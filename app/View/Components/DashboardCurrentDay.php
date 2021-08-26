@@ -3,7 +3,6 @@
 namespace App\View\Components;
 
 use App\Http\Clients\OpenLiga;
-use App\Models\Match;
 use Illuminate\View\Component;
 
 class DashboardCurrentDay extends Component

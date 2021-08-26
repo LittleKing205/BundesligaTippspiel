@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
     {
         Artisan::call('matches:loadall');
 
-        DB::unprepared(file_get_contents(database_path("sql\\tipps.sql")));
+        DB::unprepared(file_get_contents(database_path("sql/tipps.sql")));
 
         User::create([
             "name" => "Pascal",

@@ -5,7 +5,6 @@ namespace App\Notifications;
 use App\Channels\JoinChannel;
 use App\Channels\WebPushChannel;
 use App\Messages\PushMessage;
-use App\Models\Match;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;

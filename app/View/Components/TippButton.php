@@ -2,7 +2,7 @@
 
 namespace App\View\Components;
 
-use App\Models\Match;
+use App\Models\Game;
 use App\Models\Tipp;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;

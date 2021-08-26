@@ -2,7 +2,7 @@
 
 namespace App\View\Components;
 
-use App\Models\Match;
+use App\Models\Game;
 use App\Models\Tipp;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +29,7 @@ class TippBox extends Component
      */
     public function render()
     {
-        $match = Match::find($this->match_id);
+        $match = Game::find($this->match_id);
         $locked = (Carbon::now() >= $match->match_start->subHour(2));
         $tipp = Tipp::where('user_id', Auth::id())->where('match_id', $match->id)->get()->first();
         $user_tipp = (!is_null($tipp)) ? $tipp['tipp'] : null;

@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Http\Clients\OpenLiga;
-use App\Models\Match;
+use App\Models\Game;
 use App\Models\User;
 use App\Notifications\DayEndNotification;
 use Carbon\Carbon;
@@ -59,7 +59,7 @@ class MatchesLoadCurrentDay extends Command
                         $team2 = null;
                         $result = null;
                     }
-                    \App\Models\Match::upsert([
+                    Game::upsert([
                         'id' => $match['MatchID'],
                         'team1_id' => $match['Team1']['TeamId'],
                         'team2_id' => $match['Team2']['TeamId'],

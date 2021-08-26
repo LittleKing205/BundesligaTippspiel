@@ -10,11 +10,11 @@ class Team extends Model
     use HasFactory;
 
     public function homeMatches() {
-        return $this->HasMany('App\Models\Match', 'team1_id');
+        return $this->HasMany('App\Models\Game', 'team1_id');
     }
 
     public function awayMatches() {
-        return $this->HasMany('App\Models\Match', 'team2_id');
+        return $this->HasMany('App\Models\Game', 'team2_id');
     }
 
     public function getMatchesAttribute() {

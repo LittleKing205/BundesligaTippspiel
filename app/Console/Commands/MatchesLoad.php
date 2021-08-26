@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Http\Clients\OpenLiga;
-use App\Models\Match;
+use App\Models\Game;
 use App\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -66,7 +66,7 @@ class MatchesLoad extends Command
                     );
                 }
 
-                \App\Models\Match::upsert([
+                Game::upsert([
                     'id' => $match['MatchID'],
                     'team1_id' => $match['Team1']['TeamId'],
                     'team2_id' => $match['Team2']['TeamId'],
@@ -95,7 +95,7 @@ class MatchesLoad extends Command
         $this->output->newLine(1);
 
         $this->info('Cleanup missed Notifications');
-        $matches = \App\Models\Match::where('notified', 0)->get();
+        $matches = Game::where('notified', 0)->get();
         $notifiedBar = $this->output->createProgressBar(count($matches));
 
         foreach($matches as $match) {

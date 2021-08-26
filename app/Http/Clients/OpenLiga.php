@@ -2,7 +2,7 @@
 
 namespace App\Http\Clients;
 
-use App\Models\Match;
+use App\Models\Game;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
@@ -20,7 +20,7 @@ class OpenLiga {
             return Cache::get("currentDayForLeague".$league);
         else {
             $tmpDay = $this->getRawDay($league);
-            $lastMatch = App\Models\Match::where("league", $league)->where("day", $tmpDay)->orderBy('match_start', 'desc')->first();
+            $lastMatch = Game::where("league", $league)->where("day", $tmpDay)->orderBy('match_start', 'desc')->first();
             if (!(now() < $lastMatch->match_start->addHours(2)))
                 $tmpDay++;
             Cache::put("currentDayForLeague".$league, $tmpDay, now()->addMinutes(1));

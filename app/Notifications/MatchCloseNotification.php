@@ -5,7 +5,7 @@ namespace App\Notifications;
 use App\Channels\JoinChannel;
 use App\Channels\WebPushChannel;
 use App\Messages\PushMessage;
-use App\Models\Match;
+use App\Models\Game;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
@@ -15,7 +15,7 @@ class MatchCloseNotification extends Notification implements ShouldQueue
     use Queueable;
     private Match $match;
 
-    public function __construct(Match $match) {
+    public function __construct(Game $match) {
         $this->match = $match;
     }
 

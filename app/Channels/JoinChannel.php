@@ -14,7 +14,6 @@ class JoinChannel
         if (is_null($apiKey))
             return;
 
-        //$msg = str_replace('\n', ' ', $message->getMessage());
         $response = Http::get("https://joinjoaomgcd.appspot.com/_ah/api/messaging/v1/sendPush?apikey=".$apiKey."&text=".$message->getMessage()."&title=".$message->getTitle().
             "&icon=".$message->getIcon()."&deviceId=group.all&url=".$message->getLink());
     }

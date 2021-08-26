@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Http\Clients\OpenLiga;
-use App\Models\Match;
+use App\Models\Game;
 use App\Models\Tipp;
 use App\Models\User;
 use App\Notifications\MatchCloseNotification;
@@ -42,7 +42,7 @@ class NotifyClosingGames extends Command
      */
     public function handle(OpenLiga $openLiga)
     {
-        $matches = \App\Models\Match::where('notified', 0)->orderBy('match_start', 'asc')->limit(20)->get();
+        $matches = Game::where('notified', 0)->orderBy('match_start', 'asc')->limit(20)->get();
         foreach($matches as $match) {
             if ($match->match_start < now()->addHours(5)) {
                 $tmpUsers = User::all();

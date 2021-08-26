@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Clients\OpenLiga;
-use App\Models\Match;
+use App\Models\Game;
 use App\Models\Tipp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -26,7 +26,7 @@ class TippController extends Controller
         if ($league < 1 || $league > 2 || $day < 1 || $day > 34)
             abort(404);
 
-        $matches = Match::where('league', $league)->where('day', $day)->with('team1')->with('team2')->orderBy('match_start')->get();
+        $matches = Game::where('league', $league)->where('day', $day)->with('team1')->with('team2')->orderBy('match_start')->get();
         $matches = $matches->groupBy(function($item) {
             return $item->match_start->format('Y-m-d');
         });
@@ -38,7 +38,7 @@ class TippController extends Controller
         $ret['message'] = "ok";
         $ret['code'] = 200;
         $code = 200;
-        $match = Match::find($request->match);
+        $match = Game::find($request->match);
         $locked = (Carbon::now() >= $match->match_start->subHour(2));
 
         $data = array(

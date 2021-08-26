@@ -31,7 +31,7 @@ class TippBox extends Component
     {
         $match = Game::find($this->match_id);
         $locked = (Carbon::now() >= $match->match_start->subHour(2));
-        $tipp = Tipp::where('user_id', Auth::id())->where('match_id', $match->id)->get()->first();
+        $tipp = Tipp::where('user_id', Auth::id())->where('game_id', $match->id)->get()->first();
         $user_tipp = (!is_null($tipp)) ? $tipp['tipp'] : null;
         $match_result = $match->result;
 

@@ -1,4 +1,4 @@
-INSERT INTO `tipps` (`user_id`, `match_id`, `tipp`, `created_at`) VALUES
+INSERT INTO `tipps` (`user_id`, `game_id`, `tipp`, `created_at`) VALUES
     (1, 60845, 2, '2021-08-01 13:12:01'),
     (1, 60846, 0, '2021-08-01 13:12:01'),
     (1, 60847, 0, '2021-08-01 13:12:01'),

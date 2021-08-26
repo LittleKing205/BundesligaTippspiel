@@ -51,9 +51,9 @@ class TippController extends Controller
         if (!$locked) {
             Tipp::upsert([
                 'user_id' => Auth::id(),
-                'match_id' => $request->match,
+                'game_id' => $request->match,
                 'tipp' => $request->tipp
-            ], ['id', 'match_id']);
+            ], ['id', 'game_id']);
         } else {
             $ret['message'] = __('errors.tipp_locked');
             $ret['code'] = 420;

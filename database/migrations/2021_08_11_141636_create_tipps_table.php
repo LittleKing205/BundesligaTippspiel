@@ -16,10 +16,10 @@ class CreateTippsTable extends Migration
         Schema::create('tipps', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('match_id');
+            $table->unsignedBigInteger('game_id');
             $table->unsignedTinyInteger('tipp');
             $table->timestamps();
-            $table->unique(['user_id', 'match_id']);
+            $table->unique(['user_id', 'game_id']);
         });
     }
 

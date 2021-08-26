@@ -13,7 +13,7 @@ use Illuminate\Notifications\Notification;
 class MatchCloseNotification extends Notification implements ShouldQueue
 {
     use Queueable;
-    private Match $match;
+    private Game $match;
 
     public function __construct(Game $match) {
         $this->match = $match;

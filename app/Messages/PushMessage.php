@@ -31,7 +31,7 @@ class PushMessage
     }
 
     public function getMessage() {
-        return collect($this->message)->implode("\n");
+        return collect($this->lines)->implode("\n");
     }
 
     public function icon($icon) {

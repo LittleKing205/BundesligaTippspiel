@@ -9,6 +9,11 @@ function addAlert(color, message) {
 }
 
 jQuery(document).ready(function($){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
     btnHtml = [
         "<i class=\"fas fa-plus\"></i>",
         "<i class=\"fas fa-equals\"></i>",
@@ -17,11 +22,6 @@ jQuery(document).ready(function($){
 
     $(".tipp_btn").click(function() {
         $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-            }
-        });
         let sendData = {
             match: $(this).data('match'),
             tipp: $(this).data('btnval')
@@ -66,22 +66,42 @@ jQuery(document).ready(function($){
             }
         });
     });
+
+    $("#activateSmsSendTokenBtn").click(function() {
+        let sendData = {
+            number: $("#activateTelefonNummerInput").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: $('meta[name="get-sms-token-url"]').attr('content'),
+            data: sendData,
+            success: function (ret) {
+                $("#activateTelefonNummerInput").prop("disabled", true);
+                $("#telefonnummerConfirmTokenField").removeClass("d-none");
+                $("#storeNumberBtn").removeClass("d-none");
+                $("#activateSmsSendTokenBtn").addClass("d-none");
+            },
+            error: function (error) {
+                addAlert('danger', 'Ein fehler ist aufgetreten. Bitte versuche es später erneut');
+            }
+        });
+    });
+
+    $("#storeNumberBtn").click(function() {
+        let sendData = {
+            number: $("#activateTelefonNummerInput").val(),
+            token: $("#checkToken").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: $('meta[name="store-number-url"]').attr('content'),
+            data: sendData,
+            success: function (ret) {
+                location.reload();
+            },
+            error: function (error) {
+                addAlert('danger', 'Ein fehler ist aufgetreten. Bitte versuche es später erneut');
+            }
+        });
+    });
 });
-
-/*
-
-                $("body").find(`[data-match='` + $(this).data('match') + `']`).each( (index, btn) => {
-                    $( btn ).removeClass('btn-primary');
-                    $( btn ).removeClass('btn-danger');
-                    $( btn ).removeClass('btn-info');
-                    $( btn ).removeClass('btn-success');
-                    $( btn ).removeClass('btn-secondary');
-                    if ( $(this).data('btnval') === $( btn ).data('btnval') ) {
-                        $( btn ).addClass('btn-success');
-                    } else {
-                        $( btn ).addClass('btn-primary');
-                    }
-                    console.log( $(this) );
-                });
-
- */

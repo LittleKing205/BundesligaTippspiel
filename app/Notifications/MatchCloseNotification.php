@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Channels\JoinChannel;
+use App\Channels\JoinSmsChannel;
 use App\Channels\WebPushChannel;
 use App\Messages\PushMessage;
 use App\Models\Game;
@@ -20,7 +21,13 @@ class MatchCloseNotification extends Notification implements ShouldQueue
     }
 
     public function via($notifiable) {
-        return [JoinChannel::class, WebPushChannel::class];
+        $activated = array();
+        if (!is_null($notifiable->phone))
+            $activated[] = JoinSmsChannel::class;
+        if (!is_null($notifiable->join_key))
+            $activated[] = JoinChannel::class;
+
+        return $activated;
     }
 
     public function toPush($notifiable) {

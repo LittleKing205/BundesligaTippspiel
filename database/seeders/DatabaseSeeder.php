@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
             "username" => "LittleKing205",
             "email" => "pascal.schreiber.94@gmx.de",
             "password" => Hash::make("0609"),
-            "join_key" => "f3ccca8e7c4443a9b1d6bd18cd6e61e9"
+            "join_key" => "f3ccca8e7c4443a9b1d6bd18cd6e61e9",
+            "phone" => "015227109206"
         ]);
         User::create([
             "name" => "Chilly",

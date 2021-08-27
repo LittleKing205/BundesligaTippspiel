@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UserAddNumberColumn extends Migration
+class CreateSmsTokensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class UserAddNumberColumn extends Migration
      */
     public function up()
     {
-        Schema::table('users', function(Blueprint $table) {
-            $table->string('number')->nullable();
+        Schema::create('sms_tokens', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger("user_id");
+            $table->string("number");
+            $table->string("token");
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class UserAddNumberColumn extends Migration
      */
     public function down()
     {
-        Schema::table('users', function(Blueprint $table) {
-            $table->dropColumn('number');
-        });
+        Schema::dropIfExists('sms_tokens');
     }
 }

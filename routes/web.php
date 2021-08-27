@@ -17,15 +17,23 @@ use Illuminate\Support\Facades\Route;
 */
 App::setLocale('de');
 Route::redirect('/', '/dashboard')->name('home');
+Route::redirect('/home', '/dashboard');
 
 Route::middleware('auth')->group(function () {
+    //Sites
     Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::view('/regeln', 'rules')->name('rules');
+    Route::get('/profil', 'App\Http\Controllers\ProfileController@show')->name('profile');
 
+    // Tipps
     Route::get('/tipp/bl{league}', 'App\Http\Controllers\TippController@redictToDay')->name('tippsWithoutDay');
     Route::get('/tipp/bl{league}/{day?}', 'App\Http\Controllers\TippController@show')->name('tipps');
-
     Route::post('/tipp/save', 'App\Http\Controllers\TippController@store')->name('tippStore');
+
+    // SMS Tokens
+    Route::post('/profil/getSmsToken', 'App\Http\Controllers\ProfileController@getSmsToken')->name('profile.getSmsToken');
+    Route::post('/profil/storeNumber', 'App\Http\Controllers\ProfileController@storeNumber')->name('profile.storeNumber');
+    Route::delete('/profil/deleteNumber', 'App\Http\Controllers\ProfileController@deleteNumber')->name('profile.deleteNumber');
 });
 
 Route::get('/push-notificaiton', [WebNotificationController::class, 'index'])->name('push-notificaiton');

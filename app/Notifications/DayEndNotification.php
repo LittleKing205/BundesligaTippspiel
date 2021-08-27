@@ -19,7 +19,7 @@ class DayEndNotification extends Notification implements ShouldQueue
     }
 
     public function via($notifiable) {
-        return [JoinChannel::class/*, WebPushChannel::class*/];
+        return [JoinChannel::class, WebPushChannel::class];
     }
 
     public function toPush($notifiable) {

@@ -45,8 +45,8 @@ jQuery(document).ready(function($){
                             $(btn).addClass('btn-primary');
                         }
                         $(btn).html(btnHtml[index]);
-                        console.log('Tipp wurde gespeichert.')
                     });
+                    console.log('Tipp wurde gespeichert.');
                 } else {
                     console.log("Spiel wurde gesperrt.");
                     $("body").find(`[data-match='` + ret.data.matchId + `']`).each((index, btn) => {
@@ -61,6 +61,7 @@ jQuery(document).ready(function($){
                 $("body").find(`[data-match='` + error.data.matchId + `']`).each((index, btn) => {
                     $(btn).html(btnHtml[index]);
                 });
+                console.error(error);
                 addAlert('danger', 'Ein fehler ist aufgetreten. Bitte versuche es später erneut');
             }
         });

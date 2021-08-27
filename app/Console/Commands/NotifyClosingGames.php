@@ -44,10 +44,10 @@ class NotifyClosingGames extends Command
     {
         $matches = Game::where('notified', 0)->orderBy('match_start', 'asc')->limit(20)->get();
         foreach($matches as $match) {
-            if ($match->match_start < now()->addHours(5)) {
+            if ($match->match_start <= now()->addHours(5)) {
                 $tmpUsers = User::all();
                 foreach ($tmpUsers as $user) {
-                    $tipp = Tipp::where('user_id', $user->id)->where('match_id', $match->id)->get();
+                    $tipp = Tipp::where('user_id', $user->id)->where('game_id', $match->id)->get();
                     if (count($tipp) == 0) {
                         $this->info('Notify '.$user->name.' for game '.$match->id.' ('.$match->team1->name.' - '.$match->team2->name.')');
                         $user->notify(new MatchCloseNotification($match));

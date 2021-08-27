@@ -3,7 +3,7 @@
     <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
     Dashboard
 </a>
-<a class="nav-link" href="index.php?page=regeln">
+<a class="nav-link" href="{{ route('rules') }}">
     <div class="sb-nav-link-icon"><i class="fas fa-scroll"></i></div>
     Regeln
 </a>
@@ -14,8 +14,8 @@
         <div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
         Tippen
     </a>
-    <a class="nav-link" href="#">
+    <!--<a class="nav-link" href="#">
         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
         Tabelle
-    </a>
+    </a>-->
 @endforeach

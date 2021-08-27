@@ -5,7 +5,9 @@
         </div>
         <div class="card-body">
             Du hast <b>{{ $tippCount }}</b> von <b>{{ $gameCount }}</b> Spiele für den aktuellen Spieltag getippt.<br />
-            <!-- games_played > 0 -->Aktuell hast du <b>{{ $tippsRight }}</b> von <b>{{ $gamesPlayed }}</b> Spielen richtig.
+            @if($gamesPlayed > 0)
+                Aktuell hast du <b>{{ $tippsRight }}</b> von <b>{{ $gamesPlayed }}</b> Spielen richtig.
+            @endif
         </div>
         <div class="card-footer d-flex align-items-center justify-content-between">
             <a class="small text-white stretched-link" href="{{ route('tipps', ['league' => $league, 'day' => $currentDay]) }}">{{ $currentDay }}. Spieltag Anzeigen</a>

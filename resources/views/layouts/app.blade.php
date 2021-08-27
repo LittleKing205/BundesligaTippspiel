@@ -9,7 +9,7 @@
     @stack('meta')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Bundesliga Tippspiel</title>
-    <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="{{ asset('images/logo.png') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
     <link href="/css/admin.css" rel="stylesheet" />
 

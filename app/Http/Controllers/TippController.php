@@ -30,7 +30,7 @@ class TippController extends Controller
         $matches = $matches->groupBy(function($item) {
             return $item->match_start->format('Y-m-d');
         });
-        return view('tipps', compact(['leagueName', 'day', 'matches']));
+        return view('tipps', compact(['leagueName', 'day', 'matches', 'league']));
     }
 
     public function store(Request $request) {

@@ -22,8 +22,8 @@ Route::middleware('auth')->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::view('/regeln', 'rules')->name('rules');
 
-    Route::get('/tipp/bl{league}', 'App\Http\Controllers\TippController@redictToDay')->name('tippsWithoutDay');
-    Route::get('/tipp/bl{league}/{day?}', 'App\Http\Controllers\TippController@show')->name('tipps');
+    Route::get('/tipp/bl-{league}', 'App\Http\Controllers\TippController@redictToDay')->name('tippsWithoutDay');
+    Route::get('/tipp/bl-{league}/{day?}', 'App\Http\Controllers\TippController@show')->name('tipps');
 
     Route::post('/tipp/save', 'App\Http\Controllers\TippController@store')->name('tippStore');
 });

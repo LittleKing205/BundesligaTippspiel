@@ -26,7 +26,7 @@
         @endforeach
     @endif
     <label for="inputEmail" class="sr-only">{{ __('auth.email_field') }}</label>
-    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="{{ __('auth.email_field') }}" value="{{ old('email') }}" required autofocus>
+    <input type="text" id="inputEmail" name="email" class="form-control" placeholder="{{ __('auth.email_field') }}" value="{{ old('email') }}" required autofocus>
 
     <label for="inputPassword" class="sr-only">{{ __('auth.password_field') }}</label>
     <input type="password" id="inputPassword" name="password" class="form-control" placeholder="{{ __('auth.password_field') }}" required>

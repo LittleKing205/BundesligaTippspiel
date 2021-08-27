@@ -3,7 +3,8 @@
 @section('title', $leagueName)
 
 @section('breadcump')
-    <li class="breadcrumb-item active">{{ $leagueName }}</li>
+    <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+    <li class="breadcrumb-item active"><a href="{{ route('tippsWithoutDay', ["league" => $league]) }}">{{ $leagueName }}</a></li>
     <li class="breadcrumb-item active">{{ $day }}. Spieltag</li>
 @endsection
 

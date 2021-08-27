@@ -6,13 +6,14 @@ use App\Http\Clients\OpenLiga;
 use App\Models\Game;
 use App\Models\User;
 use Illuminate\View\Component;
+use Illuminate\Support\Collection;
 
 class DashboardLastDayTable extends Component
 {
     private OpenLiga $openLiga;
     public int $league;
     public int $lastDay;
-    public array $leagueResult;
+    public Collection $leagueResult;
 
     /**
      * Create a new component instance.
@@ -24,7 +25,7 @@ class DashboardLastDayTable extends Component
         $this->openLiga = $openLiga;
         $this->league = $league;
         $this->lastDay = $openLiga->getCurrentDay($league) - 1;
-        $this->leagueResult = array();
+        $this->rawLeagueResult = array();
     }
 
     /**
@@ -38,27 +39,34 @@ class DashboardLastDayTable extends Component
 
         $matches = Game::where("league", $this->league)->where("day", $this->lastDay)->leftJoin("tipps", "games.id", "tipps.game_id")->leftJoin("users", "tipps.user_id", "users.id")->get();
         foreach ($matches as $match) {
-            $this->leagueResult[$match->user_id]["name"] = $match->name;
-            $this->leagueResult[$match->user_id]["id"] = $match->user_id;
-            if (!isset($this->leagueResult[$match->user_id]["right"]))
-                $this->leagueResult[$match->user_id]["right"] = 0;
-            if (!isset($this->leagueResult[$match->user_id]["wrong"]))
-                $this->leagueResult[$match->user_id]["wrong"] = 0;
-            if (!isset($this->leagueResult[$match->user_id]["to_pay"]))
-                $this->leagueResult[$match->user_id]["to_pay"] = 0;
+            $this->rawLeagueResult[$match->user_id]["name"] = $match->name;
+            $this->rawLeagueResult[$match->user_id]["id"] = $match->user_id;
+            if (!isset($this->rawLeagueResult[$match->user_id]["right"]))
+                $this->rawLeagueResult[$match->user_id]["right"] = 0;
+            if (!isset($this->rawLeagueResult[$match->user_id]["wrong"]))
+                $this->rawLeagueResult[$match->user_id]["wrong"] = 0;
+            if (!isset($this->rawLeagueResult[$match->user_id]["to_pay"]))
+                $this->rawLeagueResult[$match->user_id]["to_pay"] = 0;
 
             if ($match->tipp == $match->result) {
-                $this->leagueResult[$match->user_id]["right"] += 1;
+                $this->rawLeagueResult[$match->user_id]["right"] += 1;
             } else {
-                $this->leagueResult[$match->user_id]["wrong"] += 1;
-                $this->leagueResult[$match->user_id]["to_pay"] += 0.5;
+                $this->rawLeagueResult[$match->user_id]["wrong"] += 1;
+                $this->rawLeagueResult[$match->user_id]["to_pay"] += 0.5;
             }
         }
 
-        foreach ($this->leagueResult as $userResult) {
+        foreach ($this->rawLeagueResult as $userResult) {
             $tippCount = $userResult["right"] + $userResult["wrong"];
             $missingTipps = 9 - $tippCount;
+            $this->rawLeagueResult[$userResult["id"]]["to_pay"] += $missingTipps;
+            $this->rawLeagueResult[$userResult["id"]]["wrong"] += $missingTipps;
         }
+
+        $this->leagueResult = collect($this->rawLeagueResult)->sortBy([
+            ["right", "desc"],
+            ["to_pay", "asc"]
+        ]);
 
         if ($this->lastDay >= 1)
             return view('components.dashboard-last-day-table');

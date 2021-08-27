@@ -36,7 +36,7 @@ class WebNotificationController extends Controller
             "notification" => [
                 "title" => 'title',
                 "body" => 'body',
-                "icon" =>
+                "icon" => asset('images/logo.png')
             ],
             "to" => 'c6hs7ckkpdnHeeXNWaOIoq:APA91bEIjNLxiNf2VDmlF770LykYrUI2RdreMMmywI3m-EiardZpqGiraXiI7fEZK5K7OOB146X0S_kTX5o2co--ml90EQmuOObDnbCfIb0fEgGT7B8N4PRcYkDBDbm_12qkpWSARt5I'
         ];

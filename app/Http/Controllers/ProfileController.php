@@ -93,11 +93,11 @@ class ProfileController extends Controller
 
     public function storeWebPush(Request $request) {
         $this->validate($request, [
-            "device_token" => ["required", "string"]
+            "token" => ["required", "string"]
         ]);
         $user = Auth::user();
 
-        $user->device_key = $request->device_token;
+        $user->device_key = $request->token;
         $user->save();
 
         return Response::json([

@@ -44,8 +44,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profil/deleteJoin', 'App\Http\Controllers\ProfileController@deleteJoin')->name('profile.deleteJoin');
 });
 
-Route::get('/push-notificaiton', [WebNotificationController::class, 'index'])->name('push-notificaiton');
-Route::post('/store-token', [WebNotificationController::class, 'storeToken'])->name('store.token');
-Route::post('/send-web-notification', [WebNotificationController::class, 'sendWebNotification'])->name('send.web-notification');
-
 Auth::routes();

@@ -55,7 +55,7 @@
                     }
                 });
                 $.ajax({
-                    url: '{{ route("store.token") }}',
+                    url: '{{ route("profile.storeWebPush") }}',
                     type: 'POST',
                     data: {
                         token: response
@@ -65,12 +65,14 @@
                         location.reload();
                     },
                     error: function (error) {
+                        console.log(error);
                         alert(error);
                     },
                 });
 
             }).catch(function (error) {
-            alert(error);
-        });
+                console.log(error);
+                alert(error);
+            });
     }
 </script>

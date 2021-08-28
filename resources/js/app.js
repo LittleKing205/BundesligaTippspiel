@@ -68,6 +68,7 @@ jQuery(document).ready(function($){
     });
 
     $("#activateSmsSendTokenBtn").click(function() {
+        console.log("Request SMS sending");
         let sendData = {
             number: $("#activateTelefonNummerInput").val()
         };
@@ -76,6 +77,7 @@ jQuery(document).ready(function($){
             url: $('meta[name="get-sms-token-url"]').attr('content'),
             data: sendData,
             success: function (ret) {
+                console.log("SMS was sendet");
                 $("#activateTelefonNummerInput").prop("disabled", true);
                 $("#telefonnummerConfirmTokenField").removeClass("d-none");
                 $("#storeNumberBtn").removeClass("d-none");
@@ -88,6 +90,7 @@ jQuery(document).ready(function($){
     });
 
     $("#storeNumberBtn").click(function() {
+        console.log("Request Save SMS Token");
         let sendData = {
             number: $("#activateTelefonNummerInput").val(),
             token: $("#checkToken").val()
@@ -97,6 +100,7 @@ jQuery(document).ready(function($){
             url: $('meta[name="store-number-url"]').attr('content'),
             data: sendData,
             success: function (ret) {
+                console.log("Number for SMS Notifications saved")
                 location.reload();
             },
             error: function (error) {

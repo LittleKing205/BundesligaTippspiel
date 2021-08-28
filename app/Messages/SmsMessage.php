@@ -7,7 +7,7 @@ use http\Message;
 class SmsMessage
 {
     protected array $lines;
-    protected string $to;
+    protected ?string $to = null;
 
 
     public function __construct() {

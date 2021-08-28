@@ -67,4 +67,50 @@ class ProfileController extends Controller
 
         return redirect(route('profile'))->with("numberDelete");
     }
+
+    public function storeJoin(Request $request) {
+        $this->validate($request, [
+            "join_key" => ["required", "string"]
+        ]);
+        $user = Auth::user();
+
+        $user->join_key = $request->join_key;
+        $user->save();
+
+        return Response::json([
+            "message" => "OK",
+            "code" => 200
+        ]);
+    }
+
+    public function deleteJoin(Request $request) {
+        $user = Auth::user();
+        $user->join_key = null;
+        $user->save();
+
+        return redirect(route('profile'))->with("joinDelete");
+    }
+
+    public function storeWebPush(Request $request) {
+        $this->validate($request, [
+            "device_token" => ["required", "string"]
+        ]);
+        $user = Auth::user();
+
+        $user->device_key = $request->device_token;
+        $user->save();
+
+        return Response::json([
+            "message" => "OK",
+            "code" => 200
+        ]);
+    }
+
+    public function deleteWebPush(Request $request) {
+        $user = Auth::user();
+        $user->device_key = null;
+        $user->save();
+
+        return redirect(route('profile'))->with("webPushDelete");
+    }
 }

@@ -30,10 +30,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/tipp/bl{league}/{day?}', 'App\Http\Controllers\TippController@show')->name('tipps');
     Route::post('/tipp/save', 'App\Http\Controllers\TippController@store')->name('tippStore');
 
+    // WebPush Benachrichtigungen
+    Route::post('/profil/storeWebPush', 'App\Http\Controllers\ProfileController@storeWebPush')->name('profile.storeWebPush');
+    Route::delete('/profil/deleteWebPush', 'App\Http\Controllers\ProfileController@deleteWebPush')->name('profile.deleteWebPush');
+
     // SMS Tokens
     Route::post('/profil/getSmsToken', 'App\Http\Controllers\ProfileController@getSmsToken')->name('profile.getSmsToken');
     Route::post('/profil/storeNumber', 'App\Http\Controllers\ProfileController@storeNumber')->name('profile.storeNumber');
     Route::delete('/profil/deleteNumber', 'App\Http\Controllers\ProfileController@deleteNumber')->name('profile.deleteNumber');
+
+    // Join Benachrichtigungen
+    Route::post('/profil/storeJoin', 'App\Http\Controllers\ProfileController@storeJoin')->name('profile.storeJoin');
+    Route::delete('/profil/deleteJoin', 'App\Http\Controllers\ProfileController@deleteJoin')->name('profile.deleteJoin');
 });
 
 Route::get('/push-notificaiton', [WebNotificationController::class, 'index'])->name('push-notificaiton');

@@ -26,7 +26,7 @@ class SendTokenNotification extends Notification
     }
 
     public function toSMS($notifiable) {
-        return (new SmsMessage)
+        return (new SmsMessage())
             ->line("[Bundesliga Tippspiel]")
             ->line("Dein SMS Code lautet: ".$this->token)
             ->toNumber($this->number);

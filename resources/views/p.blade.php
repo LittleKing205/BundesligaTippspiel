@@ -35,7 +35,6 @@
             </div>
         </div>
     </div>
-
     <script>
         firebase.initializeApp({
             apiKey: 'AIzaSyAB0_MbU6bNbLFPadjD3UxgU7YZLr0PN-g',

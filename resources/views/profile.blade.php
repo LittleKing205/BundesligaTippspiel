@@ -10,6 +10,7 @@
 @push('meta')
     <meta name="get-sms-token-url" content="{{ route('profile.getSmsToken') }}">
     <meta name="store-number-url" content="{{ route('profile.storeNumber') }}">
+    <meta name="store-join-url" content="{{ route('profile.storeJoin') }}">
 @endpush
 
 @section('content')
@@ -43,15 +44,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Passwort</label>
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Passwort</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword3" placeholder="Passwort" value="">
+                                <input type="password" class="form-control" id="inputPassword" placeholder="Passwort" value="">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Passwort Wiederholen</label>
+                            <label for="inputPasswordConfirm" class="col-sm-2 col-form-label">Passwort Wiederholen</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword3" placeholder="Passwort" value="">
+                                <input type="password" class="form-control" id="inputPasswordConfirm" placeholder="Passwort" value="">
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Speichern</button>
@@ -72,18 +73,17 @@
                         <li>3 Stunden bevor ein nicht getipptes Spiel gesperrt wird.</li>
                         <li>Wenn ein Spieltag zuende ist und alle Spieldaten vorhanden sind.</li>
                     </ul>
+                    <br />
+                    <b>!!!ACHTUNG!!!</b><br />
+                    Der WebPush ist leider noch etwas Fehleranfällig und nicht 100% funktionel. Ich arbeite noch daran, dass es
+                    zuverlässig arbeitet.
                 </div>
                 <div class="col-12 col-xl-8 mb-3">
-                    <div class="row">
-                        <div class="col-7">SMS Benachrichtigung</div>
-                        <div class="col-5">
-                            @if(is_null($user->phone))
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#smsAktivateModal">SMS Aktivieren</button>
-                            @else
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#smsDeaktivateModal">SMS Deaktivieren</button>
-                            @endif
-                        </div>
-                    </div>
+                    @if(config('join_sms.enable'))
+                        <x-profile.notify-sms :enabled="!is_null($user->phone)" />
+                    @endif
+                    <x-profile.notify-join :enabled="!is_null($user->join_key)" />
+                    <x-profile.notify-web :enabled="!is_null($user->device_key)" />
                 </div>
             </div>
         </div>
@@ -103,57 +103,4 @@
         </div>
     </div>
     -->
-
-    <div class="modal fade" id="smsAktivateModal" tabindex="-1" role="dialog" aria-labelledby="smsAktivateModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="smsAktivateMModalLabel">SMS Benachrichtigungen aktivieren</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="telefonNummer" class="col-form-label">Handynummer:</label>
-                            <input id="activateTelefonNummerInput" type="tel" class="form-control">
-                        </div>
-                        <div class="form-group d-none" id="telefonnummerConfirmTokenField">
-                            <label for="checkToken" class="col-form-label">SMS Token:</label>
-                            <input type="number" class="form-control" id="checkToken">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abrechen</button>
-                    <button type="button" id="activateSmsSendTokenBtn" class="btn btn-primary">Sende SMS</button>
-                    <button type="button" id="storeNumberBtn" class="btn btn-primary d-none">SMS Aktivieren</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="smsDeaktivateModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">SMS Benachrichtigungen Deaktivieren?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Sollen wirklich die SMS Benachrichtigungen deaktiviert werden? Dadurch wird deine Nummer aus unserem System gelöscht.</p>
-                </div>
-                <div class="modal-footer">
-                    <form action="{{ route('profile.deleteNumber') }}" method="post">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn btn-danger">Ja, Nummer löschen</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Nein</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection

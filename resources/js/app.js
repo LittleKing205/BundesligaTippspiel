@@ -104,4 +104,31 @@ jQuery(document).ready(function($){
             }
         });
     });
+
+    $("#storeJoinBtn").click(function() {
+        $.get("https://joinjoaomgcd.appspot.com/_ah/api/registration/v1/listDevices?apikey="+$("#activateJoinInput").val())
+            .done(function(data) {
+                if(data.success) {
+                    let sendData = {
+                        join_key: $("#activateJoinInput").val()
+                    };
+                    $.ajax({
+                        type: 'POST',
+                        url: $('meta[name="store-join-url"]').attr('content'),
+                        data: sendData,
+                        success: function (ret) {
+                            location.reload();
+                        },
+                        error: function (error) {
+                            addAlert('danger', 'Ein fehler ist aufgetreten. Bitte versuche es später erneut.');
+                        }
+                    });
+                } else {
+                    addAlert('danger', 'Du hast anscheinend einen falschen Key eingegeben.');
+                }
+            })
+            .fail(function(error) {
+                addAlert('danger', 'Ein fehler ist aufgetreten. Bitte versuche es später erneut.');
+            });
+    });
 });

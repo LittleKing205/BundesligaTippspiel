@@ -10,9 +10,8 @@ class WebPushChannel
     public function send($notifiable, Notification $notification) {
         $message = $notification->toPush($notifiable);
         $url = 'https://fcm.googleapis.com/fcm/send';
-        //$FcmToken = User::whereNotNull('device_key')->pluck('device_key')->all();
         $FcmToken = $notifiable->device_key;
-        $serverKey = 'AAAACapbR2k:APA91bFpDw_2__MIFUsyElm_sEsSObKKmdEnUXaWD25YL3OwMqpMnXK64PAB5zM9GPE535fOLnn9u4XRrCp-SIc1mo26eOHf0vML19Jw1wuug4PfP9ZZV3l2E-M53pEfnAVr56nWhwtZ';
+        $serverKey = env('FIREBASE_SERVER_KEY');
 
         $data = [
             "notification" => [

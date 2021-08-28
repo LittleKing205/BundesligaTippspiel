@@ -82,8 +82,10 @@
                     @if(config('join_sms.enable'))
                         <x-profile.notify-sms :enabled="!is_null($user->phone)" />
                     @endif
+                    @if(config('firebase.enable'))
+                        <x-profile.notify-web :enabled="!is_null($user->device_key)" />
+                    @endif
                     <x-profile.notify-join :enabled="!is_null($user->join_key)" />
-                    <x-profile.notify-web :enabled="!is_null($user->device_key)" />
                 </div>
             </div>
         </div>

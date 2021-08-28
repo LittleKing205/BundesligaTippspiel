@@ -26,7 +26,7 @@ class DayEndNotification extends Notification implements ShouldQueue
             $activated[] = JoinSmsChannel::class;
         if (!is_null($notifiable->join_key))
             $activated[] = JoinChannel::class;
-        if (!is_null($notifiable->device_key))
+        if (config('firebase.enable') && !is_null($notifiable->device_key))
             $activated[] = WebPushChannel::class;
 
         return $activated;

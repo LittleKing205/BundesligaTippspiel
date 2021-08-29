@@ -1,3 +1,8 @@
+@push('meta')
+    <meta name="get-sms-token-url" content="{{ route('profile.getSmsToken') }}">
+    <meta name="store-number-url" content="{{ route('profile.storeNumber') }}">
+@endpush
+
 <div class="row mb-4">
     <div class="col-7">SMS Benachrichtigung</div>
     <div class="col-5">

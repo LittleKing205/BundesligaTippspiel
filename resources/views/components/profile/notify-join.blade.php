@@ -1,3 +1,7 @@
+@push('meta')
+    <meta name="store-join-url" content="{{ route('profile.storeJoin') }}">
+@endpush
+
 <div class="row mb-4">
     <div class="col-7"><a href="https://play.google.com/store/apps/details?id=com.joaomgcd.join" target="_blank">Join</a> (Andoroid App)</div>
     <div class="col-5">

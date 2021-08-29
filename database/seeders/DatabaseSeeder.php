@@ -27,14 +27,13 @@ class DatabaseSeeder extends Seeder
             "username" => "LittleKing205",
             "email" => "pascal.schreiber.94@gmx.de",
             "password" => Hash::make("0609"),
-            "join_key" => "f3ccca8e7c4443a9b1d6bd18cd6e61e9",
-            "phone" => "015227109206"
+            "join_key" => "f3ccca8e7c4443a9b1d6bd18cd6e61e9"
         ]);
         User::create([
             "name" => "Chilly",
             "username" => "Chilly",
             "email" => "monja.s@pascalschreiber.de",
-            "password" => Hash::make("0000")
+            "password" => Hash::make("jeremy08")
         ]);
         User::create([
             "name" => "Axel",

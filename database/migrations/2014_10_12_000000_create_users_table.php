@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('phone')->nullable();
             $table->string('join_key')->nullable();
+            $table->string('device_key')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

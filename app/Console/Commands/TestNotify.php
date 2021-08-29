@@ -52,5 +52,6 @@ class TestNotify extends Command
         }
 
         $user->notify(new TestNotification());
+        $this->info("Es wurde ".$user->name." Benachrichtigt");
     }
 }

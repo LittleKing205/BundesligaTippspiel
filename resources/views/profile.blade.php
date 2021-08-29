@@ -7,12 +7,6 @@
     <li class="breadcrumb-item active">Profil</li>
 @endsection
 
-@push('meta')
-    <meta name="get-sms-token-url" content="{{ route('profile.getSmsToken') }}">
-    <meta name="store-number-url" content="{{ route('profile.storeNumber') }}">
-    <meta name="store-join-url" content="{{ route('profile.storeJoin') }}">
-@endpush
-
 @section('content')
     <div class="card mb-3">
         <div class="card-header">Profil</div>

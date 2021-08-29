@@ -8,7 +8,7 @@
     <meta name="author" content="" />
     @stack('meta')
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Bundesliga Tippspiel</title>
+    <title>@yield('page_title', 'Bundesliga Tippspiel')</title>
     <link rel="icon" type="image/vnd.microsoft.icon" href="{{ asset('images/logo.png') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
     <link href="/css/admin.css" rel="stylesheet" />
@@ -78,9 +78,7 @@
                 <ol class="breadcrumb mb-4">
                     @yield('breadcump')
                 </ol>
-                <div class="container-fluid">
-                    @yield('content')
-                </div>
+                @yield('content')
             </div>
         </main>
         <footer class="py-4 bg-light mt-auto">

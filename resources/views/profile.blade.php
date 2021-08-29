@@ -12,6 +12,9 @@
         <div class="card-header">Profil</div>
         <div class="card-body">
             <div class="row">
+                Dieser Bereich kommt demächst.<br />
+                Hier kann der Name, die E-Mail Adresse und das Passwort geändert werden.
+                <!--
                 <div class="col-12 col-xl-4 mb-3 p-4">
                     Das Passwort Feld kann frei bleiben, wenn das Passwort nicht geändert werden soll.
                 </div>
@@ -51,10 +54,10 @@
                         </div>
                         <button class="btn btn-primary" type="submit">Speichern</button>
                     </form>
-                </div>
+                </div>-->
             </div>
         </div>
-    </div>
+    </div>-->
     <div class="card mb-3">
         <div class="card-header">Benachrichtigungen</div>
         <div class="card-body">
@@ -67,10 +70,11 @@
                         <li>3 Stunden bevor ein nicht getipptes Spiel gesperrt wird.</li>
                         <li>Wenn ein Spieltag zuende ist und alle Spieldaten vorhanden sind.</li>
                     </ul>
-                    <br />
-                    <b>!!!ACHTUNG!!!</b><br />
-                    Der WebPush ist leider noch etwas Fehleranfällig und nicht 100% funktionel. Ich arbeite noch daran, dass es
-                    zuverlässig arbeitet.
+                    @if(config('firebase.enable'))
+                        <br />
+                        <b>!!!ACHTUNG!!!</b><br />
+                        Der WebPush ist leider noch etwas Fehlerbehaftet. Ich arbeite noch daran, dass es besser funktioniert.
+                    @endif
                 </div>
                 <div class="col-12 col-xl-8 mb-3">
                     @if(config('join_sms.enable'))

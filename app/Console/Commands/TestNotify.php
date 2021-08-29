@@ -2,6 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Channels\JoinChannel;
+use App\Channels\JoinSmsChannel;
+use App\Channels\WebPushChannel;
 use App\Models\User;
 use App\Notifications\TestNotification;
 use Illuminate\Console\Command;
@@ -52,6 +55,14 @@ class TestNotify extends Command
         }
 
         $user->notify(new TestNotification());
-        $this->info("Es wurde ".$user->name." Benachrichtigt");
+
+        $channels = "";
+        if (config('join_sms.enable') && !is_null($user->phone))
+            $channels .= "SMS, ";
+        if (!is_null($user->join_key))
+            $channels .= "Join, ";
+        if (config('firebase.enable') && !is_null($user->device_key))
+            $channels .= "WebPush, ";
+        $this->info("Es wurde ".$user->name." über ".$channels."Benachrichtigt");
     }
 }

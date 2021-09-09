@@ -6,6 +6,7 @@ use App\Channels\WebPushChannel;
 use App\Http\Clients\OpenLiga;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,5 +32,7 @@ class AppServiceProvider extends ServiceProvider
         Notification::extend('push', function ($app) {
             return new WebPushChannel();
         });
+        if(env('USE_BEHIND_PROXY', false))
+            URL::forceRootUrl(env('PROXY_ROOT_URL', env('APP_URL', 'http://localhost/')));
     }
 }

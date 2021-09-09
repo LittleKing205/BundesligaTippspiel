@@ -1,0 +1,2 @@
+INSERT INTO `tipps` (`user_id`, `game_id`, `tipp`, `created_at`) VALUES
+

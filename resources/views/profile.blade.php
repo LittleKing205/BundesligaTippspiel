@@ -57,7 +57,7 @@
                 </div>-->
             </div>
         </div>
-    </div>-->
+    </div>
     <div class="card mb-3">
         <div class="card-header">Benachrichtigungen</div>
         <div class="card-body">

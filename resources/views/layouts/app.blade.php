@@ -42,6 +42,11 @@
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <!--<li><a class="dropdown-item" href="#!">Settings</a></li>-->
                 <li><a class="dropdown-item" href="{{ route('profile') }}">Profil Einstellungen</a></li>
+                @can('isAdmin')
+                    <li><a class="dropdown-item" href="{{ route('admin.switch_tipp_mode') }}"><input type="checkbox" @if (Session::get('adminTippMode', false))
+                        checked
+                    @endif> Admin Mode</a></li>
+                @endcan
                 <li><hr class="dropdown-divider" /></li>
                 <li>
                     <a class="dropdown-item" href="{{ route('logout') }}"

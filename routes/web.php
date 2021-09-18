@@ -42,6 +42,9 @@ Route::middleware('auth')->group(function () {
     // Join Benachrichtigungen
     Route::post('/profil/storeJoin', 'App\Http\Controllers\ProfileController@storeJoin')->name('profile.storeJoin');
     Route::delete('/profil/deleteJoin', 'App\Http\Controllers\ProfileController@deleteJoin')->name('profile.deleteJoin');
+
+    // Admin Routes
+    Route::get('/admin/switch/tipp_mode', 'App\Http\Controllers\AdminController@switchTippMode')->name('admin.switch_tipp_mode');
 });
 
 Auth::routes();

@@ -8,7 +8,7 @@ use App\Models\Tipp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Response;
 
 class TippController extends Controller
@@ -19,9 +19,6 @@ class TippController extends Controller
     }
 
     public function show(Request $request, $league, $day) {
-        Auth::user()->fill([
-            'password' => Hash::make('0609')
-        ])->save();
         $leagueName = $league.'. Bundesliga';
         if ($league < 1 || $league > 2 || $day < 1 || $day > 34)
             abort(404);
@@ -40,6 +37,8 @@ class TippController extends Controller
         $code = 200;
         $match = Game::find($request->match);
         $locked = (Carbon::now() >= $match->match_start->subHour(2));
+        if (session('adminTippMode', false) && Gate::allows('isAdmin'))
+            $locked = false;
 
         $data = array(
             'matchId' => $request->match,

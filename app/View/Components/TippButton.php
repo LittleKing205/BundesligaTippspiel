@@ -4,8 +4,10 @@ namespace App\View\Components;
 
 use App\Models\Game;
 use App\Models\Tipp;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\Component;
 
 class TippButton extends Component
@@ -37,6 +39,9 @@ class TippButton extends Component
      */
     public function render()
     {
+        if (session('adminTippMode', false) && Gate::allows('isAdmin'))
+            $this->locked = false;
+
         // Standart farben
         $state = (!$this->locked) ? 'primary' : 'secondary';
 

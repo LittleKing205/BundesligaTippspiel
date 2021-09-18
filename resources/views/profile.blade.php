@@ -9,7 +9,7 @@
 
 @section('content')
     <div class="card mb-3">
-        <div class="card-header">Profil</div>
+        <h4 class="card-header">Profil</h4>
         <div class="card-body">
             <div class="row">
                 <div class="col-12 col-xl-4 mb-3 p-4">
@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="card mb-3">
-        <div class="card-header">Benachrichtigungen</div>
+        <h4 class="card-header">Benachrichtigungen</h4>
         <div class="card-body">
             <div class="row">
                 <div class="col-12 col-xl-4 mb-3 p-4">

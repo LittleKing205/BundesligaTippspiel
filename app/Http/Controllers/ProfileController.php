@@ -6,7 +6,9 @@ use App\Models\SmsToken;
 use App\Notifications\SendTokenNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
@@ -112,5 +114,25 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect(route('profile'))->with("webPushDelete");
+    }
+
+    public function update(Request $request) {
+        $user = Auth::user();
+        $validated = $request->validate([
+            'name' => ['required', 'min:5', 'max:200'],
+            'email' => ['required', 'max:200', 'email', Rule::unique('users')->ignore($user->getAuthIdentifier()) ],
+            'password' => ['nullable', 'confirmed']
+        ]);
+
+        $user->email = $validated['email'];
+        $user->name = $validated['name'];
+
+        if(!is_null($validated['password']))
+            $user->password = Hash::make($validated['password']);
+
+        $user->save();
+        session()->flash('success', 'Dein Profil wurde erfolgreich gespeichert.');
+
+        return redirect(route('profile'));
     }
 }

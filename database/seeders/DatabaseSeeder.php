@@ -35,11 +35,5 @@ class DatabaseSeeder extends Seeder
             "email" => "monja.s@pascalschreiber.de",
             "password" => Hash::make("jeremy08")
         ]);
-        User::create([
-            "name" => "Axel",
-            "username" => "AxelHeinzWagner",
-            "email" => "axel.s@pascalschreiber.de",
-            "password" => Hash::make("z")
-        ]);
     }
 }

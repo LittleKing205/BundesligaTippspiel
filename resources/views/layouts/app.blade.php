@@ -89,6 +89,7 @@
                         <!--<a href="#">Privacy Policy</a>
                         &middot;
                         <a href="#">Terms &amp; Conditions</a>-->
+                        Version: 1.0.1
                     </div>
                 </div>
             </div>

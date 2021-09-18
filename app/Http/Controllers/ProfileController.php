@@ -131,6 +131,7 @@ class ProfileController extends Controller
             $user->password = Hash::make($validated['password']);
 
         $user->save();
+        session()->flash('success', 'Dein Profil wurde erfolgreich gespeichert.');
 
         return redirect(route('profile'));
     }

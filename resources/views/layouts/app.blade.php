@@ -73,6 +73,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
+                <x-layout.flash-message />
                 <div class="myAlert-bottom" id="alerts"></div>
                 <h1 class="mt-4">@yield('title', 'Seitentitel')</h1>
                 <ol class="breadcrumb mb-4">

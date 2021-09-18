@@ -12,16 +12,15 @@
         <div class="card-header">Profil</div>
         <div class="card-body">
             <div class="row">
+                <div class="col-12 col-xl-4 mb-3 p-4">
                 Dieser Bereich kommt demächst.<br />
                 Hier kann der Name, die E-Mail Adresse und das Passwort geändert werden.
-                <!--
-                <div class="col-12 col-xl-4 mb-3 p-4">
                     Das Passwort Feld kann frei bleiben, wenn das Passwort nicht geändert werden soll.
                 </div>
                 <div class="col-12 col-xl-8 mb-3">
-                    <form action="" method="POST">
+                    <form action="{{ route('profile.update') }}" method="POST">
                         @csrf
-                        @method('post')
+                        @method('patch')
                         <div class="form-group row">
                             <label for="inputUsername" class="col-sm-2 col-form-label">Benutzername</label>
                             <div class="col-sm-10">
@@ -31,30 +30,30 @@
                         <div class="form-group row">
                             <label for="inputDisplayName" class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputDisplayName" placeholder="Name" value="{{ $user->name }}">
+                                <input name="name" type="text" class="form-control" id="inputDisplayName" placeholder="Name" value="{{ $user->name }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="{{ $user->email }}">
+                                <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email" value="{{ $user->email }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Passwort</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword" placeholder="Passwort" value="">
+                                <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Passwort" value="">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPasswordConfirm" class="col-sm-2 col-form-label">Passwort Wiederholen</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPasswordConfirm" placeholder="Passwort" value="">
+                                <input name="password_confirmation" type="password" class="form-control" id="inputPasswordConfirm" placeholder="Passwort" value="">
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Speichern</button>
                     </form>
-                </div>-->
+                </div>
             </div>
         </div>
     </div>

@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::view('/regeln', 'rules')->name('rules');
     Route::get('/profil', 'App\Http\Controllers\ProfileController@show')->name('profile');
+    Route::patch('/profil/save', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
 
     // Tipps
     Route::get('/tipp/bl{league}', 'App\Http\Controllers\TippController@redictToDay')->name('tippsWithoutDay');

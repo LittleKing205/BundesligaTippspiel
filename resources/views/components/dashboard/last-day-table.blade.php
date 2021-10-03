@@ -2,31 +2,30 @@
     <div class="card">
         <h5 class="card-header">{{ $league }}. Bundesliga - {{ $lastDay }}. Spieltag Ergebnisse</h5>
         <div class="card-body">
-            <!--<h5 class="card-title text-danger">Achtung, es sind noch nicht alle Ergebnisse da. Es fehlen noch ANZAHL Spielergebnisse.</h5>-->
             <p class="card-text">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th>Name</th>
-                    <th>Richtig</th>
-                    <th>Falsch</th>
-                    <th>Zu Behzahlen</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                @foreach($leagueResult as $userResult)
+                <table class="table">
+                    <thead>
                     <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $userResult["name"] }}</td>
-                        <td>{{ $userResult["right"] }}</td>
-                        <td>{{ $userResult["wrong"] }}</td>
-                        <td>{{ number_format($userResult["to_pay"], 2, ",", ".") }} €</td>
+                        <th scope="col">#</th>
+                        <th>Name</th>
+                        <th>Richtig</th>
+                        <th>Falsch</th>
+                        <th>Zu Behzahlen</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+
+                    <tbody>
+                        @foreach($leagueResult as $userResult)
+                            <tr>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $userResult["name"] }}</td>
+                                <td>{{ $userResult["right"] }}</td>
+                                <td>{{ $userResult["wrong"] }}</td>
+                                <td>{{ number_format($userResult["to_pay"], 2, ",", ".") }} €</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </p>
         </div>
     </div>

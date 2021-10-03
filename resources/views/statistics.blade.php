@@ -11,4 +11,11 @@
     <div class="row">
         <x-statistics.system-box />
     </div>
+
+    <div class="row">
+        <x-statistics.payment-table league="1" />
+        <x-statistics.payment-table league="2" />
+    </div>
+
+    <x-statistics.payment-modal />
 @endsection

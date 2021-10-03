@@ -4,7 +4,7 @@
     Dashboard
 </a>
 <a class="nav-link" href="{{ route('statistics') }}">
-    <div class="sb-nav-link-icon"><i class="fas fa-scroll"></i></div>
+    <div class="sb-nav-link-icon"><i class="fas fa-star"></i></div>
     Statistiken
 </a>
 <a class="nav-link" href="{{ route('rules') }}">

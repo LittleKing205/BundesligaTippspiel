@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Dashboard;
 
 use App\Http\Clients\OpenLiga;
 use App\Models\Game;
@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\View\Component;
 use Illuminate\Support\Collection;
 
-class DashboardLastDayTable extends Component
+class LastDayTable extends Component
 {
     private OpenLiga $openLiga;
     public int $league;
@@ -69,7 +69,7 @@ class DashboardLastDayTable extends Component
         ]);
 
         if ($this->lastDay >= 1)
-            return view('components.dashboard-last-day-table');
+            return view('components.dashboard.last-day-table');
         else
             return "";
     }

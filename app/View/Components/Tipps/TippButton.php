@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Tipps;
 
 use App\Models\Game;
 use App\Models\Tipp;
@@ -61,6 +61,6 @@ class TippButton extends Component
         if (!is_null($this->matchResult) && $this->matchResult == $this->val && is_null($this->userTipp))
             $state = 'info';
 
-        return view('components.tipp-button', compact('state'));
+        return view('components.tipps.tipp-button', compact('state'));
     }
 }

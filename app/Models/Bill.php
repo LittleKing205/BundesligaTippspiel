@@ -21,6 +21,15 @@ class Bill extends Model
         'to_pay'
     ];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'has_payed' => 'boolean'
+    ];
+
     public function user() {
         return $this->belongsTo(User::class);
     }

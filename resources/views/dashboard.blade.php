@@ -8,12 +8,13 @@
 
 @section('content')
     <div class="row">
-        <x-dashboard-current-day league="1" />
-        <x-dashboard-current-day league="2" />
+        <x-dashboard.current-day-table league="1" />
+        <x-dashboard.current-day-table league="2" />
+        <x-dashboard.statistics-box />
     </div>
 
     <div class="row">
-        <x-dashboard-last-day-table league="1" />
-        <x-dashboard-last-day-table league="2" />
+        <x-dashboard.last-day-table league="1" />
+        <x-dashboard.last-day-table league="2" />
     </div>
 @endsection

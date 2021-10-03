@@ -1,11 +1,11 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Tipps;
 
 use Illuminate\View\Component;
 use Illuminate\Http\Request;
 
-class TippDayPaginate extends Component
+class Paginate extends Component
 {
     private $request;
     private $extraPages = 2;
@@ -36,6 +36,6 @@ class TippDayPaginate extends Component
             $links[] = $i;
         }
 
-        return view('components.tipp-day-paginate', compact('currentDay', 'league', 'links'));
+        return view('components.tipps.paginate', compact('currentDay', 'league', 'links'));
     }
 }

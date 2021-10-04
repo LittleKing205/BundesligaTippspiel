@@ -3,6 +3,10 @@
     <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
     Dashboard
 </a>
+<a class="nav-link" href="{{ route('statistics') }}">
+    <div class="sb-nav-link-icon"><i class="fas fa-star"></i></div>
+    Statistiken
+</a>
 <a class="nav-link" href="{{ route('rules') }}">
     <div class="sb-nav-link-icon"><i class="fas fa-scroll"></i></div>
     Regeln

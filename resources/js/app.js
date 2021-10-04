@@ -135,4 +135,24 @@ jQuery(document).ready(function($){
                 addAlert('danger', 'Ein fehler ist aufgetreten. Bitte versuche es später erneut.');
             });
     });
+
+    $(".statistics-pay-btn").click(function() {
+        $(".payment-modal-verwendungszweck").val($(this).data("league") + ". Bundesliga // " + $(this).data("day") + ". Spieltag");
+        $(".payment-modal-to-pay").val($(this).data("betrag"))
+        $(".payment-modal-bill-id").val($(this).data("id"))
+        $("#payment-modal").modal("show");
+    });
+
+    $(".click-copy").click(function() {
+        console.log("Click Copy");
+        $(this).select();
+        document.execCommand("copy");
+    });
+
+    $("button").click(function() {
+        console.log("Button Clicked");
+        if ($(this).data("dismiss") === "payment-modal") {
+            $("#payment-modal").modal("hide");
+        }
+    });
 });

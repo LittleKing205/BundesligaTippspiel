@@ -21,7 +21,7 @@
             </p>
             <footer class="card-footer d-flex justify-content-around">
                 @foreach([1, 0, 2] as $button)
-                    <x-tipp-button :val="$button" :matchId="$match->id" :userTipp="$user_tipp" :matchResult="$match_result" :locked="$locked"/>
+                    <x-tipps.tipp-button :val="$button" :matchId="$match->id" :userTipp="$user_tipp" :matchResult="$match_result" :locked="$locked"/>
                 @endforeach
             </footer>
         </div>

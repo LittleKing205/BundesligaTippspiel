@@ -47,4 +47,8 @@ class User extends Authenticatable
     public function tipps() {
         return $this->hasMany(Tipp::class);
     }
+
+    public function bills() {
+        return $this->hasMany(Bill::class);
+    }
 }

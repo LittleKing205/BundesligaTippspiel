@@ -13,14 +13,14 @@
 @endpush
 
 @section('content')
-    <x-tipp-day-paginate currentPage="3" />
+    <x-tipps.paginate currentPage="3" />
     @foreach($matches as $matchPerDay)
-        <x-day-separator>{{ $matchPerDay[0]->match_start->dayName }}, den {{ $matchPerDay[0]->match_start->format('d.m.Y') }}</x-day-separator>
+        <x-tipps.day-separator>{{ $matchPerDay[0]->match_start->dayName }}, den {{ $matchPerDay[0]->match_start->format('d.m.Y') }}</x-day-separator>
         <div class="row">
             @foreach($matchPerDay as $match)
-                <x-tipp-box :match="$match->id" />
+                <x-tipps.tipp-box :match="$match->id" />
             @endforeach
         </div>
     @endforeach
-    <x-tipp-day-paginate currentPage="3" />
+    <x-tipps.paginate currentPage="3" />
 @endsection

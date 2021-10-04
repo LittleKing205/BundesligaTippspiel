@@ -80,6 +80,11 @@ class MatchesLoadCurrentDay extends Command
                 $users = User::all();
                 foreach ($users as $user) {
                     $user->notify(new DayEndNotification($league));
+                    $this->call("make:bill", [
+                        "user" => $user->id,
+                        "league" => $league,
+                        "day" => $openLiga->getCurrentDay($league) - 1
+                    ]);
                 }
                 Cache::forever('lastNotifiedEnd_bl'.$league, $openLiga->getCurrentDay($league));
                 $this->info("Notified Users, that day is end on league bl".$league);

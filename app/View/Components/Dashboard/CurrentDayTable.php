@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Dashboard;
 
 use App\Http\Clients\OpenLiga;
 use App\Models\Game;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
-class DashboardCurrentDay extends Component
+class CurrentDayTable extends Component
 {
     public int $league;
     public int $tippCount;
@@ -85,6 +85,6 @@ class DashboardCurrentDay extends Component
         else
             $this->statusColor = "primary";
 
-        return view('components.dashboard-current-day');
+        return view('components.dashboard.current-day-table');
     }
 }

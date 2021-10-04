@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Tipps;
 
 use App\Models\Game;
 use App\Models\Tipp;
@@ -35,6 +35,6 @@ class TippBox extends Component
         $user_tipp = (!is_null($tipp)) ? $tipp['tipp'] : null;
         $match_result = $match->result;
 
-        return view('components.tipp-box', compact('match', 'user_tipp', 'match_result', 'locked'));
+        return view('components.tipps.tipp-box', compact('match', 'user_tipp', 'match_result', 'locked'));
     }
 }

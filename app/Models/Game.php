@@ -19,7 +19,7 @@ class Game extends Model
         'league' => 'integer',
         'day' => 'integer',
         'has_finished' => 'boolean',
-        'results' => 'integer',
+        'result' => 'integer',
         'team1_points' => 'integer',
         'team2_points' => 'integer',
         'notified' => 'boolean'

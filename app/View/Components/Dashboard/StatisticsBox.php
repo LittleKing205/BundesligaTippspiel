@@ -9,7 +9,7 @@ use Illuminate\View\Component;
 class StatisticsBox extends Component
 {
     public int $open_bills = 0;
-    public string $status_color = "primary";
+    public string $status_color = "success";
     public $pot = 0;
     public $missing_pot = 0;
 

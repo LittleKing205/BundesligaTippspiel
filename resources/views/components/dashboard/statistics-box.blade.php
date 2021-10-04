@@ -7,7 +7,7 @@
             @if($open_bills > 0)
                 <b>Du musst noch {{ $open_bills }} Zahlungen tätigen.</b><br />
             @else
-                Du hast alles gezahlt.
+                Du hast alles gezahlt.<br />
             @endif
 
             Im Topf befinden sich zurzeit {{ number_format($pot, 2, ",", ".") }} €

@@ -10,6 +10,8 @@
 @section('content')
     <div class="row">
         <x-statistics.system-box />
+        <x-statistics.payment-box />
+        <x-statistics.player-box />
     </div>
 
     <div class="row">

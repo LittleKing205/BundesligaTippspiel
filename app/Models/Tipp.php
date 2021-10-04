@@ -13,7 +13,7 @@ class Tipp extends Model
         return $this->hasMany(User::class);
     }
 
-    public function match() {
+    public function game() {
         return $this->belongsTo(Game::class);
     }
 }

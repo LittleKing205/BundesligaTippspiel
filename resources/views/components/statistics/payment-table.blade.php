@@ -36,7 +36,7 @@
                                     @if($bill->has_payed)
                                         Bezahlt
                                     @else
-                                        Jetzt zahlen
+                                        <u class="statistics-pay-btn" style="cursor: pointer;" data-id="{{ $bill->id }}" data-betrag="{{ number_format($bill->to_pay, 2, ",", ".") }}" data-league="{{ $bill->league }}" data-day="{{ $bill->day }}">Jetzt zahlen</u>
                                     @endif
                                 </td>
                             </tr>

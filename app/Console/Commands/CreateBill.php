@@ -41,18 +41,26 @@ class CreateBill extends Command
     public function handle()
     {
         $matches = DB::table("games")->where("games.day", $this->argument("day"))->where("games.league", $this->argument("league"))->join("tipps", "games.id", "=", "tipps.game_id")->where("tipps.user_id", $this->argument("user"))->get();
+        $right = 0;
         $wrong = 0;
+        $not_tipped = 0;
         foreach($matches as $match) {
-            if ($match->tipp != $match->result)
+            if ($match->tipp == $match->result)
+                $right += 1;
+            else
                 $wrong += 1;
         }
-        $toPay = ($wrong * 0.5) + (9 - count($matches));
+        $not_tipped = 9 - count($matches);
+        $toPay = ($wrong * 0.5) + $not_tipped;
         $bill = Bill::where("user_id", $this->argument("user"))->where("day", $this->argument("day"))->where("league", $this->argument("league"))->first();
         if (is_null($bill)) {
             Bill::create([
                 "user_id" => $this->argument("user"),
                 "league" => $this->argument("league"),
                 "day" => $this->argument("day"),
+                "right" => $right,
+                "wrong" => $wrong,
+                "not_tipped" => $not_tipped,
                 "to_pay" => $toPay
             ]);
         } else {

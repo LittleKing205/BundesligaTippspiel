@@ -18,6 +18,9 @@ class Bill extends Model
         'user_id',
         'league',
         'day',
+        'right',
+        'wrong',
+        'not_tipped',
         'to_pay'
     ];
 

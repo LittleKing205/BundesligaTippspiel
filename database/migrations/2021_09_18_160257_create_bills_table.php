@@ -20,6 +20,9 @@ class CreateBillsTable extends Migration
             $table->unsignedTinyInteger('league');
             $table->unsignedTinyInteger('day');
             $table->double('to_pay');
+            $table->unsignedBigInteger('right');
+            $table->unsignedBigInteger('wrong');
+            $table->unsignedBigInteger('not_tipped');
             $table->boolean('has_payed')->default(false);
             $table->timestamps();
         });

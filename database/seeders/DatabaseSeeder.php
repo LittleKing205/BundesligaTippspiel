@@ -35,5 +35,7 @@ class DatabaseSeeder extends Seeder
             "email" => "monja.s@pascalschreiber.de",
             "password" => Hash::make("jeremy08")
         ]);
+
+        Artisan::call('make:oldbills');
     }
 }

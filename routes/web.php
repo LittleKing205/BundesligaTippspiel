@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/statistiken', 'App\Http\Controllers\StatisticsController@show')->name('statistics');
     Route::post('/statistiken/pay', 'App\Http\Controllers\StatisticsController@pay')->name('statistics.pay');
 
+    Route::get('/kassenwart', 'App\Http\Controllers\TreasurerController@show')->name('treasurer');
+
     Route::get('/profil', 'App\Http\Controllers\ProfileController@show')->name('profile');
     Route::patch('/profil/save', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
 

@@ -11,6 +11,12 @@
     <div class="sb-nav-link-icon"><i class="fas fa-scroll"></i></div>
     Regeln
 </a>
+@can('isTreasurer')
+    <a class="nav-link" href="{{ route('rules') }}">
+        <div class="sb-nav-link-icon"><i class="fas fa-scroll"></i></div>
+        Kassenwart
+    </a>
+@endcan
 
 @foreach([1, 2] as $league)
     <div class="sb-sidenav-menu-heading">{{ $league }}. Bundesliga</div>

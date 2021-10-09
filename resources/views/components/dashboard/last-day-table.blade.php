@@ -18,7 +18,7 @@
                         @foreach($leagueResult as $userResult)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $userResult["name"] }}</td>
+                                <td>{{ $userResult["user"]->name }}</td>
                                 <td>{{ $userResult["right"] }}</td>
                                 <td>{{ $userResult["wrong"] }}</td>
                                 <td>{{ number_format($userResult["to_pay"], 2, ",", ".") }} €</td>

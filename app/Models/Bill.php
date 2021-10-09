@@ -30,6 +30,15 @@ class Bill extends Model
         'has_payed' => 'boolean'
     ];
 
+    public static function boot() {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->timestamps = false;
+            $model->created_at = now();
+        });
+    }
+
     public function user() {
         return $this->belongsTo(User::class);
     }

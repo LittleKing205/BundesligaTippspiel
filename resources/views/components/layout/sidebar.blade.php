@@ -12,8 +12,8 @@
     Regeln
 </a>
 @can('isTreasurer')
-    <a class="nav-link" href="{{ route('rules') }}">
-        <div class="sb-nav-link-icon"><i class="fas fa-scroll"></i></div>
+    <a class="nav-link" href="{{ route('treasurer') }}">
+        <div class="sb-nav-link-icon"><i class="fas fa-gem"></i></div>
         Kassenwart
     </a>
 @endcan

@@ -33,7 +33,13 @@ class DatabaseSeeder extends Seeder
             "name" => "Chilly",
             "username" => "Chilly",
             "email" => "monja.s@pascalschreiber.de",
-            "password" => Hash::make("jeremy08")
+            "password" => Hash::make("0609")
+        ]);
+        User::create([
+            "name" => "Igor",
+            "username" => "Axel",
+            "email" => "axel.s@pascalschreiber.de",
+            "password" => Hash::make("0609")
         ]);
 
         Artisan::call('make:oldbills');

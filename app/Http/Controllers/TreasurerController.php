@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Bill;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class TreasurerController extends Controller
 {
 
     public function show(Request $request) {
+        if (!Gate::allows('isTreasurer'))
+            abort(404);
+
         $users = User::all();
         $showWithMissing = false;
         $filter = $request;

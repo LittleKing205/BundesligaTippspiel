@@ -95,7 +95,7 @@
                         <!--<a href="#">Privacy Policy</a>
                         &middot;
                         <a href="#">Terms &amp; Conditions</a>-->
-                        Version: 1.0.1
+                        Version: 1.0.2
                     </div>
                 </div>
             </div>

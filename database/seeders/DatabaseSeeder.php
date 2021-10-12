@@ -43,5 +43,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Artisan::call('make:oldbills');
+
+        $user = User::where('id', 1)->first();
+
+        $user->assignRole('admin');
     }
 }

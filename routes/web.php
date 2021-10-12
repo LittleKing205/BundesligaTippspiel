@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/statistiken', 'App\Http\Controllers\StatisticsController@show')->name('statistics');
     Route::post('/statistiken/pay', 'App\Http\Controllers\StatisticsController@pay')->name('statistics.pay');
 
-    Route::get('/kassenwart', 'App\Http\Controllers\TreasurerController@show')->name('treasurer');
+    Route::get('/kassenwart', 'App\Http\Controllers\TreasurerController@show')->name('treasurer')->middleware('permission:show_treasurer_page');
 
     Route::get('/profil', 'App\Http\Controllers\ProfileController@show')->name('profile');
     Route::patch('/profil/save', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profil/deleteJoin', 'App\Http\Controllers\ProfileController@deleteJoin')->name('profile.deleteJoin');
 
     // Admin Routes
-    Route::get('/admin/switch/tipp_mode', 'App\Http\Controllers\AdminController@switchTippMode')->name('admin.switch_tipp_mode');
+    Route::get('/admin/switch/tipp_mode', 'App\Http\Controllers\AdminController@switchTippMode')->name('admin.switch_tipp_mode')->middleware('permission:edit_closed_games');
 });
 
 Auth::routes();

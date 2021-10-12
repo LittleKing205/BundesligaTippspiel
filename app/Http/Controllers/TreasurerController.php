@@ -11,9 +11,6 @@ class TreasurerController extends Controller
 {
 
     public function show(Request $request) {
-        if (!Gate::allows('isTreasurer'))
-            abort(404);
-
         $users = User::all();
         $showWithMissing = false;
         $filter = $request;

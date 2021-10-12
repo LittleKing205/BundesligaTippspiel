@@ -18,18 +18,18 @@ class DefaultRolesSeeder extends Seeder
     {
         $allPermissions = array(
             // Function Permissions
-            'can_edit_closed_games',
+            'edit_closed_games',
 
             // Site Permissions
             'show_treasurer_page'
         );
 
         $defaultRoles = array(
-            'Admin' => [
-                'can_edit_closed_games',
+            __('role_names.admin') => [
+                'edit_closed_games',
                 'show_treasurer_page'
             ],
-            'Kassenwart' => [
+            __('role_names.treasurer') => [
                 'show_treasurer_page'
             ]
         );

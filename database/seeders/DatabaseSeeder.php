@@ -46,6 +46,6 @@ class DatabaseSeeder extends Seeder
 
         $user = User::where('id', 1)->first();
 
-        $user->assignRole('admin');
+        $user->assignRole(__('role_names.admin'));
     }
 }

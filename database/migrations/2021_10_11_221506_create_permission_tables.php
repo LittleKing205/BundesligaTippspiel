@@ -124,7 +124,7 @@ class CreatePermissionTables extends Migration
             $table->dropColumn('is_treasurer');
         });
 
-        Artisan::call('db:seed DefaultRolesSeeder');
+        Artisan::call('db:seed PermissionSeeder');
     }
 
     /**

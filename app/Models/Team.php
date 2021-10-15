@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
-    use HasFactory;
-
     public function homeMatches() {
         return $this->HasMany('App\Models\Game', 'team1_id');
     }

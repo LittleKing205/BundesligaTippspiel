@@ -10,7 +10,7 @@
 @section('content')
     <div class="row">
         <x-statistics.system-box />
-        <x-statistics.payment-box />
+        <x-statistics.all-player-box />
         <x-statistics.player-box />
     </div>
 

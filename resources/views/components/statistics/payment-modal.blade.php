@@ -9,6 +9,10 @@
             </div>
             <div class="modal-body">
                 <p>
+                    Zur vereinfachung für den Kassenwart, bitte den unten angegebenen Verwendungszweck verwenden.<br />
+                    Der Verwendungszweck und der Betrag wird Automatisch beim klicken kopiert, so kann man die Daten direkt in die Überweisung einfügen.
+                </p>
+                <p>
                     Verwendungszweck:<br />
                     <input class="payment-modal-verwendungszweck click-copy" value="1. Bundesliga // 5. Spieltag" />
                 </p>

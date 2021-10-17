@@ -14,10 +14,21 @@
                 <h5 class="card-header">Nach Spieler Filtern</h5>
                 <div class="card-body">
                     <p class="card-text">
-                        <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer') }}">Alle</a> <br />
+                        <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['payed' => $payed_filter]) }}">Alle</a> <br />
                         @foreach ($users as $user)
-                            <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user->name]) }}">{{ $user->name }}</a><br />
+                            <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['payed' => $payed_filter, 'user' => $user->name]) }}">{{ $user->name }}</a><br />
                         @endforeach
+                    </p>
+                </div>
+            </div>
+            <br />
+            <div class="card">
+                <h5 class="card-header">Nach Zahlstatus Filtern</h5>
+                <div class="card-body">
+                    <p class="card-text">
+                        <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter]) }}">Alle</a> <br />
+                        <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter, 'payed' => true]) }}">Gezahlt</a> <br />
+                        <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter, 'payed' => false]) }}">Nicht gezahlt</a> <br />
                     </p>
                 </div>
             </div>
@@ -35,9 +46,6 @@
                                     <th>Liga</th>
                                     <th>Spieltag</th>
                                     <th>Betrag</th>
-                                    @if ($showWithMissing)
-                                        <th>gezahlt</th>
-                                    @endif
                                     <th>Zu zahlen/bezahlt seit</th>
                                 </tr>
                             </thead>
@@ -47,9 +55,6 @@
                                     <th>Liga</th>
                                     <th>Spieltag</th>
                                     <th>Betrag</th>
-                                    @if ($showWithMissing)
-                                        <th>gezahlt</th>
-                                    @endif
                                     <th>Zu zahlen/bezahlt seit</th>
                                 </tr>
                             </tfoot>
@@ -61,9 +66,6 @@
                                         <td>{{ $bill->league }}. Bundesliga</td>
                                         <td>{{ $bill->day }}.</td>
                                         <td>{{ number_format($bill->to_pay, 2, ",", ".") }} €</td>
-                                        @if ($showWithMissing)
-                                            <td>{{ $bill->has_payed }}</td>
-                                        @endif
                                         <td>
                                             @if(!is_null($bill->updated_at))
                                                 <span class="text-success">{{ $bill->updated_at }}</span>

@@ -23,11 +23,14 @@ class TippController extends Controller
         if ($league < 1 || $league > 2 || $day < 1 || $day > 34)
             abort(404);
 
+        $colors = config("tippspiel.colors");
+        if (!is_null(Auth::user()->button_colors))
+            $colors = array_merge($colors, Auth::user()->button_colors);
         $matches = Game::where('league', $league)->where('day', $day)->with('team1')->with('team2')->orderBy('match_start')->get();
         $matches = $matches->groupBy(function($item) {
             return $item->match_start->format('Y-m-d');
         });
-        return view('tipps', compact(['leagueName', 'day', 'matches', 'league']));
+        return view('tipps', compact(['leagueName', 'day', 'matches', 'league', 'colors']));
     }
 
     public function store(Request $request) {

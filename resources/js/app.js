@@ -35,14 +35,25 @@ jQuery(document).ready(function($){
                 if (ret.code == 200) {
                     $("body").find(`[data-match='` + ret.data.matchId + `']`).each((index, btn) => {
                         $(btn).removeClass('btn-primary');
-                        $(btn).removeClass('btn-danger');
-                        $(btn).removeClass('btn-info');
-                        $(btn).removeClass('btn-success');
                         $(btn).removeClass('btn-secondary');
+                        $(btn).removeClass('btn-success');
+                        $(btn).removeClass('btn-danger');
+                        $(btn).removeClass('btn-warning');
+                        $(btn).removeClass('btn-info');
+                        $(btn).removeClass('btn-light');
+                        $(btn).removeClass('btn-dark');
+                        $(btn).removeClass('btn-outline-primary');
+                        $(btn).removeClass('btn-outline-secondary');
+                        $(btn).removeClass('btn-outline-success');
+                        $(btn).removeClass('btn-outline-danger');
+                        $(btn).removeClass('btn-outline-warning');
+                        $(btn).removeClass('btn-outline-info');
+                        $(btn).removeClass('btn-outline-light');
+                        $(btn).removeClass('btn-outline-dark');
                         if (ret.data.tipp == $(btn).data('btnval')) {
-                            $(btn).addClass('btn-success');
+                            $(btn).addClass('btn-' + $('meta[name="tipp-button-user"]').attr('content'));
                         } else {
-                            $(btn).addClass('btn-primary');
+                            $(btn).addClass('btn-' + $('meta[name="tipp-button-default"]').attr('content'));
                         }
                         $(btn).html(btnHtml[index]);
                     });

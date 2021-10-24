@@ -42,7 +42,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'is_admin' => 'boolean',
-        'is_treasurer' => 'boolean'
+        'is_treasurer' => 'boolean',
+        'button_colors' => 'array '
     ];
 
     public function tipps() {

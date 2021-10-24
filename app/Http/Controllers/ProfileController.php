@@ -13,8 +13,29 @@ use Illuminate\Validation\Rule;
 class ProfileController extends Controller
 {
     public function show(Request $request) {
+        $available_colors = [
+            "Blau" => "primary",
+            "Grau" => "secondary",
+            "Grün" => "success",
+            "Rot" => "danger",
+            "Gelb" => "warning",
+            "Hell Blau" => "info",
+            "Weiß" => "light",
+            "Schwarz" => "dark",
+            "Blau Umriss" => "outline-primary",
+            "Grau Umriss" => "outline-secondary",
+            "Grün Umriss" => "outline-success",
+            "Rot Umriss" => "outline-danger",
+            "Gelb Umriss" => "outline-warning",
+            "Hell Blau Umriss" => "outline-info",
+            "Weiß Umriss" => "outline-light",
+            "Schwarz Umriss" => "outline-dark"
+        ];
+        $user_colors = config("tippspiel.colors");
+        if (!is_null(Auth::user()->button_colors))
+            $user_colors = array_merge($user_colors, Auth::user()->button_colors);
         $user = Auth::user();
-        return view('profile', compact('user'));
+        return view('profile', compact('user', 'available_colors', 'user_colors'));
     }
 
     public function getSmsToken(Request $request) {
@@ -133,6 +154,14 @@ class ProfileController extends Controller
         $user->save();
         session()->flash('success', 'Dein Profil wurde erfolgreich gespeichert.');
 
+        return redirect(route('profile'));
+    }
+
+    public function updateColors(Request $request) {
+        $user = Auth::user();
+        $user->button_colors = $request->except(['_token', '_method']);
+        $user->save();
+        session()->flash('success', 'Dein Profil wurde erfolgreich gespeichert.');
         return redirect(route('profile'));
     }
 }

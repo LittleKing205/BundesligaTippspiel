@@ -16,9 +16,9 @@ return [
     'colors' => [
         "default" => "primary",
         "default_locked" => "secondary",
-        "user_tipp" => "dark",
+        "user_tipp" => "success",
         "game_result" => "success",
-        "user_wrong_tipp" => "dark",
+        "user_wrong_tipp" => "danger",
         "not_tipped" => "info"
     ],
 

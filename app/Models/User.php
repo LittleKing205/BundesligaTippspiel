@@ -43,7 +43,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_admin' => 'boolean',
         'is_treasurer' => 'boolean',
-        'button_colors' => 'array '
+        'button_colors' => 'array'
     ];
 
     public function tipps() {

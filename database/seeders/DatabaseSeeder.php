@@ -42,19 +42,6 @@ class DatabaseSeeder extends Seeder
             "password" => Hash::make("0609")
         ]);
 
-        $oldColors = [
-            "default" => "primary",
-            "default_locked" => "secondary",
-            "user_tipp" => "success",
-            "game_result" => "success",
-            "user_wrong_tipp" => "danger",
-            "not_tipped" => "info"
-        ];
-
-        $user = User::find(1);
-        $user->button_colors = $oldColors;
-        $user->save();
-
         Artisan::call('make:oldbills');
     }
 }

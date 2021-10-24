@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profil', 'App\Http\Controllers\ProfileController@show')->name('profile');
     Route::patch('/profil/save', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
+    Route::patch('/profil/saveButtons', 'App\Http\Controllers\ProfileController@updateColors')->name('profile.updateColors');
 
     // Tipps
     Route::get('/tipp/bl{league}', 'App\Http\Controllers\TippController@redictToDay')->name('tippsWithoutDay');

@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-xl-6 col-md-12 mb-3">
             <div class="card">
-                <h5 class="card-header">Regelwerk / Spielablauf</h5>
+                <h4 class="card-header">Regelwerk / Spielablauf</h4>
                 <div class="card-body">
                     <ol>
                         <li>Getippt wird jedes Spiel der ersten und zweiten Bundesliga.</li>
@@ -29,9 +29,9 @@
     <div class="row">
         <div class="col-12 mb-3">
             <div class="card">
-                <div class="card-header">
+                <h4 class="card-header">
                     Tipp Box Beispiele (Legende)
-                </div>
+                </h4>
                 <div class="card-body">
                     <div class="row">
                         <x-rules.open :match="$match" :colors="$colors"/>

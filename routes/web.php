@@ -22,7 +22,7 @@ Route::redirect('/home', '/dashboard');
 Route::middleware('auth')->group(function () {
     //Sites
     Route::view('/dashboard', 'dashboard')->name('dashboard');
-    Route::view('/regeln', 'rules')->name('rules');
+    Route::get('/regeln', 'App\Http\Controllers\RulesController@show')->name('rules');
 
     Route::get('/statistiken', 'App\Http\Controllers\StatisticsController@show')->name('statistics');
     Route::post('/statistiken/pay', 'App\Http\Controllers\StatisticsController@pay')->name('statistics.pay');

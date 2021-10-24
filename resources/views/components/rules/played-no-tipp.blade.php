@@ -1,12 +1,12 @@
-<div id="{{ $match->id }}" class="col-xl-6 col-md-6 mb-3">
+<div id="Match-Test-Open" class="col-xl-6 col-md-6 mb-3">
     <div class="card">
+        <div class="card-header">
+            Spiel Vorbei // Gewonnen hat {{ $match->team1->name }} // Es wurde nicht getippt
+        </div>
         <div class="card-body">
             <p>
                 <div align="center">
-                    Anpfiff: <b>{{ $match->match_start->format('H:i') }}</b>
-                    @if($match->has_finished)
-                        <br />Spiel ist vorbei
-                    @endif
+                    Anpfiff: <b>{{ $match->match_start->format('H:i') }}</b><br />Spiel ist vorbei
                 </div>
                 <div class="d-flex justify-content-around">
                     <div align="center">
@@ -21,9 +21,9 @@
             </p>
         </div>
         <footer class="card-footer d-flex justify-content-around">
-            @foreach([1, 0, 2] as $button)
-                <x-tipps.tipp-button :val="$button" :matchId="$match->id" :userTipp="$user_tipp" :matchResult="$match_result" :locked="$locked"/>
-            @endforeach
+            <button type="button" class="btn btn-info px-xl-5 px-4" disabled><i class="fas fa-plus"></i></button>
+            <button type="button" class="btn btn-secondary px-xl-5 px-4" disabled><i class="fas fa-equals"></i></button>
+            <button type="button" class="btn btn-secondary px-xl-5 px-4" disabled><i class="fas fa-plus"></i></button>
         </footer>
     </div>
 </div>

@@ -47,7 +47,7 @@ class TippButton extends Component
 
         // Tipp
         if (!is_null($this->userTipp) && $this->userTipp == $this->val)
-            $state = 'success';
+            $state = 'dark';
 
         // Ergebnis
         if (!is_null($this->matchResult) && $this->matchResult == $this->val)
@@ -55,7 +55,7 @@ class TippButton extends Component
 
         // Ergebnis != Tipp
         if (!is_null($this->userTipp) && !is_null($this->matchResult) && $this->matchResult != $this->userTipp && $this->userTipp == $this->val)
-            $state = 'danger';
+            $state = 'dark';
 
         // Ergebnis && Tipp nicht gegebn
         if (!is_null($this->matchResult) && $this->matchResult == $this->val && is_null($this->userTipp))

@@ -25,4 +25,26 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-12 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    Tipp Box Beispiele (Legende)
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <x-rules.open :match="$match"/>
+                        <x-rules.closed :match="$match"/>
+                    </div>
+
+                    <div class="row">
+                        <x-rules.played-right-tipp :match="$match"/>
+                        <x-rules.played-wrong-tipp :match="$match"/>
+                        <x-rules.played-no-tipp :match="$match"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

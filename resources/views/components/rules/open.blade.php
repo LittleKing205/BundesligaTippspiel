@@ -21,9 +21,9 @@
             </p>
         </div>
         <footer class="card-footer d-flex justify-content-around">
-            <button type="button" class="btn btn-dark px-xl-5 px-4"><i class="fas fa-plus"></i></button>
-            <button type="button" class="btn btn-primary px-xl-5 px-4"><i class="fas fa-equals"></i></button>
-            <button type="button" class="btn btn-primary px-xl-5 px-4"><i class="fas fa-plus"></i></button>
+            <button type="button" class="btn btn-{{ $colors["user_tipp"] }} px-xl-5 px-4"><i class="fas fa-plus"></i></button>
+            <button type="button" class="btn btn-{{ $colors["default"] }} px-xl-5 px-4"><i class="fas fa-equals"></i></button>
+            <button type="button" class="btn btn-{{ $colors["default"] }} px-xl-5 px-4"><i class="fas fa-plus"></i></button>
         </footer>
     </div>
 </div>

@@ -34,14 +34,14 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <x-rules.open :match="$match"/>
-                        <x-rules.closed :match="$match"/>
+                        <x-rules.open :match="$match" :colors="$colors"/>
+                        <x-rules.closed :match="$match" :colors="$colors"/>
                     </div>
 
                     <div class="row">
-                        <x-rules.played-right-tipp :match="$match"/>
-                        <x-rules.played-wrong-tipp :match="$match"/>
-                        <x-rules.played-no-tipp :match="$match"/>
+                        <x-rules.played-right-tipp :match="$match" :colors="$colors"/>
+                        <x-rules.played-wrong-tipp :match="$match" :colors="$colors"/>
+                        <x-rules.played-no-tipp :match="$match" :colors="$colors"/>
                     </div>
                 </div>
             </div>

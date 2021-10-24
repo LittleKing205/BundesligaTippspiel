@@ -22,14 +22,14 @@ class ProfileController extends Controller
             "Hell Blau" => "info",
             "Weiß" => "light",
             "Schwarz" => "dark",
-            "Blau Umriss" => "outline-primary",
-            "Grau Umriss" => "outline-secondary",
-            "Grün Umriss" => "outline-success",
-            "Rot Umriss" => "outline-danger",
-            "Gelb Umriss" => "outline-warning",
-            "Hell Blau Umriss" => "outline-info",
-            "Weiß Umriss" => "outline-light",
-            "Schwarz Umriss" => "outline-dark"
+            "Blau Umrandet" => "outline-primary",
+            "Grau Umrandet" => "outline-secondary",
+            "Grün Umrandet" => "outline-success",
+            "Rot Umrandet" => "outline-danger",
+            "Gelb Umrandet" => "outline-warning",
+            "Hell Blau Umrandet" => "outline-info",
+            "Weiß Umrandet" => "outline-light",
+            "Schwarz Umrandet" => "outline-dark"
         ];
         $user_colors = config("tippspiel.colors");
         if (!is_null(Auth::user()->button_colors))

@@ -158,8 +158,18 @@ class ProfileController extends Controller
     }
 
     public function updateColors(Request $request) {
+        $default_colors = config('tippspiel.colors');
+        $new_colors = $request->except(['_token', '_method']);
+        $save_colors = array();
+        foreach($new_colors as $key => $value) {
+            if ($value != $default_colors[$key])
+                $save_colors[$key] = $value;
+        }
+        if(count($save_colors) == 0)
+            $save_colors = null;
+
         $user = Auth::user();
-        $user->button_colors = $request->except(['_token', '_method']);
+        $user->button_colors = $save_colors;
         $user->save();
         session()->flash('success', 'Dein Profil wurde erfolgreich gespeichert.');
         return redirect(route('profile'));

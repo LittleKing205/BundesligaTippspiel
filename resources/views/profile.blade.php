@@ -13,9 +13,10 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-12 col-xl-4 mb-3 p-4">
-                Dieser Bereich kommt demächst.<br />
-                Hier kann der Name, die E-Mail Adresse und das Passwort geändert werden.
-                    Das Passwort Feld kann frei bleiben, wenn das Passwort nicht geändert werden soll.
+                    <p>
+                        Hier kann der Name, die E-Mail Adresse und das Passwort geändert werden.
+                        Das Passwort Feld kann frei bleiben, wenn das Passwort nicht geändert werden soll.
+                    </p>
                 </div>
                 <div class="col-12 col-xl-8 mb-3">
                     <form action="{{ route('profile.update') }}" method="POST">
@@ -92,14 +93,39 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-12 col-xl-4 mb-3">
-                    Erklärung kommt später
+                    <p>
+                        Hier können die Farbgebungen der jeweiligen Buttons abgeändert werden. Die Buttons werden nach Aufsteigender Priorität gefärbt bzw. überschrieben.<br />
+                        Die aktuellen Einstellungen können <a href="{{ route('rules') }}">hier</a> mit Beispielen eingesehen werden.
+                    </p>
+                    <ul>
+                        <li>
+                            <b>Standart Farbe / Gesperrter Button</b>:<br />
+                            Jeder Button wird mit dieser Farbe versehen. Hier kann man auswählen, welche Farbe ein Button haben soll, wenn ein Spiel gesperrt ist oder noch getippt werden kann.
+                        </li>
+                        <li>
+                            <b>Getippter Button</b>:<br />
+                            Diese Farbe wird gesetzt, ein Tipp für das jeweilige Spiel vorliegt.
+                        </li>
+                        <li>
+                            <b>Spielergebnis</b>:<br />
+                            Diese Farbe wird gesetzt, wenn das Spielergebnis dem Button entspricht.
+                        </li>
+                        <li>
+                            <b>Falscher Tipp</b>:<br />
+                            Diese Farbe wird für den Falsch abgesetzten Tipp gesetzt.
+                        </li>
+                        <li>
+                            <b>Nicht getipptes Ergebnis</b>:<br />
+                            Diese Farbe wird für das Ergenis eines Spiels gesetzt, wo kein Tipp abgegeben wurde.
+                        </li>
+                    </ul>
                 </div>
                 <div class="col-12 col-xl-8 mb-3">
                     <form action="{{ route('profile.updateColors') }}" method="POST">
                         @csrf
                         @method('patch')
                         <div class="form-group row">
-                            <label for="inputDefaultColor" class="col-sm-2 col-form-label">Standart Button</label>
+                            <label for="inputDefaultColor" class="col-sm-2 col-form-label">Standart Farbe</label>
                             <div class="col-sm-10">
                                 <select name="default" class="form-select" id="inputDefaultColor" aria-label="select">
                                     @foreach ($available_colors as $color_name => $color_value)

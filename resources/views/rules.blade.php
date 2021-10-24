@@ -34,6 +34,15 @@
                 </h4>
                 <div class="card-body">
                     <div class="row">
+                        <div class="col-12 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    Hier kann man alle verschiedenen Farbkombinationen einer Tippbox betrachten. Die jeweiligen Farben der Knöpfe könen in den <a href="{{ route('profile') }}">Profileinstellungen</a> geändert werden.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <x-rules.open :match="$match" :colors="$colors"/>
                         <x-rules.closed :match="$match" :colors="$colors"/>
                     </div>

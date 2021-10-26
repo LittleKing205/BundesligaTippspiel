@@ -53,4 +53,16 @@ class User extends Authenticatable
     public function bills() {
         return $this->hasMany(Bill::class);
     }
+
+    public function getNotificationChannel() {
+        $activated = array();
+        if (config('join_sms.enable') && !is_null($this->phone))
+            $activated[] = JoinSmsChannel::class;
+        if (!is_null($this->join_key))
+            $activated[] = JoinChannel::class;
+        if (config('firebase.enable') && !is_null($this->device_key))
+            $activated[] = WebPushChannel::class;
+
+        return $activated;
+    }
 }

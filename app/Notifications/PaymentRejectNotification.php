@@ -17,20 +17,12 @@ class PaymentRejectNotification extends Notification
 
     public function __construct($bill)
     {
-        $this->bill = $bill
+        $this->bill = $bill;
     }
 
     public function via($notifiable)
     {
-        $activated = array();
-        if (config('join_sms.enable') && !is_null($notifiable->phone))
-            $activated[] = JoinSmsChannel::class;
-        if (!is_null($notifiable->join_key))
-            $activated[] = JoinChannel::class;
-        if (config('firebase.enable') && !is_null($notifiable->device_key))
-            $activated[] = WebPushChannel::class;
-
-        return $activated;
+        return $notifiable->getNotificationChannel();
     }
 
     public function toMail($notifiable)

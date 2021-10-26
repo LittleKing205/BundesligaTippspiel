@@ -28,10 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/statistiken/pay', 'App\Http\Controllers\StatisticsController@pay')->name('statistics.pay');
 
     Route::get('/kassenwart', 'App\Http\Controllers\TreasurerController@show')->name('treasurer');
+    Route::patch('/kassenwart', 'App\Http\Controllers\TreasurerController@rejectPayment')->name('treasurer.rejectPayment');
 
     Route::get('/profil', 'App\Http\Controllers\ProfileController@show')->name('profile');
     Route::patch('/profil/save', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
-    Route::patch('/profil/saveButtons', 'App\Http\Controllers\ProfileController@updateColors')->name('profile.updateColors');
+    Route::patch('/profil/updateButtonColors', 'App\Http\Controllers\ProfileController@updateColors')->name('profile.updateColors');
 
     // Tipps
     Route::get('/tipp/bl{league}', 'App\Http\Controllers\TippController@redictToDay')->name('tippsWithoutDay');

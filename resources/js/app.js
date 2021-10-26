@@ -154,6 +154,12 @@ jQuery(document).ready(function($){
         $("#payment-modal").modal("show");
     });
 
+    $(".treasurer-payment-revoke").click(function() {
+        $("#treasurerPaymentRevokeModalUsername").text($(this).data("username"));
+        $("#treasurerPaymentRevokeModalDate").text($(this).data("paydate"));
+        $("#inputBillId").val($(this).data("bill-id"));
+    });
+
     $(".click-copy").click(function() {
         console.log("Click Copy");
         $(this).select();

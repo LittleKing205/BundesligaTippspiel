@@ -47,6 +47,7 @@
                                     <th>Spieltag</th>
                                     <th>Betrag</th>
                                     <th>Zu zahlen/bezahlt seit</th>
+                                    <th>Aktionen</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -56,6 +57,7 @@
                                     <th>Spieltag</th>
                                     <th>Betrag</th>
                                     <th>Zu zahlen/bezahlt seit</th>
+                                    <th>Aktionen</th>
                                 </tr>
                             </tfoot>
 
@@ -67,18 +69,47 @@
                                         <td>{{ $bill->day }}.</td>
                                         <td>{{ number_format($bill->to_pay, 2, ",", ".") }} €</td>
                                         <td>
-                                            @if(!is_null($bill->updated_at))
+                                            @if($bill->has_payed)
                                                 <span class="text-success">{{ $bill->updated_at }}</span>
                                             @else
                                                 <span class="text-danger">{{ $bill->created_at }}</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($bill->has_payed)
+                                                <a class="treasurer-payment-revoke" href="#" data-bill-id="{{ $bill->id }}" data-username="{{ $bill->user->name }}" data-paydate="{{ $bill->updated_at }}" data-toggle="modal" data-target="#treasurerPaymentRevokeModal">Zahlung zurücksetzen</a>
                                             @endif
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-
                     </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="treasurerPaymentRevokeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Zahlung zurücksetzen?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Soll die Zahlung von <b><span id="treasurerPaymentRevokeModalUsername"></span></b> vom <b><span id="treasurerPaymentRevokeModalDate"></span></b> wirklich zurückgesetzt werden?</p>
+                </div>
+                <div class="modal-footer">
+                    <form action="{{ route('treasurer.rejectPayment', ['user' => $user_filter, 'payed' => $payed_filter]) }}" method="post">
+                        @csrf
+                        @method('patch')
+                        <input type="hidden" id="inputBillId" name="bill-id" value="">
+                        <button type="submit" class="btn btn-danger">Ja, Zahlung zurücksetzen!</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Nein</button>
+                    </form>
                 </div>
             </div>
         </div>

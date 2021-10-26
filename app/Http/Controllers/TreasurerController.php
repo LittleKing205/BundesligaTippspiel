@@ -6,6 +6,7 @@ use App\Models\Bill;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Input\Input;
 
 class TreasurerController extends Controller
 {
@@ -36,5 +37,16 @@ class TreasurerController extends Controller
         $bills = $bills->get();
 
         return view('treasurer', compact('users', 'bills', 'user_filter', 'payed_filter'));
+    }
+
+    public function rejectPayment(Request $request) {
+        $validated = $request->validate([
+            "bill-id" => ['exists:App\Models\Bill,id']
+        ]);
+        $bill = Bill::find(intval($validated["bill-id"]));
+        $bill->has_payed = false;
+        $bill->save();
+
+        return redirect(route('treasurer', ['user' => $request->input("user"), 'payed' => $request->input("payed")]));
     }
 }

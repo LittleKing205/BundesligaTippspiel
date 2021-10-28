@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Channels\JoinChannel;
+use App\Channels\JoinSmsChannel;
+use App\Channels\WebPushChannel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;

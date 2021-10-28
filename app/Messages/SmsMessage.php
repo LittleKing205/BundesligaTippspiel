@@ -30,7 +30,7 @@ class SmsMessage
     }
 
     public function getMessage() {
-        Arr::prepend($this->lines, "[" . config("join_sms.header") . "]");
+        $this->lines = Arr::prepend($this->lines, "[" . config("join_sms.header") . "]");
         return collect($this->lines)->implode("\n");
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bill;
 use App\Models\User;
+use App\Notifications\PaymentRejectNotification;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
@@ -40,12 +41,17 @@ class TreasurerController extends Controller
     }
 
     public function rejectPayment(Request $request) {
+        if (!Gate::allows('isTreasurer'))
+            abort(404);
+
         $validated = $request->validate([
             "bill-id" => ['exists:App\Models\Bill,id']
         ]);
         $bill = Bill::find(intval($validated["bill-id"]));
         $bill->has_payed = false;
         $bill->save();
+
+        $bill->user->notify(new PaymentRejectNotification($bill));
 
         return redirect(route('treasurer', ['user' => $request->input("user"), 'payed' => $request->input("payed")]));
     }

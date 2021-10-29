@@ -105,7 +105,7 @@
                     <p>Soll die Zahlung von <b><span id="treasurerPaymentRevokeModalUsername"></span></b> vom <b><span id="treasurerPaymentRevokeModalDate"></span></b> wirklich zurückgesetzt werden?</p>
                 </div>
                 <div class="modal-footer">
-                    <form action="{{ route('treasurer.rejectPayment', ['user' => $user_filter, 'payed' => $payed_filter]) }}" method="post">
+                    <form action="{{ route('treasurer.reject_payment', ['user' => $user_filter, 'payed' => $payed_filter]) }}" method="post">
                         @csrf
                         @method('patch')
                         <input type="hidden" id="inputBillId" name="bill-id" value="">

@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/statistiken/pay', 'App\Http\Controllers\StatisticsController@pay')->name('statistics.pay');
 
     Route::get('/kassenwart', 'App\Http\Controllers\TreasurerController@show')->name('treasurer')->middleware('permission:treasurer.show');
-    Route::patch('/kassenwart', 'App\Http\Controllers\TreasurerController@rejectPayment')->name('treasurer.reject_payment');
+    Route::patch('/kassenwart', 'App\Http\Controllers\TreasurerController@rejectPayment')->name('treasurer.reject_payment')->middleware('permission:treasurer.reject_payment');
 
     Route::get('/profil', 'App\Http\Controllers\ProfileController@show')->name('profile');
     Route::patch('/profil/save', 'App\Http\Controllers\ProfileController@update')->name('profile.update');

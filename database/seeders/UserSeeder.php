@@ -28,6 +28,11 @@ class UserSeeder extends Seeder
         $treasurer->assignRole(__('role_names.treasurer'));
         $treasurer->save();
 
-        User::factory()->count(3)->create();
+        $user = User::factory()->make([
+            'username' => 'user',
+            'name' => 'user'
+        ])->save();
+
+        User::factory()->count(2)->create();
     }
 }

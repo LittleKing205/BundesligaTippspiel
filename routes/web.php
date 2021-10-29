@@ -1,6 +1,10 @@
 <?php
 
-use App\Http\Controllers\WebNotificationController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RulesController;
+use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\TippController;
+use App\Http\Controllers\TreasurerController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -22,38 +26,41 @@ Route::redirect('/home', '/dashboard');
 Route::middleware('auth')->group(function () {
     //Sites
     Route::view('/dashboard', 'dashboard')->name('dashboard');
-    Route::get('/regeln', 'App\Http\Controllers\RulesController@show')->name('rules');
+    Route::get('/regeln', [RulesController::class, 'show'])->name('rules');
 
-    Route::get('/statistiken', 'App\Http\Controllers\StatisticsController@show')->name('statistics');
-    Route::post('/statistiken/pay', 'App\Http\Controllers\StatisticsController@pay')->name('statistics.pay');
+    Route::get('/statistiken', [StatisticsController::class, 'show'])->name('statistics');
+    Route::post('/statistiken/pay', [StatisticsController::class, 'pay'])->name('statistics.pay');
 
-    Route::get('/kassenwart', 'App\Http\Controllers\TreasurerController@show')->name('treasurer')->middleware('permission:treasurer.show');
-    Route::patch('/kassenwart', 'App\Http\Controllers\TreasurerController@rejectPayment')->name('treasurer.reject_payment')->middleware('permission:treasurer.reject_payment');
+    Route::get('/kassenwart', [TreasurerController::class, 'show'])->name('treasurer')->middleware('permission:treasurer.show');
+    Route::patch('/kassenwart', [TreasurerController::class, 'rejectPayment'])->name('treasurer.reject_payment')->middleware('permission:treasurer.reject_payment');
 
-    Route::get('/profil', 'App\Http\Controllers\ProfileController@show')->name('profile');
-    Route::patch('/profil/save', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
-    Route::patch('/profil/updateButtonColors', 'App\Http\Controllers\ProfileController@updateColors')->name('profile.updateColors');
+    Route::get('/profil', [ProfileController::class, 'show'])->name('profile');
+    Route::patch('/profil/save', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profil/updateButtonColors', [ProfileController::class, 'updateColors'])->name('profile.updateColors');
 
     // Tipps
-    Route::get('/tipp/bl{league}', 'App\Http\Controllers\TippController@redictToDay')->name('tippsWithoutDay');
-    Route::get('/tipp/bl{league}/{day?}', 'App\Http\Controllers\TippController@show')->name('tipps');
-    Route::post('/tipp/save', 'App\Http\Controllers\TippController@store')->name('tippStore');
+    Route::get('/tipp/bl{league}', [TippController::class, 'redictToDay'])->name('tippsWithoutDay');
+    Route::get('/tipp/bl{league}/{day?}', [TippController::class, 'show'])->name('tipps');
+    Route::post('/tipp/save', [TippController::class, 'store'])->name('tippStore');
 
     // WebPush Benachrichtigungen
-    Route::post('/profil/storeWebPush', 'App\Http\Controllers\ProfileController@storeWebPush')->name('profile.storeWebPush');
-    Route::delete('/profil/deleteWebPush', 'App\Http\Controllers\ProfileController@deleteWebPush')->name('profile.deleteWebPush');
+    Route::post('/profil/storeWebPush', [ProfileController::class, 'storeWebPush'])->name('profile.storeWebPush');
+    Route::delete('/profil/deleteWebPush', [ProfileController::class, 'deleteWebPush'])->name('profile.deleteWebPush');
 
     // SMS Tokens
-    Route::post('/profil/getSmsToken', 'App\Http\Controllers\ProfileController@getSmsToken')->name('profile.getSmsToken');
-    Route::post('/profil/storeNumber', 'App\Http\Controllers\ProfileController@storeNumber')->name('profile.storeNumber');
-    Route::delete('/profil/deleteNumber', 'App\Http\Controllers\ProfileController@deleteNumber')->name('profile.deleteNumber');
+    Route::post('/profil/getSmsToken', [ProfileController::class, 'getSmsToken'])->name('profile.getSmsToken');
+    Route::post('/profil/storeNumber', [ProfileController::class, 'storeNumber'])->name('profile.storeNumber');
+    Route::delete('/profil/deleteNumber', [ProfileController::class, 'deleteNumber'])->name('profile.deleteNumber');
 
     // Join Benachrichtigungen
-    Route::post('/profil/storeJoin', 'App\Http\Controllers\ProfileController@storeJoin')->name('profile.storeJoin');
-    Route::delete('/profil/deleteJoin', 'App\Http\Controllers\ProfileController@deleteJoin')->name('profile.deleteJoin');
+    Route::post('/profil/storeJoin', [ProfileController::class, 'storeJoin'])->name('profile.storeJoin');
+    Route::delete('/profil/deleteJoin', [ProfileController::class, 'deleteJoin'])->name('profile.deleteJoin');
 
     // Admin Routes
-    Route::get('/admin/switch/tipp_mode', 'App\Http\Controllers\AdminController@switchTippMode')->name('admin.switch_tipp_mode')->middleware('permission:dev.edit_closed_games');
+    Route::get('/admin/switch/tipp_mode', [AdminController::class, 'switchTippMode'])->name('admin.switch_tipp_mode')->middleware('permission:dev.edit_closed_games');
+
+    // Dev Routes
+
 });
 
 Auth::routes();

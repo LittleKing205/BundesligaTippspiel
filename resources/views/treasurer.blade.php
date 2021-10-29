@@ -76,9 +76,11 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if($bill->has_payed)
-                                                <a class="treasurer-payment-revoke" href="#" data-bill-id="{{ $bill->id }}" data-username="{{ $bill->user->name }}" data-paydate="{{ $bill->updated_at }}" data-toggle="modal" data-target="#treasurerPaymentRevokeModal">Zahlung zurücksetzen</a>
-                                            @endif
+                                            @can("treasurer.reject_payment")
+                                                @if($bill->has_payed )
+                                                    <a class="treasurer-payment-revoke" href="#" data-bill-id="{{ $bill->id }}" data-username="{{ $bill->user->name }}" data-paydate="{{ $bill->updated_at }}" data-toggle="modal" data-target="#treasurerPaymentRevokeModal">Zahlung zurücksetzen</a>
+                                                @endif
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach

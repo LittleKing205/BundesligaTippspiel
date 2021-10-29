@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TreasurerController;
+
 return [
 
     'models' => [
@@ -126,7 +128,7 @@ return [
      * By default wildcard permission lookups are disabled.
      */
 
-    'enable_wildcard_permission' => false,
+    'enable_wildcard_permission' => true,
 
     'cache' => [
 
@@ -135,7 +137,8 @@ return [
          * When permissions or roles are updated the cache is flushed automatically.
          */
 
-        'expiration_time' => \DateInterval::createFromDateString('24 hours'),
+        // 'expiration_time' => \DateInterval::createFromDateString('24 hours'),
+        'expiration_time' => \DateInterval::createFromDateString('1 seconds'), // For Testings Purpuse... will be removed in further Versions
 
         /*
          * The cache key used to store all permissions.

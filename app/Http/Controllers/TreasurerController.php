@@ -38,9 +38,6 @@ class TreasurerController extends Controller
     }
 
     public function rejectPayment(Request $request) {
-        if (!Gate::allows('isTreasurer'))
-            abort(404);
-
         $validated = $request->validate([
             "bill-id" => ['exists:App\Models\Bill,id']
         ]);

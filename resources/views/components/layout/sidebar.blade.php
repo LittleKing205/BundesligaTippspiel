@@ -11,7 +11,7 @@
     <div class="sb-nav-link-icon"><i class="fas fa-scroll"></i></div>
     Regeln
 </a>
-@can('show_treasurer_page')
+@can('treasurer.show')
     <a class="nav-link" href="{{ route('treasurer') }}">
         <div class="sb-nav-link-icon"><i class="fas fa-coins"></i></div>
         Kassenwart

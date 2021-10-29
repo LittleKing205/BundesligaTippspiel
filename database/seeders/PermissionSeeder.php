@@ -17,20 +17,26 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $allPermissions = array(
-            // Function Permissions
-            'edit_closed_games',
+            // Dev Functions
+            'dev.edit_closed_games',
 
-            // Site Permissions
-            'show_treasurer_page'
+            // Treasurer Permissions
+            'treasurer.show',
+            'treasurer.reject_payment'
         );
 
         $defaultRoles = array(
             __('role_names.admin') => [
-                'edit_closed_games',
-                'show_treasurer_page'
+                'dev.edit_closed_games',
+                'treasurer.show',
+                'treasurer.reject_payment'
+            ],
+            __('role_names.dev') => [
+                'dev.edit_closed_games',
             ],
             __('role_names.treasurer') => [
-                'show_treasurer_page'
+                'treasurer.show',
+                'treasurer.reject_payment'
             ]
         );
 

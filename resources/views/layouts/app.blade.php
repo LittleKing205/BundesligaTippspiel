@@ -42,10 +42,10 @@
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <!--<li><a class="dropdown-item" href="#!">Settings</a></li>-->
                 <li><a class="dropdown-item" href="{{ route('profile') }}">Profil Einstellungen</a></li>
-                @can('edit_closed_games')
+                @can('dev.edit_closed_games')
                     <li><a class="dropdown-item" href="{{ route('admin.switch_tipp_mode') }}"><input type="checkbox" @if (Session::get('adminTippMode', false))
                         checked
-                    @endif> Admin Mode</a></li>
+                    @endif> Edit Closed Games</a></li>
                 @endcan
                 <li><hr class="dropdown-divider" /></li>
                 <li>

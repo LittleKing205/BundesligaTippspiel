@@ -65,6 +65,9 @@ class CreateBill extends Command
             ]);
         } else {
             $bill->to_pay = $toPay;
+            $bill->right = $right;
+            $bill->wrong = $wrong;
+            $bill->not_tipped = $not_tipped;
             $bill->save();
         }
     }

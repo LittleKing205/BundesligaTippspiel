@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DevController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\StatisticsController;
@@ -57,9 +58,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profil/deleteJoin', [ProfileController::class, 'deleteJoin'])->name('profile.deleteJoin');
 
     // Admin Routes
-    Route::get('/admin/switch/tipp_mode', [AdminController::class, 'switchTippMode'])->name('admin.switch_tipp_mode')->middleware('permission:dev.edit_closed_games');
 
     // Dev Routes
+    Route::get('/dev/switch/tipp_mode', [DevController::class, 'switchTippMode'])->name('dev.switch_tipp_mode')->middleware('permission:dev.edit_closed_games');
 
 });
 

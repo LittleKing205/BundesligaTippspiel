@@ -43,7 +43,7 @@
                 <!--<li><a class="dropdown-item" href="#!">Settings</a></li>-->
                 <li><a class="dropdown-item" href="{{ route('profile') }}">Profil Einstellungen</a></li>
                 @can('dev.edit_closed_games')
-                    <li><a class="dropdown-item" href="{{ route('admin.switch_tipp_mode') }}"><input type="checkbox" @if (Session::get('adminTippMode', false))
+                    <li><a class="dropdown-item" href="{{ route('dev.switch_tipp_mode') }}"><input type="checkbox" @if (Session::get('devTippMode', false))
                         checked
                     @endif> Edit Closed Games</a></li>
                 @endcan

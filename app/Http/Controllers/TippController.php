@@ -7,9 +7,11 @@ use App\Models\Game;
 use App\Models\Tipp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Response;
+use PhpParser\Node\Expr\Match_;
 
 class TippController extends Controller
 {
@@ -33,20 +35,19 @@ class TippController extends Controller
         return view('tipps', compact(['leagueName', 'day', 'matches', 'league', 'colors']));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request, OpenLiga $openLiga) {
         $ret = array();
         $ret['message'] = "ok";
         $ret['code'] = 200;
         $code = 200;
         $match = Game::find($request->match);
         $locked = (Carbon::now() >= $match->match_start->subHour(2));
-        if (session('adminTippMode', false) && Gate::allows('isAdmin'))
+        if (session('devTippMode', false) && Gate::allows('dev.edit_closed_games'))
             $locked = false;
 
         $data = array(
             'matchId' => $request->match,
-            'tipp' => $request->tipp,
-            'user' => Auth::user()->toArray()
+            'tipp' => $request->tipp
         );
         $ret['data'] = $data;
 
@@ -56,6 +57,16 @@ class TippController extends Controller
                 'game_id' => $request->match,
                 'tipp' => $request->tipp
             ], ['id', 'game_id']);
+            if (session('devTippMode', false) && Gate::allows('dev.edit_closed_games')) {
+                $game = Game::find($request->match);
+                if ($openLiga->getCurrentDay($game->league) < $game->day) {
+                    Artisan::call("make:bill", [
+                        "user" => Auth::user()->id,
+                        "league" => $game->league,
+                        "day" => $game->day
+                    ]);
+                }
+            }
         } else {
             $ret['message'] = __('errors.tipp_locked');
             $ret['code'] = 420;

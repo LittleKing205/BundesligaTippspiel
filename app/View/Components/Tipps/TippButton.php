@@ -41,7 +41,7 @@ class TippButton extends Component
      */
     public function render()
     {
-        if (session('adminTippMode', false) && Gate::allows('isAdmin'))
+        if (session('devTippMode', false) && Gate::allows('dev.edit_closed_games'))
             $this->locked = false;
 
         if (!is_null(Auth::user()->button_colors))

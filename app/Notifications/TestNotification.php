@@ -19,20 +19,11 @@ class TestNotification extends Notification implements ShouldQueue
     }
 
     public function via($notifiable) {
-        $activated = array();
-        if (config('join_sms.enable') && !is_null($notifiable->phone))
-            $activated[] = JoinSmsChannel::class;
-        if (!is_null($notifiable->join_key))
-            $activated[] = JoinChannel::class;
-        if (config('firebase.enable') && !is_null($notifiable->device_key))
-            $activated[] = WebPushChannel::class;
-
-        return $activated;
+        return $notifiable->getNotificationChannel();
     }
 
     public function toSMS($notifiable) {
         return (new SmsMessage())
-            ->line("[Bundesliga Tippspiel]")
             ->line("Dies ist eine Benachrichtigung, um den Dienst zu Testen");
     }
 

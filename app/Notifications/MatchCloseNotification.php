@@ -22,15 +22,7 @@ class MatchCloseNotification extends Notification implements ShouldQueue
     }
 
     public function via($notifiable) {
-        $activated = array();
-        if (config('join_sms.enable') && !is_null($notifiable->phone))
-            $activated[] = JoinSmsChannel::class;
-        if (!is_null($notifiable->join_key))
-            $activated[] = JoinChannel::class;
-        if (config('firebase.enable') && !is_null($notifiable->device_key))
-            $activated[] = WebPushChannel::class;
-
-        return $activated;
+        return $notifiable->getNotificationChannel();
     }
 
     public function toPush($notifiable) {
@@ -46,7 +38,6 @@ class MatchCloseNotification extends Notification implements ShouldQueue
     public function toSMS($notifiable)
     {
         return (new SmsMessage())
-            ->line("[Bundesliga Tippspiel]")
             ->line($this->match->team1->name . ' - ' . $this->match->team2->name)
             ->line("Das Spiel beginnt um " . $this->match->match_start->format('H:i') . " und ist gesperrt ab " . $this->match->match_start->subHours(2)->format('H:i') . ".")
             ->line("Jetzt noch schnell Tippen!")

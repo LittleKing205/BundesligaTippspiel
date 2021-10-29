@@ -22,15 +22,17 @@ Route::redirect('/home', '/dashboard');
 Route::middleware('auth')->group(function () {
     //Sites
     Route::view('/dashboard', 'dashboard')->name('dashboard');
-    Route::view('/regeln', 'rules')->name('rules');
+    Route::get('/regeln', 'App\Http\Controllers\RulesController@show')->name('rules');
 
     Route::get('/statistiken', 'App\Http\Controllers\StatisticsController@show')->name('statistics');
     Route::post('/statistiken/pay', 'App\Http\Controllers\StatisticsController@pay')->name('statistics.pay');
 
-    Route::get('/kassenwart', 'App\Http\Controllers\TreasurerController@show')->name('treasurer')->middleware('permission:show_treasurer_page');
+    Route::get('/kassenwart', 'App\Http\Controllers\TreasurerController@show')->name('treasurer');
+    Route::patch('/kassenwart', 'App\Http\Controllers\TreasurerController@rejectPayment')->name('treasurer.rejectPayment');
 
     Route::get('/profil', 'App\Http\Controllers\ProfileController@show')->name('profile');
     Route::patch('/profil/save', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
+    Route::patch('/profil/updateButtonColors', 'App\Http\Controllers\ProfileController@updateColors')->name('profile.updateColors');
 
     // Tipps
     Route::get('/tipp/bl{league}', 'App\Http\Controllers\TippController@redictToDay')->name('tippsWithoutDay');

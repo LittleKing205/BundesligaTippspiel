@@ -3,6 +3,7 @@
 namespace App\Messages;
 
 use http\Message;
+use Illuminate\Support\Arr;
 
 class SmsMessage
 {
@@ -29,6 +30,7 @@ class SmsMessage
     }
 
     public function getMessage() {
+        $this->lines = Arr::prepend($this->lines, "[" . config("join_sms.header") . "]");
         return collect($this->lines)->implode("\n");
     }
 }

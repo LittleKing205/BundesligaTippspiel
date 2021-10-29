@@ -13,7 +13,7 @@
 </a>
 @can('show_treasurer_page')
     <a class="nav-link" href="{{ route('treasurer') }}">
-        <div class="sb-nav-link-icon"><i class="fas fa-gem"></i></div>
+        <div class="sb-nav-link-icon"><i class="fas fa-coins"></i></div>
         Kassenwart
     </a>
 @endcan

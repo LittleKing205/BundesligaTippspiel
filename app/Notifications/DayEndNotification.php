@@ -21,15 +21,7 @@ class DayEndNotification extends Notification implements ShouldQueue
     }
 
     public function via($notifiable) {
-        $activated = array();
-        if (config('join_sms.enable') && !is_null($notifiable->phone))
-            $activated[] = JoinSmsChannel::class;
-        if (!is_null($notifiable->join_key))
-            $activated[] = JoinChannel::class;
-        if (config('firebase.enable') && !is_null($notifiable->device_key))
-            $activated[] = WebPushChannel::class;
-
-        return $activated;
+        return $notifiable->getNotificationChannel();
     }
 
     public function toPush($notifiable) {
@@ -43,7 +35,6 @@ class DayEndNotification extends Notification implements ShouldQueue
 
     public function toSMS($notifiable) {
         return (new SmsMessage())
-            ->line("[Bundesliga Tippspiel]")
             ->line("Der Spieltag ist zuende")
             ->line("Es sind nun alle Daten des Spieltages für die ".$this->league.". Bundesliga vorhanden.")
             ->line("Schau gleich nach, auf welchem Platz du bist.");

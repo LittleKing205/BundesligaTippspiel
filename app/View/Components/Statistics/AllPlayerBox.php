@@ -5,12 +5,15 @@ namespace App\View\Components\Statistics;
 use App\Models\Bill;
 use Illuminate\View\Component;
 
-class PaymentBox extends Component
+class AllPlayerBox extends Component
 {
     public $pot_sum = 0;
     public $pot_sum_missing = 0;
-    public $most_payments_payed = 0;
-    public $most_payments_user = "";
+    public $most_right_sum = 0;
+    public $most_right_name = "";
+    public $most_wrong_sum = 0;
+    public $most_wrong_name = "";
+    public $not_tipped = 0;
 
     /**
      * Create a new component instance.
@@ -34,11 +37,19 @@ class PaymentBox extends Component
         $bill_group = $bills->groupBy("user_id");
 
         foreach($bill_group as $bill) {
-            $tmp_payed = $bill->sum("to_pay");
-            if ($this->most_payments_payed < $tmp_payed) {
-                $this->most_payments_payed = $tmp_payed;
-                $this->most_payments_user = $bill[0]->user->name;
+            $tmp_right = $bill->sum("right");
+            if ($this->most_right_sum < $tmp_right) {
+                $this->most_right_sum = $tmp_right;
+                $this->most_right_name = $bill[0]->user->name;
             }
+
+            $tmp_wrong = $bill->sum("wrong");
+            if ($this->most_wrong_sum < $tmp_wrong) {
+                $this->most_wrong_sum = $tmp_wrong;
+                $this->most_wrong_name = $bill[0]->user->name;
+            }
+
+            $this->not_tipped += $bill->sum("not_tipped");
         }
 
         foreach($bills as $bill) {
@@ -48,6 +59,6 @@ class PaymentBox extends Component
                 $this->pot_sum_missing += $bill->to_pay;
         }
 
-        return view('components.statistics.payment-box');
+        return view('components.statistics.all-player-box');
     }
 }

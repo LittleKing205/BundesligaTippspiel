@@ -13,8 +13,29 @@ use Illuminate\Validation\Rule;
 class ProfileController extends Controller
 {
     public function show(Request $request) {
+        $available_colors = [
+            "Blau" => "primary",
+            "Grau" => "secondary",
+            "Grün" => "success",
+            "Rot" => "danger",
+            "Gelb" => "warning",
+            "Hell Blau" => "info",
+            "Weiß" => "light",
+            "Schwarz" => "dark",
+            "Blau Umrandet" => "outline-primary",
+            "Grau Umrandet" => "outline-secondary",
+            "Grün Umrandet" => "outline-success",
+            "Rot Umrandet" => "outline-danger",
+            "Gelb Umrandet" => "outline-warning",
+            "Hell Blau Umrandet" => "outline-info",
+            "Weiß Umrandet" => "outline-light",
+            "Schwarz Umrandet" => "outline-dark"
+        ];
+        $user_colors = config("tippspiel.colors");
+        if (!is_null(Auth::user()->button_colors))
+            $user_colors = array_merge($user_colors, Auth::user()->button_colors);
         $user = Auth::user();
-        return view('profile', compact('user'));
+        return view('profile', compact('user', 'available_colors', 'user_colors'));
     }
 
     public function getSmsToken(Request $request) {
@@ -133,6 +154,24 @@ class ProfileController extends Controller
         $user->save();
         session()->flash('success', 'Dein Profil wurde erfolgreich gespeichert.');
 
+        return redirect(route('profile'));
+    }
+
+    public function updateColors(Request $request) {
+        $default_colors = config('tippspiel.colors');
+        $new_colors = $request->except(['_token', '_method']);
+        $save_colors = array();
+        foreach($new_colors as $key => $value) {
+            if ($value != $default_colors[$key])
+                $save_colors[$key] = $value;
+        }
+        if(count($save_colors) == 0)
+            $save_colors = null;
+
+        $user = Auth::user();
+        $user->button_colors = $save_colors;
+        $user->save();
+        session()->flash('success', 'Dein Profil wurde erfolgreich gespeichert.');
         return redirect(route('profile'));
     }
 }

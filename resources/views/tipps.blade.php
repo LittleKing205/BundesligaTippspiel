@@ -10,6 +10,8 @@
 
 @push('meta')
     <meta name="tipp-url" content="{{ route('tippStore') }}">
+    <meta name="tipp-button-user" content="{{ $colors["user_tipp"] }}">
+    <meta name="tipp-button-default" content="{{ $colors["default"] }}">
 @endpush
 
 @section('content')

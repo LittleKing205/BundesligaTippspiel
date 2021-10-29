@@ -13,8 +13,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">Am Meisten gezahlt:</div>
-                    <div class="col-6">{{ $most_payments_user }} ({{ number_format($most_payments_payed, 2, ",", ".") }} €)</div>
+                    <div class="col-6">Am Meisten Richtig:</div>
+                    <div class="col-6">{{ $most_right_name }} ({{ $most_right_sum }}x)</div>
+                </div>
+                <div class="row">
+                    <div class="col-6">Am Meisten Falsch:</div>
+                    <div class="col-6">{{ $most_wrong_name }} ({{ $most_wrong_sum }}x)</div>
+                </div>
+                <div class="row">
+                    <div class="col-6">Nicht getippte Spiele:</div>
+                    <div class="col-6">{{ $not_tipped }}x</div>
                 </div>
             </p>
         </div>

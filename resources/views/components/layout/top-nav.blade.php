@@ -16,7 +16,7 @@
                     @endif> Edit Closed Games</a></li>
                 @endcan
                 @if(Session::get('devIsLoggedInAsDifferentUser', false))
-                    <li><a href="{{ route('dev.login_as_user.back') }}" class="dropdown-item">Zurück zu NAME</a></li>
+                    <li><a href="{{ route('dev.login_as_user.back') }}" class="dropdown-item">Zurück zu {{ $backToUser->name }}</a></li>
                 @endif
                 @canany('dev.login_as_user')
                     <li><a href="{{ route('dev') }}" class="dropdown-item">Entwickler Funktionen</a></li>

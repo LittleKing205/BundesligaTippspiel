@@ -15,12 +15,12 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row">
-                        <button type="submit" class="col-sm-12">Login</button>
+                    <div class="row justify-content-center">
+                        <button type="submit" class="btn btn-success col-sm-10">Login</button>
                     </div>
                 </form>
             @else
-                Logout To Main User
+                You are Already a different user
             @endif
         </div>
     </div>

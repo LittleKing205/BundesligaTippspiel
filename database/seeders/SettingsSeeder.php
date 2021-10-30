@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Settings;
+use App\Models\Setting;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 
@@ -18,9 +18,9 @@ class SettingsSeeder extends Seeder
         $now = Carbon::now('utc')->toDateTimeString();
 
         $defaultSettings = [
-            ["key" => "register_enabled", "value" => true, "created_at" => $now]
+            ["key" => "register_enabled", "value" => true, "type" => "boolean", "created_at" => $now]
         ];
 
-        Settings::insert($defaultSettings);
+        Setting::insert($defaultSettings);
     }
 }

@@ -6,7 +6,7 @@ use App\Http\Controllers\RulesController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\TippController;
 use App\Http\Controllers\TreasurerController;
-use App\Models\Settings;
+use App\Models\Setting;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -68,4 +68,4 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Auth::routes(['register' => Settings::find('register_enabled')->value]);
+Auth::routes(['register' => Setting::get("register_enabled", true)]);

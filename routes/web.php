@@ -32,8 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/statistiken', [StatisticsController::class, 'show'])->name('statistics');
     Route::post('/statistiken/pay', [StatisticsController::class, 'pay'])->name('statistics.pay');
 
-    Route::get('/kassenwart', [TreasurerController::class, 'show'])->name('treasurer')->middleware('permission:treasurer.show');
-    Route::patch('/kassenwart', [TreasurerController::class, 'rejectPayment'])->name('treasurer.reject_payment')->middleware('permission:treasurer.reject_payment');
+    Route::get('/kassenwart', [TreasurerController::class, 'show'])->name('treasurer');
+    Route::patch('/kassenwart', [TreasurerController::class, 'rejectPayment'])->name('treasurer.reject_payment');
 
     Route::get('/profil', [ProfileController::class, 'show'])->name('profile');
     Route::patch('/profil/save', [ProfileController::class, 'update'])->name('profile.update');
@@ -60,10 +60,10 @@ Route::middleware('auth')->group(function () {
     // Admin Routes
 
     // Dev Routes
-    Route::get('/dev', [DevController::class, 'show'])->name('dev')->middleware('permission:dev.edit_closed_games|dev.login_as_user');
-    Route::post('/dev/loginasuser', [DevController::class, 'loginAsUser'])->name('dev.login_as_user')->middleware('permission:dev.login_as_user');
+    Route::get('/dev', [DevController::class, 'show'])->name('dev');
+    Route::post('/dev/loginasuser', [DevController::class, 'loginAsUser'])->name('dev.login_as_user');
     Route::get('/dev/loginasuser/back', [DevController::class, 'logBack'])->name('dev.login_as_user.back');
-    Route::get('/dev/switch/tipp_mode', [DevController::class, 'switchTippMode'])->name('dev.switch_tipp_mode')->middleware('permission:dev.edit_closed_games');
+    Route::get('/dev/switch/tipp_mode', [DevController::class, 'switchTippMode'])->name('dev.switch_tipp_mode');
 
 });
 

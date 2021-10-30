@@ -12,6 +12,11 @@ use Symfony\Component\Console\Input\Input;
 class TreasurerController extends Controller
 {
 
+    public function __construct() {
+        $this->middleware('permission:treasurer.show');
+        $this->middleware('permission:treasurer.reject_payment')->only('rejectPayment');
+    }
+
     public function show(Request $request) {
         $users = User::all();
         $bills = Bill::with('user');

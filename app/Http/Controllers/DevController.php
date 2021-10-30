@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class DevController extends Controller {
 
+    public function __construct() {
+        $dev_permissions = collect([
+            'dev.login_as_user'
+        ]);
+        $this->middleware('permission:'.$dev_permissions->implode('|'))->only('show');
+        $this->middleware('permission:dev.login_as_user')->only('loginAsUser');
+        $this->middleware('permission:dev.edit_closed_games')->only('switchTippMode');
+    }
+
     public function show(Request $request) {
         return view('developer');
     }
@@ -40,6 +49,6 @@ class DevController extends Controller {
 
         $request->session()->put('devIsLoggedInAsDifferentUser', false);
         Auth::loginUsingId(session('devOriginalUserId'));
-        return back();
+        return redirect(route('dev'));
     }
 }

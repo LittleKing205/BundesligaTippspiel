@@ -19,6 +19,7 @@ class PermissionSeeder extends Seeder
         $allPermissions = array(
             // Dev Functions
             'dev.edit_closed_games',
+            'dev.login_as_user',
 
             // Treasurer Permissions
             'treasurer.show',
@@ -27,11 +28,11 @@ class PermissionSeeder extends Seeder
 
         $defaultRoles = array(
             __('role_names.admin') => [
-                'dev.edit_closed_games',
                 'treasurer.show',
                 'treasurer.reject_payment'
             ],
             __('role_names.dev') => [
+                'dev.login_as_user',
                 'dev.edit_closed_games',
             ],
             __('role_names.treasurer') => [

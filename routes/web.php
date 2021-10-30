@@ -60,6 +60,9 @@ Route::middleware('auth')->group(function () {
     // Admin Routes
 
     // Dev Routes
+    Route::get('/dev', [DevController::class, 'show'])->name('dev')->middleware('permission:dev.edit_closed_games|dev.login_as_user');
+    Route::post('/dev/loginasuser', [DevController::class, 'loginAsUser'])->name('dev.login_as_user')->middleware('permission:dev.login_as_user');
+    Route::get('/dev/loginasuser/back', [DevController::class, 'logBack'])->name('dev.login_as_user.back');
     Route::get('/dev/switch/tipp_mode', [DevController::class, 'switchTippMode'])->name('dev.switch_tipp_mode')->middleware('permission:dev.edit_closed_games');
 
 });

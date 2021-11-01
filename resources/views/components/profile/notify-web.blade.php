@@ -33,46 +33,51 @@
     </div>
 </div>
 
-<script>
-    firebase.initializeApp({
-        apiKey: 'AIzaSyAB0_MbU6bNbLFPadjD3UxgU7YZLr0PN-g',
-        authDomain: 'websites-6011b.firebaseapp.com',
-        projectId: 'websites-6011b',
-        messagingSenderId: '41512814441',
-        appId: '1:41512814441:web:c7019665ac69b83f955ff8',
-    });
-    const messaging = firebase.messaging();
-    function startFCM() {
-        messaging
-            .requestPermission()
-            .then(function () {
-                return messaging.getToken()
-            })
-            .then(function (response) {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    url: '{{ route("profile.storeWebPush") }}',
-                    type: 'POST',
-                    data: {
-                        token: response
-                    },
-                    dataType: 'JSON',
-                    success: function (response) {
-                        location.reload();
-                    },
-                    error: function (error) {
-                        console.log(error);
-                        alert(error);
-                    },
-                });
+@push('script')
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js"></script>-
 
-            }).catch(function (error) {
-                console.log(error);
-                alert(error);
-            });
-    }
-</script>
+    <script>
+        firebase.initializeApp({
+            apiKey: 'AIzaSyAB0_MbU6bNbLFPadjD3UxgU7YZLr0PN-g',
+            authDomain: 'websites-6011b.firebaseapp.com',
+            projectId: 'websites-6011b',
+            messagingSenderId: '41512814441',
+            appId: '1:41512814441:web:c7019665ac69b83f955ff8',
+        });
+        const messaging = firebase.messaging();
+        function startFCM() {
+            messaging
+                .requestPermission()
+                .then(function () {
+                    return messaging.getToken()
+                })
+                .then(function (response) {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        url: '{{ route("profile.storeWebPush") }}',
+                        type: 'POST',
+                        data: {
+                            token: response
+                        },
+                        dataType: 'JSON',
+                        success: function (response) {
+                            location.reload();
+                        },
+                        error: function (error) {
+                            console.log(error);
+                            alert(error);
+                        },
+                    });
+
+                }).catch(function (error) {
+                    console.log(error);
+                    alert(error);
+                });
+        }
+    </script>
+@endpush

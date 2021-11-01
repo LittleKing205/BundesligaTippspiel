@@ -41,7 +41,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profil/updateButtonColors', [ProfileController::class, 'updateColors'])->name('profile.updateColors');
 
     // Tipps
-    Route::get('/tipp/bl{league}', [TippController::class, 'redictToDay'])->name('tippsWithoutDay');
     Route::get('/tipp/bl{league}/{day?}', [TippController::class, 'show'])->name('tipps');
     Route::post('/tipp/save', [TippController::class, 'store'])->name('tippStore');
 

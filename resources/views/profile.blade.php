@@ -22,31 +22,31 @@
                     <form action="{{ route('profile.update') }}" method="POST">
                         @csrf
                         @method('patch')
-                        <div class="form-group row">
+                        <div class="form-group mb-3 row">
                             <label for="inputUsername" class="col-sm-2 col-form-label">Benutzername</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="inputUsername" placeholder="Benutzername" readonly value="{{ $user->username }}">
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group mb-3 row">
                             <label for="inputDisplayName" class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-10">
                                 <input name="name" type="text" class="form-control" id="inputDisplayName" placeholder="Name" value="{{ $user->name }}">
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group mb-3 row">
                             <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
                                 <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email" value="{{ $user->email }}">
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group mb-3 row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Passwort</label>
                             <div class="col-sm-10">
                                 <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Passwort" value="">
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group mb-3 row">
                             <label for="inputPasswordConfirm" class="col-sm-2 col-form-label">Passwort Wiederholen</label>
                             <div class="col-sm-10">
                                 <input name="password_confirmation" type="password" class="form-control" id="inputPasswordConfirm" placeholder="Passwort" value="">
@@ -124,7 +124,7 @@
                     <form action="{{ route('profile.updateColors') }}" method="POST">
                         @csrf
                         @method('patch')
-                        <div class="form-group row">
+                        <div class="form-group mb-3 row">
                             <label for="inputDefaultColor" class="col-sm-2 col-form-label">Standart Farbe</label>
                             <div class="col-sm-10">
                                 <select name="default" class="form-select" id="inputDefaultColor" aria-label="select">
@@ -135,7 +135,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group mb-3 row">
                             <label for="inputDefaultLockedColor" class="col-sm-2 col-form-label">Gesperrter Button</label>
                             <div class="col-sm-10">
                                 <select name="default_locked" class="form-select" id="inputDefaultLockedColor" aria-label="select">
@@ -146,7 +146,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group mb-3 row">
                             <label for="inputTippedColor" class="col-sm-2 col-form-label">Getippter Button</label>
                             <div class="col-sm-10">
                                 <select name="user_tipp" class="form-select" id="inputTippedColor" aria-label="select">
@@ -157,7 +157,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group mb-3 row">
                             <label for="inputGameResultColor" class="col-sm-2 col-form-label">Spielergebnis</label>
                             <div class="col-sm-10">
                                 <select name="game_result" class="form-select" id="inputGameResultColor" aria-label="select">
@@ -168,7 +168,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group mb-3 row">
                             <label for="inputUserWrongTippColor" class="col-sm-2 col-form-label">Falscher Tipp</label>
                             <div class="col-sm-10">
                                 <select name="user_wrong_tipp" class="form-select" id="inputUserWrongTippColor" aria-label="select">
@@ -179,7 +179,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group mb-3 row">
                             <label for="inputNotTippedColor" class="col-sm-2 col-form-label">Nicht getipptes Ergebnis</label>
                             <div class="col-sm-10">
                                 <select name="not_tipped" class="form-select" id="inputNotTippedColor" aria-label="select">

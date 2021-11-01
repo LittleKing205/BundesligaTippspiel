@@ -20,7 +20,7 @@
 
 @foreach([1, 2] as $league)
     <div class="sb-sidenav-menu-heading">{{ $league }}. Bundesliga</div>
-    <a class="nav-link" href="{{ route('tippsWithoutDay', ['league' => $league]) }}">
+    <a class="nav-link" href="{{ route('tipps', ['league' => $league]) }}">
         <div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
         Tippen
     </a>

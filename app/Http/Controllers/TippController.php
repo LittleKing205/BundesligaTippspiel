@@ -16,12 +16,10 @@ use PhpParser\Node\Expr\Match_;
 class TippController extends Controller
 {
 
-    public function redictToDay(Request $request, OpenLiga $openLiga, $league) {
-        return redirect(route('tipps', ['league' => $league, 'day' => $openLiga->getCurrentDay($league)]));
-    }
-
-    public function show(Request $request, $league, $day) {
+    public function show(Request $request, OpenLiga $openLiga, $league, $day = null) {
         $leagueName = $league.'. Bundesliga';
+        if (is_null($day))
+            $day = $openLiga->getCurrentDay($league);
         if ($league < 1 || $league > 2 || $day < 1 || $day > 34)
             abort(404);
 

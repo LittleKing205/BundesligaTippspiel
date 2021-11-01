@@ -116,27 +116,29 @@
             </div>
         </div>
     </div>
-
-    <script>
-    jQuery(document).ready(function($){
-        $('#bills-table').dataTable({
-            ordering: true,
-            "order": [ 0, 'asc' ],
-            "language": {
-                "lengthMenu": "Zeige _MENU_ Einträge pro Seite",
-                "zeroRecords": "Keine Einträge gefunden",
-                "info": "Seite _PAGE_ von _PAGES_",
-                "infoEmpty": "Keine Einträge vorhanden",
-                "infoFiltered": "(gefiltert von _MAX_ Einträgen)",
-                "decimal": ",",
-                paginate: {
-                    first: "Erste Seite",
-                    previous:   "<<",
-                    next:       ">>",
-                    last:       "Letzte Seite"
-                },
-            }
-        });
-    });
-    </script>
 @endsection
+
+@push('script')
+    <script>
+        jQuery(document).ready(function($){
+            $('#bills-table').dataTable({
+                ordering: true,
+                "order": [ 0, 'asc' ],
+                "language": {
+                    "lengthMenu": "Zeige _MENU_ Einträge pro Seite",
+                    "zeroRecords": "Keine Einträge gefunden",
+                    "info": "Seite _PAGE_ von _PAGES_",
+                    "infoEmpty": "Keine Einträge vorhanden",
+                    "infoFiltered": "(gefiltert von _MAX_ Einträgen)",
+                    "decimal": ",",
+                    paginate: {
+                        first: "Erste Seite",
+                        previous:   "<<",
+                        next:       ">>",
+                        last:       "Letzte Seite"
+                    },
+                }
+            });
+        });
+    </script>
+@endpush

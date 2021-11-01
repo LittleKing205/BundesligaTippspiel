@@ -7,6 +7,11 @@
     <li class="breadcrumb-item active">Profil</li>
 @endsection
 
+@push('script')
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js"></script>-
+@endpush
+
 @section('content')
     <div class="card mb-3">
         <h4 class="card-header">Profil</h4>

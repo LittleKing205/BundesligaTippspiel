@@ -1,4 +1,5 @@
 require('./bootstrap');
+require('./bootstrap502');
 
 function addAlert(color, message) {
     $('#alerts').append(

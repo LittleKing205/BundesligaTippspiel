@@ -2,7 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class CreateUser extends Command
 {
@@ -11,7 +14,7 @@ class CreateUser extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'make:user';
 
     /**
      * The console command description.
@@ -37,6 +40,26 @@ class CreateUser extends Command
      */
     public function handle()
     {
+        $username = $this->ask("Benutzername / Loginame:");
+        $name = $this->ask("Anzeigename:");
+        $email = $this->ask("E-Mail Adresse:");
+        $password = $this->secret("Passwort");
+        $is_admin = $this->confirm('Ist dieser User ein Admin?');
+
+        $user = User::create([
+            "name" => $name,
+            "username" => $username,
+            "email" => $email,
+            "password" => Hash::make($password)
+        ]);
+
+        if ($is_admin) {
+            $role = Role::where("name", __('role_names.admin'))->first();
+            $user->assignRole(__('role_names.admin'));
+        }
+
+        $this->info("Der Benutzer wurde erfolgreich angelegt");
+
         return 0;
     }
 }

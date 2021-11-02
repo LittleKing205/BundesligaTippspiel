@@ -16,8 +16,19 @@
                     <p class="card-text">
                         <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['payed' => $payed_filter]) }}">Alle</a> <br />
                         @foreach ($users as $user)
-                            <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['payed' => $payed_filter, 'user' => $user->name]) }}">{{ $user->name }}</a><br />
+                            <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['payed' => $payed_filter, 'validated' => $validated_filter, 'user' => $user->name]) }}">{{ $user->name }}</a><br />
                         @endforeach
+                    </p>
+                </div>
+            </div>
+            <br />
+            <div class="card">
+                <h5 class="card-header">Geprüften Zahlungen Filtern</h5>
+                <div class="card-body">
+                    <p class="card-text">
+                        <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter, 'payed' => $payed_filter,]) }}">Alle</a> <br />
+                        <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter, 'payed' => $payed_filter, 'validated' => true]) }}">Geprüft</a> <br />
+                        <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter, 'payed' => $payed_filter, 'validated' => false]) }}">Nicht Geprüft</a> <br />
                     </p>
                 </div>
             </div>
@@ -26,9 +37,9 @@
                 <h5 class="card-header">Nach Zahlstatus Filtern</h5>
                 <div class="card-body">
                     <p class="card-text">
-                        <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter]) }}">Alle</a> <br />
-                        <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter, 'payed' => true]) }}">Gezahlt</a> <br />
-                        <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter, 'payed' => false]) }}">Nicht gezahlt</a> <br />
+                        <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter, 'validated' => $validated_filter]) }}">Alle</a> <br />
+                        <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter, 'validated' => $validated_filter, 'payed' => true]) }}">Gezahlt</a> <br />
+                        <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter, 'validated' => $validated_filter, 'payed' => false]) }}">Nicht gezahlt</a> <br />
                     </p>
                 </div>
             </div>
@@ -42,6 +53,7 @@
                         <table id="bills-table" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
+                                    <th colspan="2">Zahl/Check Status</th>
                                     <th>Spielername</th>
                                     <th>Liga</th>
                                     <th>Spieltag</th>
@@ -52,6 +64,7 @@
                             </thead>
                             <tfoot>
                                 <tr>
+                                    <th colspan="2">Zahl/Check Status</th>
                                     <th>Spielername</th>
                                     <th>Liga</th>
                                     <th>Spieltag</th>
@@ -64,23 +77,44 @@
                             <tbody>
                                 @foreach ($bills as $bill)
                                     <tr>
+                                        <td>
+                                            @if($bill->has_payed)
+                                                <i class="text-success fas fa-check"></i>
+                                            @else
+                                                <i class="text-danger fas fa-times"></i>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($bill->validated)
+                                                <i class="text-success fas fa-check"></i>
+                                            @else
+                                                <i class="text-danger fas fa-times"></i>
+                                            @endif
+                                        </td>
                                         <td>{{ $bill->user->name }}</td>
                                         <td>{{ $bill->league }}. Bundesliga</td>
                                         <td>{{ $bill->day }}.</td>
                                         <td>{{ number_format($bill->to_pay, 2, ",", ".") }} €</td>
                                         <td>
                                             @if($bill->has_payed)
-                                                <span class="text-success">{{ $bill->updated_at }}</span>
+                                                {{ $bill->updated_at }}
                                             @else
-                                                <span class="text-danger">{{ $bill->created_at }}</span>
+                                                {{ $bill->created_at }}
                                             @endif
                                         </td>
                                         <td>
-                                            @can("treasurer.reject_payment")
-                                                @if($bill->has_payed )
-                                                    <a class="treasurer-payment-revoke" href="#" data-bill-id="{{ $bill->id }}" data-username="{{ $bill->user->name }}" data-paydate="{{ $bill->updated_at }}" data-toggle="modal" data-target="#treasurerPaymentRevokeModal">Zahlung zurücksetzen</a>
-                                                @endif
-                                            @endcan
+                                            @if($bill->has_payed )
+                                                @can("treasurer.validate_payment")
+                                                    @if ($bill->validated)
+                                                    <a href="{{ route('treasurer.validate_payment', ['bill' => $bill->id, 'validate' => 'reject']) }}" class="btn btn-warning">Bestätigung Zurückziehen</a>
+                                                    @else
+                                                        <a href="{{ route('treasurer.validate_payment', ['bill' => $bill->id]) }}" class="btn btn-success">Zahlung Betsätigen</a>
+                                                    @endif
+                                                @endcan
+                                                @can("treasurer.reject_payment")
+                                                    <a class="treasurer-payment-revoke btn btn-danger" href="#" data-bill-id="{{ $bill->id }}" data-username="{{ $bill->user->name }}" data-paydate="{{ $bill->updated_at }}" data-toggle="modal" data-target="#treasurerPaymentRevokeModal">Zahlung zurücksetzen</a>
+                                                @endcan
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

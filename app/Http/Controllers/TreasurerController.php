@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bill;
 use App\Models\User;
 use App\Notifications\PaymentRejectNotification;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
-use Symfony\Component\Console\Input\Input;
 
 class TreasurerController extends Controller
 {

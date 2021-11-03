@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 
 class Setting extends Model
 {
@@ -18,7 +19,11 @@ class Setting extends Model
 
     static function get($key, $default = null) {
         if(empty(self::$settings)) {
-            self::$settings = self::all();
+            try {
+                self::$settings = self::all();
+            } catch(QueryException $e) {
+                self::$settings = collect(array());
+            }
         }
         $model = self::$settings->where('key', $key)->first();
         if (empty($model)) {

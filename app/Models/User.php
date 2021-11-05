@@ -69,4 +69,13 @@ class User extends Authenticatable
 
         return $activated;
     }
+
+    public function getGroupsAttribute() {
+        $groups = UserGroup::where('user_id', $this->id)->get();
+        $tipp_groups = array();
+        foreach($groups as $group) {
+            $tipp_groups[] = TippGroup::find($group->tipp_group_id);
+        }
+        return $tipp_groups;
+    }
 }

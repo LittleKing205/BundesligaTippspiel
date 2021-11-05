@@ -24,7 +24,7 @@ class CreateTippGroupsTable extends Migration
         Schema::create('user_groups', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tipp_group_id');
-            $table->unsignedBigInteger('user_group_id');
+            $table->unsignedBigInteger('user_id');
         });
 
         Schema::table('bills', function(Blueprint $table) {

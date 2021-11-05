@@ -16,6 +16,7 @@ class CreateTippGroupsTable extends Migration
         Schema::create('tipp_groups', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->unsignedBigInteger('owner_id');
             $table->string('invite_code')->nullable()->unique();
             $table->json("settings")->nullable();
             $table->timestamps();
@@ -32,7 +33,7 @@ class CreateTippGroupsTable extends Migration
         });
 
         Schema::table('users', function(Blueprint $table) {
-            $table->unsignedBigInteger('last_group')->after('password');
+            $table->unsignedBigInteger('last_group')->nullable()->after('password');
         });
     }
 

@@ -61,7 +61,8 @@ class CreateBill extends Command
                 "right" => $right,
                 "wrong" => $wrong,
                 "not_tipped" => $not_tipped,
-                "to_pay" => $toPay
+                "to_pay" => $toPay,
+                "tipp_group_id" => 1
             ]);
         } else {
             $bill->to_pay = $toPay;

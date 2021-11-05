@@ -19,7 +19,8 @@ class Bill extends Model
         'right',
         'wrong',
         'not_tipped',
-        'to_pay'
+        'to_pay',
+        'tipp_group_id'
     ];
 
     /**

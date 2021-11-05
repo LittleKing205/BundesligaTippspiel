@@ -16,30 +16,32 @@ class UserSeeder extends Seeder
     {
         $admin = User::factory()->make([
             'username' => 'admin',
-            'name' => 'admin'
+            'name' => 'admin',
+            'last_group' => 1
         ]);
         $admin->assignRole(__('role_names.admin'));
         $admin->save();
 
         $treasurer = User::factory()->make([
             'username' => 'kassenwart',
-            'name' => 'kassenwart'
+            'name' => 'kassenwart',
+            'last_group' => 1
         ]);
         $treasurer->assignRole(__('role_names.treasurer'));
         $treasurer->save();
 
         $treasurer = User::factory()->make([
             'username' => 'dev',
-            'name' => 'dev'
+            'name' => 'dev',
+            'last_group' => 1
         ]);
         $treasurer->assignRole(__('role_names.dev'));
         $treasurer->save();
 
         $user = User::factory()->make([
             'username' => 'user',
-            'name' => 'user'
+            'name' => 'user',
+            'last_group' => 1
         ])->save();
-
-        User::factory()->count(1)->create();
     }
 }

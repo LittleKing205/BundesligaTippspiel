@@ -14,7 +14,7 @@ class UsersAddColumnTippColors extends Migration
     public function up()
     {
         Schema::table('users', function(Blueprint $table) {
-            $table->json("button_colors")->nullable();
+            $table->json("button_colors")->nullable()->after('remember_token');
         });
     }
 

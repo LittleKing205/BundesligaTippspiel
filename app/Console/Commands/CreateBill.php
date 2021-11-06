@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use App\Models\Bill;
 use Illuminate\Console\Command;
 use App\Models\Game;
+use App\Models\User;
+use App\Models\UserGroup;
 use Illuminate\Support\Facades\DB;
 
 class CreateBill extends Command
@@ -52,24 +54,27 @@ class CreateBill extends Command
         }
         $not_tipped = 9 - count($matches);
         $toPay = ($wrong * 0.5) + $not_tipped;
-        $bill = Bill::where("user_id", $this->argument("user"))->where("day", $this->argument("day"))->where("league", $this->argument("league"))->first();
-        if (is_null($bill)) {
-            Bill::create([
-                "user_id" => $this->argument("user"),
-                "league" => $this->argument("league"),
-                "day" => $this->argument("day"),
-                "right" => $right,
-                "wrong" => $wrong,
-                "not_tipped" => $not_tipped,
-                "to_pay" => $toPay,
-                "tipp_group_id" => 1
-            ]);
-        } else {
-            $bill->to_pay = $toPay;
-            $bill->right = $right;
-            $bill->wrong = $wrong;
-            $bill->not_tipped = $not_tipped;
-            $bill->save();
+        $groups = UserGroup::where('user_id', $this->argument("user"))->get();
+        foreach($groups as $group) {
+            $bill = Bill::where("user_id", $this->argument("user"))->where("day", $this->argument("day"))->where("league", $this->argument("league"))->where('tipp_group_id', $group->tipp_group_id)->first();
+            if (is_null($bill)) {
+                Bill::create([
+                    "user_id" => $this->argument("user"),
+                    "league" => $this->argument("league"),
+                    "day" => $this->argument("day"),
+                    "right" => $right,
+                    "wrong" => $wrong,
+                    "not_tipped" => $not_tipped,
+                    "to_pay" => $toPay,
+                    "tipp_group_id" => $group->tipp_group_id
+                ]);
+            } else {
+                $bill->to_pay = $toPay;
+                $bill->right = $right;
+                $bill->wrong = $wrong;
+                $bill->not_tipped = $not_tipped;
+                $bill->save();
+            }
         }
     }
 }

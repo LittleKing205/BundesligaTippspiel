@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             TeamSeeder::class,
             GameSeeder::class,
             TippSeeder::class,
+            GroupSeeder::class,
         ]);
         Artisan::call('make:oldbills');
     }

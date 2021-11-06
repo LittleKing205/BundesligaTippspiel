@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Http\Clients\OpenLiga;
 use App\Models\Bill;
 use App\Models\User;
+use App\Models\UserGroup;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 
@@ -56,13 +57,17 @@ class CreateOldBills extends Command
                     continue;
 
                 for ($i = 1; $i < $day; $i++) {
-                    $checkBill = Bill::where("user_id", $user->id)->where("league", $league)->where("day", $i)->first();
-                    if (is_null($checkBill)) {
-                        $this->call("make:bill", [
-                            "user" => $user->id,
-                            "league" => $league,
-                            "day" => $i
-                        ]);
+                    $groups = UserGroup::where('user_id', $user->id)->get();
+                    foreach($groups as $group) {
+                        $checkBill = Bill::where("user_id", $user->id)->where("league", $league)->where("day", $i)->where('tipp_group_id', $group->tipp_group_id)->first();
+                        if (is_null($checkBill)) {
+                            $this->call("make:bill", [
+                                "user" => $user->id,
+                                "league" => $league,
+                                "day" => $i
+                            ]);
+                            break;
+                        }
                     }
                 }
             }

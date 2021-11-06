@@ -21,4 +21,8 @@ class TippGroup extends Model
         }
         return $users;
     }
+
+    public function bills() {
+        return $this->hasMany(Bill::class);
+    }
 }

@@ -54,9 +54,9 @@ class User extends Authenticatable
         return $this->hasMany(Tipp::class);
     }
 
-    public function bills() {
+    /*public function bills() {
         return $this->hasMany(Bill::class);
-    }
+    }*/
 
     public function getNotificationChannel() {
         $activated = array();

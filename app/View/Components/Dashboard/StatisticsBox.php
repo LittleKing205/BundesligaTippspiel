@@ -31,7 +31,7 @@ class StatisticsBox extends Component
     public function render()
     {
         $user = Auth::user();
-        $bills = Bill::all();
+        $bills = $user->currentGroup->bills;
 
         foreach($bills as $bill) {
             if ($bill->user->id == $user->id && !$bill->has_payed)
@@ -44,8 +44,7 @@ class StatisticsBox extends Component
         }
 
         if ($this->open_bills > 0)
-            $this->status_color = "danger";
-
+            $this->status_color = "danger";;
         return view('components.dashboard.statistics-box');
     }
 }

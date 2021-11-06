@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Notifications\PaymentRejectNotification;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Console\Input\Input;
 
 class TreasurerController extends Controller
@@ -18,8 +19,8 @@ class TreasurerController extends Controller
     }
 
     public function show(Request $request) {
-        $users = User::all();
-        $bills = Bill::with('user');
+        $users = Auth::user()->currentGroup->users->sortBy("name");
+        $bills = Bill::where("tipp_group_id", Auth::user()->current_group_id)->with('user');
 
         $user_filter = "";
         $payed_filter = "";

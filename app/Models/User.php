@@ -54,9 +54,12 @@ class User extends Authenticatable
         return $this->hasMany(Tipp::class);
     }
 
-    /*public function bills() {
-        return $this->hasMany(Bill::class);
-    }*/
+    public function bills($tipp_group = null) {
+        if (is_null($tipp_group))
+            return $this->hasMany(Bill::class);
+        else
+            return Bill::where("user_id", $this->id)->where("tipp_group_id", $tipp_group)->get();
+    }
 
     public function getNotificationChannel() {
         $activated = array();
@@ -76,6 +79,10 @@ class User extends Authenticatable
         foreach($groups as $group) {
             $tipp_groups[] = TippGroup::find($group->tipp_group_id);
         }
-        return $tipp_groups;
+        return collect($tipp_groups);
+    }
+
+    public function currentGroup() {
+        return $this->belongsTo(TippGroup::class, "current_group_id");
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Game;
 use App\Models\User;
 use Illuminate\View\Component;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class LastDayTable extends Component
 {
@@ -36,7 +37,7 @@ class LastDayTable extends Component
      */
     public function render()
     {
-        $this->rawLeagueResult = Bill::where("league", $this->league)->where("day", $this->lastDay)->with('user')->get();
+        $this->rawLeagueResult = Bill::where("league", $this->league)->where("day", $this->lastDay)->where("tipp_group_id", Auth::user()->current_group_id)->with('user')->get();
 
         $this->leagueResult = collect($this->rawLeagueResult)->sortBy([
             ["right", "desc"],

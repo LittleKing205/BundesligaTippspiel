@@ -32,7 +32,7 @@ class PlayerBox extends Component
     public function render()
     {
         $tipps = Tipp::where("user_id", Auth::id())->with('game')->get();
-        $bills = Bill::where("user_id", Auth::id())->get();
+        $bills = Bill::where("user_id", Auth::id())->where("tipp_group_id", Auth::user()->current_group_id)->get();
 
         foreach($tipps as $tipp) {
             if($tipp->game->has_finished) {

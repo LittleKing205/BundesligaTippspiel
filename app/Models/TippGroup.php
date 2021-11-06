@@ -17,9 +17,9 @@ class TippGroup extends Model
         $usersList = UserGroup::where('tipp_group_id', $this->id)->get();
         $users = array();
         foreach($usersList as $user) {
-            $uers[] = User::find($user->user_id);
+            $users[] = User::find($user->user_id);
         }
-        return $users;
+        return collect($users);
     }
 
     public function bills() {

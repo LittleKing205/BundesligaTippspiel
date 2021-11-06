@@ -29,7 +29,7 @@ class PaymentTable extends Component
      */
     public function render()
     {
-        $this->bills = Bill::where("user_id", Auth::id())->where("league", $this->league)->orderBy("day", "desc")->get();
+        $this->bills = Bill::where("user_id", Auth::id())->where("league", $this->league)->where("tipp_group_id", Auth::user()->current_group_id)->orderBy("day", "desc")->get();
         foreach($this->bills as $bill) {
             $this->sum += $bill->to_pay;
         }

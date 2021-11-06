@@ -3,6 +3,7 @@
 namespace App\View\Components\Statistics;
 
 use App\Models\Bill;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class AllPlayerBox extends Component
@@ -32,7 +33,7 @@ class AllPlayerBox extends Component
      */
     public function render()
     {
-        $bills = Bill::all();
+        $bills = Bill::where("tipp_group_id", Auth::user()->current_group_id)->get();
 
         $bill_group = $bills->groupBy("user_id");
 

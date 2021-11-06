@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DevController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\StatisticsController;
@@ -39,6 +40,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profil', [ProfileController::class, 'show'])->name('profile');
     Route::patch('/profil/save', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/profil/updateButtonColors', [ProfileController::class, 'updateColors'])->name('profile.updateColors');
+
+    Route::post('/group/switch-group', [GroupController::class, 'switchGroup'])->name('group.switch');
+    Route::get('/group/add-group', [GroupController::class, 'addGroup'])->name('group.add');
+    Route::post('/group/add-group', [GroupController::class, 'addGroup'])->name('group.add');
 
     // Tipps
     Route::get('/tipp/bl{league}/{day?}', [TippController::class, 'show'])->name('tipps');

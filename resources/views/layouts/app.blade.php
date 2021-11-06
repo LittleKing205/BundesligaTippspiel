@@ -27,7 +27,8 @@
             </div>
             <div class="sb-sidenav-footer">
                 <div class="small">{{ __('messages.sidebar.loggedInAs') }}</div>
-                {{ Auth::user()->name }}
+                {{ Auth::user()->name }}<br />
+                Gruppe: {{ Auth::user()->currentGroup->name }}
             </div>
         </nav>
     </div>
@@ -58,6 +59,8 @@
         </footer>
     </div>
 </div>
+@stack('modal')
+<x-layout.switch-group-modal />
 <script src="{{ mix('js/app.js') }}"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>

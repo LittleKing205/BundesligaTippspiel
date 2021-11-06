@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        app(\Spatie\Permission\PermissionRegistrar::class)->setPermissionsTeamId(1);
         $admin = User::factory()->make([
             'username' => 'admin',
             'name' => 'admin',

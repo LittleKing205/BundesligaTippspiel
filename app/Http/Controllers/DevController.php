@@ -44,9 +44,6 @@ class DevController extends Controller {
         if(!session('devIsLoggedInAsDifferentUser', false))
             abort(403);
         $user = User::find(session('devOriginalUserId'));
-        if ($user->cannot('dev.login_as_user'))
-            abort(403);
-
         $request->session()->put('devIsLoggedInAsDifferentUser', false);
         Auth::loginUsingId(session('devOriginalUserId'));
         return redirect(route('dev'));

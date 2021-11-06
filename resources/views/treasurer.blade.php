@@ -11,8 +11,8 @@
     <div class="row">
         <div class="mb-3 col-xl-2 col-md-12">
             <div class="card">
-                <h5 class="card-header">Nach Spieler Filtern</h5>
-                <div class="card-body">
+                <h5 class="card-header" data-toggle="collapse" data-target="#collapseUserFilter">Nach Spieler Filtern</h5>
+                <div class="card-body collapse @desktop show @enddesktop" id="collapseUserFilter">
                     <p class="card-text">
                         <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['payed' => $payed_filter]) }}">Alle</a> <br />
                         @foreach ($users as $user)
@@ -23,8 +23,8 @@
             </div>
             <br />
             <div class="card">
-                <h5 class="card-header">Geprüften Zahlungen Filtern</h5>
-                <div class="card-body">
+                <h5 class="card-header" data-toggle="collapse" data-target="#collapseValidatedFilter">Geprüften Zahlungen Filtern</h5>
+                <div class="card-body collapse @desktop show @enddesktop" id="collapseValidatedFilter">
                     <p class="card-text">
                         <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter, 'payed' => $payed_filter,]) }}">Alle</a> <br />
                         <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter, 'payed' => $payed_filter, 'validated' => true]) }}">Geprüft</a> <br />
@@ -34,8 +34,8 @@
             </div>
             <br />
             <div class="card">
-                <h5 class="card-header">Nach Zahlstatus Filtern</h5>
-                <div class="card-body">
+                <h5 class="card-header" data-toggle="collapse" data-target="#collapsePayedFilter">Nach Zahlstatus Filtern</h5>
+                <div class="card-body collapse @desktop show @enddesktop" id="collapsePayedFilter">
                     <p class="card-text">
                         <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter, 'validated' => $validated_filter]) }}">Alle</a> <br />
                         <i class="fas fa-arrow-right"></i> <a href="{{ route('treasurer', ['user' => $user_filter, 'validated' => $validated_filter, 'payed' => true]) }}">Gezahlt</a> <br />

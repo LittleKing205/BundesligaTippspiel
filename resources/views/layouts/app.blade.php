@@ -51,7 +51,7 @@
                         <!--<a href="#">Privacy Policy</a>
                         &middot;
                         <a href="#">Terms &amp; Conditions</a>-->
-                        Version: 1.0.4
+                        Version: 0.0.5
                     </div>
                 </div>
             </div>

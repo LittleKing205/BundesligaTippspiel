@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/kassenwart', [TreasurerController::class, 'show'])->name('treasurer');
     Route::patch('/kassenwart', [TreasurerController::class, 'rejectPayment'])->name('treasurer.reject_payment');
+    Route::get('/kassenwart/validate/{bill:id}/{validate?}', [TreasurerController::class, 'validatePayment'])->name('treasurer.validate_payment');
 
     Route::get('/profil', [ProfileController::class, 'show'])->name('profile');
     Route::patch('/profil/save', [ProfileController::class, 'update'])->name('profile.update');

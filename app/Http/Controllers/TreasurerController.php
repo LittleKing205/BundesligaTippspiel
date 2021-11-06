@@ -53,6 +53,7 @@ class TreasurerController extends Controller
         ]);
         $bill = Bill::find(intval($validated["bill-id"]));
         $bill->has_payed = false;
+        $bill->timestamps = false;
         $bill->save();
 
         $bill->user->notify(new PaymentRejectNotification($bill));
@@ -68,6 +69,7 @@ class TreasurerController extends Controller
                 $bill->validated = false;
             }
         }
+        $bill->timestamps = false;
         $bill->save();
         return back();
     }

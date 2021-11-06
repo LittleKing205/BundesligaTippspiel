@@ -33,7 +33,7 @@ class CreateTippGroupsTable extends Migration
         });
 
         Schema::table('users', function(Blueprint $table) {
-            $table->unsignedBigInteger('last_group')->nullable()->after('password');
+            $table->unsignedBigInteger('current_group')->nullable()->after('password');
         });
     }
 

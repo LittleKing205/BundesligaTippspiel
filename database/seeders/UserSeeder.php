@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         $admin = User::factory()->make([
             'username' => 'admin',
             'name' => 'admin',
-            'last_group' => 1
+            'current_group' => 1
         ]);
         $admin->assignRole(__('role_names.admin'));
         $admin->save();
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
         $treasurer = User::factory()->make([
             'username' => 'kassenwart',
             'name' => 'kassenwart',
-            'last_group' => 1
+            'current_group' => 1
         ]);
         $treasurer->assignRole(__('role_names.treasurer'));
         $treasurer->save();
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
         $treasurer = User::factory()->make([
             'username' => 'dev',
             'name' => 'dev',
-            'last_group' => 1
+            'current_group' => 1
         ]);
         $treasurer->assignRole(__('role_names.dev'));
         $treasurer->save();
@@ -41,7 +41,12 @@ class UserSeeder extends Seeder
         $user = User::factory()->make([
             'username' => 'user',
             'name' => 'user',
-            'last_group' => 1
+            'current_group' => 1
+        ])->save();
+
+        $user = User::factory()->make([
+            'username' => 'user2',
+            'name' => 'user2'
         ])->save();
     }
 }

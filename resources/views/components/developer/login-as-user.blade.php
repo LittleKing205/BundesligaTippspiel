@@ -5,7 +5,7 @@
             @if (!Session::get('devIsLoggedInAsDifferentUser', false))
                 <form action="{{ route('dev.login_as_user') }}" method="post">
                     @csrf
-                    <div class="form-group row">
+                    <div class="form-group row mb-3">
                         <label for="inputUserpicker" class="col-sm-4 col-form-label">Benutzer: </label>
                         <div class="col-sm-8">
                             <select name="user" class="form-select" id="inputUserpicker" aria-label="select">

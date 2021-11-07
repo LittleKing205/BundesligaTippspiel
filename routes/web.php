@@ -41,9 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profil/save', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/profil/updateButtonColors', [ProfileController::class, 'updateColors'])->name('profile.updateColors');
 
-    Route::post('/group/switch-group', [GroupController::class, 'switchGroup'])->name('group.switch');
-    Route::get('/group/add-group', [GroupController::class, 'addGroup'])->name('group.add');
-    Route::post('/group/add-group', [GroupController::class, 'addGroup'])->name('group.add');
+    Route::post('/group/switch', [GroupController::class, 'modalFormSwitch'])->name('group.modal-form');
+    Route::get('/group/new', [GroupController::class, 'addGroupShow'])->name('group.add.show');
 
     // Tipps
     Route::get('/tipp/bl{league}/{day?}', [TippController::class, 'show'])->name('tipps');

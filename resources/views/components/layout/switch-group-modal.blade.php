@@ -7,15 +7,23 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('group.switch') }}" method="post">
+            <form action="{{ route('group.modal-form') }}" method="post">
                 <div class="modal-body">
-                    <p>Sollen wirklich die Benachrichtigungen über Join deaktiviert werden? Dadurch wird dein API Key aus unserem System gelöscht.</p>
+                    <p></p>
+                    <div class="input-group mb-3">
+                        <button name="btn" value="switch" class="btn btn-outline-success" type="submit">Gruppe wechelsn zu:</button>
+                        <select name="switched-group" class="form-select" id="inputGroupSelect02">
+                            @foreach ($groups as $group)
+                                <option value="{{ $group->id }}" @if(Auth::user()->currentGroup->id == $group->id) selected disabled @endif >{{ $group->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                         @csrf
                         @method('post')
-                        <button type="submit" class="btn btn-danger">Gruppe weshseln</button>
-                        <button type="link" href="{{ route('group.add') }}" class="btn btn-danger">Neue Gruppe erstellen</button>
+                        <!--<button type="submit" name="btn" value="switch" class="btn btn-danger">Gruppe weshseln</button>-->
+                        <button type="submit" name="btn" value="add" class="btn btn-info">Neue Gruppe erstellen</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
                 </div>
             </form>

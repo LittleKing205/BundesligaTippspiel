@@ -23,13 +23,13 @@ class PermissionSeeder extends Seeder
 
             // Treasurer Permissions
             'treasurer.show',
-            'treasurer.reject_payment'
+            'treasurer.reject_payment',
+            'treasurer.validate_payment'
         );
 
         $defaultRoles = array(
             __('role_names.admin') => [
-                'treasurer.show',
-                'treasurer.reject_payment'
+                'treasurer.show'
             ],
             __('role_names.dev') => [
                 'dev.login_as_user',
@@ -37,7 +37,8 @@ class PermissionSeeder extends Seeder
             ],
             __('role_names.treasurer') => [
                 'treasurer.show',
-                'treasurer.reject_payment'
+                'treasurer.reject_payment',
+                'treasurer.validate_payment'
             ]
         );
 

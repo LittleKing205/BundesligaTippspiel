@@ -1,15 +1,19 @@
-<div class="{{ isset($size) ? $size : 'col-12' }}">
-    <div class="card @if(isset($color)) bg-{{ $color }} text-white @endif mb-4">
+<div @if(isset($id)) id="{{ $id }}" @endif class="{{ isset($size) ? $size : 'col-12' }}">
+    <div class="card @if(isset($color)) bg-{{ $color }} text-white @endif mb-3">
         @if (isset($title))
-            <h5 class="card-header">{{ $title }}</h5>
+            @if (isset($color) || (isset($smallTitle) && $smallTitle == true))
+                <div class="card-header">{{ $title }}</div>
+            @else
+                <h5 class="card-header">{{ $title }}</h5>
+            @endif
         @endif
         @if(isset($body))
-            <div class="card-body">
+            <div {{ $body->attributes->merge(['class' => 'card-body']) }}>
                 {{ $body }}
             </div>
         @endif
         @if(isset($footer))
-            <div class="card-footer">{{ $footer }}</div>
+            <div {{ $footer->attributes->merge(['class' => 'card-footer']) }}>{{ $footer }}</div>
         @endif
         @if(isset($link))
             <div class="card-footer d-flex align-items-center justify-content-between">

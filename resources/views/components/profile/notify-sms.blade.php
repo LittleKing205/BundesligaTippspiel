@@ -14,55 +14,36 @@
     </div>
 </div>
 
-<div class="modal fade" id="smsAktivateModal" tabindex="-1" role="dialog" aria-labelledby="smsAktivateModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="smsAktivateModalLabel">SMS Benachrichtigungen aktivieren</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="telefonNummer" class="col-form-label">Handynummer:</label>
-                        <input id="activateTelefonNummerInput" type="tel" class="form-control">
-                    </div>
-                    <div class="form-group d-none" id="telefonnummerConfirmTokenField">
-                        <label for="checkToken" class="col-form-label">SMS Token:</label>
-                        <input type="number" class="form-control" id="checkToken">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Abrechen</button>
-                <button type="button" id="activateSmsSendTokenBtn" class="btn btn-primary">Sende SMS</button>
-                <button type="button" id="storeNumberBtn" class="btn btn-primary d-none">SMS Aktivieren</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="smsDeaktivateModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">SMS Benachrichtigungen Deaktivieren?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Sollen wirklich die SMS Benachrichtigungen deaktiviert werden? Dadurch wird deine Nummer aus unserem System gelöscht.</p>
-            </div>
-            <div class="modal-footer">
-                <form action="{{ route('profile.deleteNumber') }}" method="post">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger">Ja, Nummer löschen</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Nein</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+@push('modal')
+    <x-util.modal id="smsAktivateModal" title="SMS Benachrichtigungen aktivieren">
+        <x-slot name="body">
+            <form>
+                <div class="form-group">
+                    <label for="telefonNummer" class="col-form-label">Handynummer:</label>
+                    <input id="activateTelefonNummerInput" type="tel" class="form-control">
+                </div>
+                <div class="form-group d-none" id="telefonnummerConfirmTokenField">
+                    <label for="checkToken" class="col-form-label">SMS Token:</label>
+                    <input type="number" class="form-control" id="checkToken">
+                </div>
+            </form>
+        </x-slot>
+        <x-slot name="footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Abrechen</button>
+            <button type="button" id="activateSmsSendTokenBtn" class="btn btn-primary">Sende SMS</button>
+            <button type="button" id="storeNumberBtn" class="btn btn-primary d-none">SMS Aktivieren</button>
+        </x-slot>
+    </x-util.modal>
+@endpush
+
+@push('modal')
+    <x-util.modal id="smsDeaktivateModal" title="SMS Benachrichtigungen Deaktivieren?" action="{{ route('profile.deleteNumber') }}" method="delete">
+        <x-slot name="body">
+            <p>Sollen wirklich die SMS Benachrichtigungen deaktiviert werden? Dadurch wird deine Nummer aus unserem System gelöscht.</p>
+        </x-slot>
+        <x-slot name="footer">
+            <button type="submit" class="btn btn-danger">Ja, Nummer löschen</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Nein</button>
+        </x-slot>
+    </x-util.modal>
+@endpush

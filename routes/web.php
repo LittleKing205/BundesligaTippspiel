@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profil/updateButtonColors', [ProfileController::class, 'updateColors'])->name('profile.updateColors');
 
     // Groups
-    Route::post('/group/switch', [GroupController::class, 'modalFormSwitch'])->name('group.modal-form');
+    Route::post('/group/switch', [GroupController::class, 'switchGroup'])->name('group.switch');
     Route::get('/group/new', [GroupController::class, 'addGroupShow'])->name('group.new.show');
     Route::post('/group/new/create', [GroupController::class, 'createGroup'])->name('group.new.create');
 

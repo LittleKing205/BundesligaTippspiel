@@ -11,20 +11,6 @@ use Illuminate\Support\Facades\Auth;
 class GroupController extends Controller
 {
 
-    public function modalFormSwitch(Request $request) {
-        $validated = $request->validate([
-            "btn" => ["required", "regex:/(add|switch)/isU"]
-        ]);
-        switch($validated['btn']) {
-            case "add":
-                return redirect(route("group.new.show"));
-                break;
-            case "switch":
-                return $this->switchGroup($request);
-                break;
-        }
-    }
-
     public function switchGroup(Request $request) {
         $validated = $request->validate([
             "switched-group" => ["exists:App\Models\TippGroup,id"]

@@ -17,10 +17,6 @@
         Kassenwart
     </a>
 @endcan
-<a class="nav-link" href="#" data-toggle="modal" data-target="#switchGroupModal">
-    <div class="sb-nav-link-icon"><i class="fas fa-coins"></i></div>
-    Tippgruppe wechseln
-</a>
 
 @foreach([1, 2] as $league)
     <div class="sb-sidenav-menu-heading">{{ $league }}. Bundesliga</div>

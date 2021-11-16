@@ -16,7 +16,7 @@
                     <tfoot>
                         <th></th>
                         <th>Gesamt</th>
-                        <th>{{ number_format($sum, 2, ",", ".") }} €</th>
+                        <th>{{ number_format($bills->sum('to_pay'), 2, ",", ".") }} €</th>
                         <th></th>
                     </tfoot>
 

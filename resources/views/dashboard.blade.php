@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Dashboard ('.Auth::user()->currentGroup->name.')')
 
 @section('breadcump')
     <li class="breadcrumb-item active">Dashboard</li>

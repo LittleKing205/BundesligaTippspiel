@@ -42,7 +42,7 @@ class GroupSeeder extends Seeder
         ]);
         UserGroup::create([
             "user_id" => 3,
-            "tipp_group_id" => 2
+            "tipp_group_id" => 1
         ]);
         UserGroup::create([
             "user_id" => 4,

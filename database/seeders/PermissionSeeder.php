@@ -46,7 +46,7 @@ class PermissionSeeder extends Seeder
         }
 
         foreach($defaultRoles as $name => $permissions) {
-            $role = Role::create(['name' => $name]);
+            $role = Role::create(['name' => $name, 'group_id' => 1]);
             $role->syncPermissions($permissions);
         }
     }

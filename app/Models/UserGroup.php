@@ -10,4 +10,9 @@ class UserGroup extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    protected $fillable = [
+        'user_id',
+        'tipp_group_id'
+    ];
 }

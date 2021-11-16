@@ -22,13 +22,14 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
-                    <x-layout.sidebar />
+                    <x-layout.side-nav />
                 </div>
             </div>
             <div class="sb-sidenav-footer">
                 <div class="small">{{ __('messages.sidebar.loggedInAs') }}</div>
-                {{ Auth::user()->name }}<br />
-                Gruppe: {{ Auth::user()->currentGroup->name }}
+                <div>{{ Auth::user()->name }}</div>
+                <div class="small">Gruppe: <a href="#" data-toggle="modal" data-target="#switchGroupModal">(wechseln)</a></div>
+                <div>{{ Auth::user()->currentGroup->name }}</div>
             </div>
         </nav>
     </div>

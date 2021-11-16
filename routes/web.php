@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DevController;
+use App\Http\Controllers\GroupAdminController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RulesController;
@@ -41,8 +42,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profil/save', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/profil/updateButtonColors', [ProfileController::class, 'updateColors'])->name('profile.updateColors');
 
+    // Groups
     Route::post('/group/switch', [GroupController::class, 'modalFormSwitch'])->name('group.modal-form');
-    Route::get('/group/new', [GroupController::class, 'addGroupShow'])->name('group.add.show');
+    Route::get('/group/new', [GroupController::class, 'addGroupShow'])->name('group.new.show');
+    Route::post('/group/new/create', [GroupController::class, 'createGroup'])->name('group.new.create');
 
     // Tipps
     Route::get('/tipp/bl{league}/{day?}', [TippController::class, 'show'])->name('tipps');
@@ -62,6 +65,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profil/deleteJoin', [ProfileController::class, 'deleteJoin'])->name('profile.deleteJoin');
 
     // Admin Routes
+    Route::get('/admin', [GroupAdminController::class, 'show'])->name('group-admin');
+    Route::get('/admin/users', [GroupAdminController::class, 'showUsers'])->name('group-admin.users');
+    Route::get('/admin/user/{user:username}', [GroupAdminController::class, 'showUser'])->name('group-admin.user');
 
     // Dev Routes
     Route::get('/dev', [DevController::class, 'show'])->name('dev');

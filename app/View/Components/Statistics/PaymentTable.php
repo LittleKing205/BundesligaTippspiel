@@ -10,7 +10,6 @@ class PaymentTable extends Component
 {
     public $league;
     public $bills;
-    public $sum = 0;
 
     /**
      * Create a new component instance.
@@ -30,10 +29,6 @@ class PaymentTable extends Component
     public function render()
     {
         $this->bills = Bill::where("user_id", Auth::id())->where("league", $this->league)->where("tipp_group_id", Auth::user()->current_group_id)->orderBy("day", "desc")->get();
-        foreach($this->bills as $bill) {
-            $this->sum += $bill->to_pay;
-        }
-
         return view('components.statistics.payment-table');
     }
 }

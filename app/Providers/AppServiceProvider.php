@@ -29,9 +29,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Notification::extend('push', function ($app) {
-            return new WebPushChannel();
-        });
         if(env('USE_BEHIND_PROXY', false))
             URL::forceRootUrl(env('PROXY_ROOT_URL', env('APP_URL', 'http://localhost/')));
     }

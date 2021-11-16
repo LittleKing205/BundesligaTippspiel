@@ -33,11 +33,9 @@ class SystemBox extends Component
         $tipps = Tipp::all();
         $games = Game::all();
 
-        $this->tipp_count = count($tipps);
-        $this->game_count = count($games);
-        $this->finished_games = count(Game::where("has_finished", true)->get());
-
-
+        $this->tipp_count = $tipps->count();
+        $this->game_count = $games->count();
+        $this->finished_games = Game::where("has_finished", true)->get()->count();
 
         return view('components.statistics.system-box');
     }

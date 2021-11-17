@@ -24,7 +24,8 @@
                     <tbody>
                         @foreach ($users->sortBy('name') as $user)
                             <tr>
-                                <td><a href="{{ route('group-admin.user', ['user' => $user->username]) }}">{{ $user->name }}</a></td>
+                                {{--<td><a href="{{ route('group-admin.user', ['user' => $user->username]) }}">{{ $user->name }}</a></td>--}}
+                                <td><a href="#" data-toggle="modal" data-target="#userPermissionModal{{ $user->id }}">{{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     @foreach ($user->getRoleNames() as $role)
@@ -32,6 +33,14 @@
                                     @endforeach
                                 </td>
                             </tr>
+
+                            @push('modal')
+                                <x-util.modal id="userPermissionModal{{ $user->id }}" title="Benutzer Rollen Bearbeiten">
+                                    <x-slot name="body">
+                                        Hallo {{ $user->name }}
+                                    </x-slot>
+                                </x-util.modal>
+                            @endpush
                         @endforeach
                     </tbody>
                 </table>

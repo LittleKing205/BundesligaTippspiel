@@ -1,11 +1,9 @@
 <div class="modal fade" id="{{ $id }}" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content {{ isset($size) ? 'modal-'.$size : '' }}">
             <div class="modal-header">
                 <h5 class="modal-title">{{ isset($title) ? $title : "" }}</h5>
-                <button type="button" class="close" data-dismiss="{{ $id }}" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             @if(isset($action))
                 <form action="{{ $action }}" method="post">

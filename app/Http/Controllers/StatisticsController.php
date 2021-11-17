@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
-use App\Models\Game;
-use App\Models\Tipp;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\BinaryOp\Identical;
 
 class StatisticsController extends Controller
 {

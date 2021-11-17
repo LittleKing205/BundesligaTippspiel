@@ -69,6 +69,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin', [GroupAdminController::class, 'show'])->name('group-admin');
     Route::get('/admin/users', [GroupAdminController::class, 'showUsers'])->name('group-admin.users');
     Route::get('/admin/user/{user:username}', [GroupAdminController::class, 'showUser'])->name('group-admin.user');
+    Route::get('/admin/roles', [GroupAdminController::class, 'showRoles'])->name('group-admin.roles');
+    Route::patch('/admin/roles/save', [GroupAdminController::class, 'saveRoles'])->name('group-admin.roles.save');
 
     // Dev Routes
     Route::get('/dev', [DevController::class, 'show'])->name('dev');

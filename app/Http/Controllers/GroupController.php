@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\UserGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class GroupController extends Controller
 {
@@ -44,6 +46,24 @@ class GroupController extends Controller
         ]);
         $user->current_group_id = $group->id;
         $user->save();
+
+        $adminGroup = Role::create(["name" => __('role_names.admin'), 'group_id' => $group->id]);
+        $adminPermissions = [
+            Permission::findOrCreate('admin.settings.show'),
+            Permission::findOrCreate('admin.edit-roles'),
+            Permission::findOrCreate('treasurer.show'),
+            Permission::findOrCreate('treasurer.reject_payment'),
+            Permission::findOrCreate('treasurer.validate_payment')
+        ];
+        $adminGroup->syncPermissions($adminPermissions);
+
+        $treasurerGroup = Role::create(["name" => __('role_names.treasurer'), 'group_id' => $group->id]);
+        $treasurerPermissions = [
+            Permission::findOrCreate('treasurer.show'),
+            Permission::findOrCreate('treasurer.reject_payment'),
+            Permission::findOrCreate('treasurer.validate_payment')
+        ];
+        $treasurerGroup->syncPermissions($treasurerPermissions);
 
         return redirect(route('dashboard'));
     }

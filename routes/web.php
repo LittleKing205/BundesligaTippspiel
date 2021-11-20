@@ -67,10 +67,11 @@ Route::middleware('auth')->group(function () {
 
     // Admin Routes
     Route::get('/admin', [GroupAdminController::class, 'show'])->name('group-admin');
-    Route::get('/admin/users', [GroupAdminController::class, 'showUsers'])->name('group-admin.users');
-    Route::get('/admin/user/{user:username}', [GroupAdminController::class, 'showUser'])->name('group-admin.user');
-    Route::get('/admin/roles', [GroupAdminController::class, 'showRoles'])->name('group-admin.roles');
+    Route::put('/admin/user/add-role', [GroupAdminController::class, 'addRoleToUser'])->name('group-admin.users.add-role');
+    Route::delete('/admin/user/delete-role', [GroupAdminController::class, 'removeRoleFromUser'])->name('group-admin.users.delete-role');
+    Route::put('/admin/roles/create', [GroupAdminController::class, 'createRole'])->name('group-admin.roles.create');
     Route::patch('/admin/roles/save', [GroupAdminController::class, 'saveRoles'])->name('group-admin.roles.save');
+    Route::delete('/admin/roles/delete', [GroupAdminController::class, 'deleteRole'])->name('group-admin.roles.delete');
 
     // Dev Routes
     Route::get('/dev', [DevController::class, 'show'])->name('dev');

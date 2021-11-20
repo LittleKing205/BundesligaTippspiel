@@ -13,12 +13,12 @@
                 @endif
             @endif
             @if (isset($body))
-                <div class="modal-body">
+                <div {{ $body->attributes->merge(['class' => 'modal-body']) }}>
                     {{ $body }}
                 </div>
             @endif
             @if (isset($footer))
-                <div class="modal-footer">
+                <div {{ $footer->attributes->merge(['class' => 'modal-footer']) }}>
                     {{ $footer }}
                 </div>
             @endif

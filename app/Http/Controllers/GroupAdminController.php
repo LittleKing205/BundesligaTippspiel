@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -18,6 +19,24 @@ class GroupAdminController extends Controller
 
     public function show(Request $request) {
         return view('group-settings');
+    }
+
+    public function kickUser(Request $request) {
+        $validated = $request->validate([
+            'user' => ['required', 'exists:users,username']
+        ]);
+        $user = User::where('username', $validated['user'])->first();
+        $user->syncRoles([]);
+        $oldGroup = UserGroup::where('user_id', $user->id)->where('tipp_group_id', Auth::user()->current_group_id)->first();
+        $oldGroup->delete();
+        $userGroups = $user->groups;
+        if($userGroups->count() > 0) {
+            $user->current_group_id = $userGroups->first()->id;
+        } else {
+            $user->current_group_id = null;
+        }
+        $user->save();
+        return back()->with(['success' => 'Der Benutzer wurde erfolgreich aus dieser Gruppe entfernt.']);
     }
 
     public function removeRoleFromUser(Request $request) {

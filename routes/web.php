@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/admin/roles/create', [GroupAdminController::class, 'createRole'])->name('group-admin.roles.create');
     Route::patch('/admin/roles/save', [GroupAdminController::class, 'saveRoles'])->name('group-admin.roles.save');
     Route::delete('/admin/roles/delete', [GroupAdminController::class, 'deleteRole'])->name('group-admin.roles.delete');
+    Route::delete('/admin/user/kick', [GroupAdminController::class, 'kickUser'])->name('group-admin.users.kick');
 
     // Dev Routes
     Route::get('/dev', [DevController::class, 'show'])->name('dev');

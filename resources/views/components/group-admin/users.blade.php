@@ -7,6 +7,7 @@
                         <th>Spielername</th>
                         <th>E-Mail</th>
                         <th>Rollen</th>
+                        <th>Aktionen</th>
                     </tr>
                 </thead>
 
@@ -41,6 +42,12 @@
                                     @endpush
                                 @endforeach
                             </td>
+                            <td>
+                                @if($user->id != Auth::user()->currentGroup->owner_id)
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#userKickModal{{ $user->username }}"><i class="fas fa-ban"></i></button>
+                                @endif
+                                {{--<button type="button" class="btn btn-warning"><i class="fas fa-exchange-alt"></i></button>--}}
+                            </td>
                         </tr>
 
                         @push('modal')
@@ -53,7 +60,7 @@
                                                 <option>{{ $role->name }}</option>
                                             @endforeach
                                         </select>
-                                      </div>
+                                    </div>
                                 </x-slot>
                                 <x-slot name="footer">
                                     <input type="hidden" name="user" value="{{ $user->username }}" />
@@ -61,26 +68,20 @@
                                     <button type="submit" class="btn btn-success">Hinzufügen</button>
                                 </x-slot>
                             </x-util.modal>
-                        @endpush
 
-                        {{--@push('modal')
-                            <x-util.modal id="userRemoveRole{{ $user->id }}" title="Benutzer Rollen Bearbeiten" action="#">
+                            <x-util.modal id="userKickModal{{ $user->username }}" title="User Kicken" action="{{ route('group-admin.users.kick') }}" method="delete">
                                 <x-slot name="body">
-                                    <p><b>Aktuelle Rollen:</b></p>
-                                    <p class="text-red ms-3">Achtung: Beim Klick auf das <i class="fas fa-times"></i> wird ohne nachfrage die Rolle gelöscht!</p>
-                                    <div class="mb-3 ms-3">
-                                        @foreach ($user->getRoleNames() as $role)
-                                            <span class="badge bg-secondary p-2">{{ $role }} <a href="{{ route('group-admin.users.delete-role', ['user' => $user->username, 'role' => $role, 'token' => csrf_token()]) }}" class="text-white ms-3"><i class="fas fa-times"></i></a></span>
-                                        @endforeach
-                                    </div>
-
-                                    <p><b>Neue Rolle hinzufügen:</b></p>
-                                    <div class="ms-3">
-
-                                    </div>
+                                    <p>
+                                        Soll der Benutzer "{{ $user->name }}" wrklich aus dieser Gruppe gekickt werden?
+                                    </p>
+                                </x-slot>
+                                <x-slot name="footer">
+                                    <input type="hidden" name="user" value="{{ $user->username }}" />
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                                    <button type="submit" class="btn btn-danger">Jep, Kicken</button>
                                 </x-slot>
                             </x-util.modal>
-                        @endpush --}}
+                        @endpush
                     @endforeach
                 </tbody>
             </table>

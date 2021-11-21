@@ -4,6 +4,8 @@ return [
     // Admin
     'admin.settings.show' => 'Administrations Seite einsehen',
     'admin.edit-roles' => 'Rollen bearbeiten',
+    'admin.edit-settings' => 'Gruppen einstellungen bearbeiten',
+    'admin.change-invite-code' => 'Einladungscode generieren',
 
     // Kassenwart
     'treasurer.show' => 'Kassenwart Seite einsehen',

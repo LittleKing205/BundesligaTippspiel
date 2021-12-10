@@ -5,7 +5,10 @@
             @push('modal')
                 <x-util.modal size="xl" id="newRoleModal" title="Neue Rolle erstellen" action="{{ route('group-admin.roles.create') }}" method="put">
                     <x-slot name="body">
-                        <input name="name" placeholder="Rollen Name" />
+                        <div class="mb-3">
+                            <label class="form-label"  for="newRoleNameInput">Neuer Rollen Name:</label>
+                            <input class="form-control" id="newRoleNameInput" name="name" placeholder="Rollen Name" />
+                        </div>
                         <x-group-admin.permission-checkboxes />
                     </x-slot>
                     <x-slot name="footer">

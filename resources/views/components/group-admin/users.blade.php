@@ -29,14 +29,14 @@
                                         <x-util.modal id="userRemoveRole{{ $user->username }}" title="Rolle dem User entfernen?" action="{{ route('group-admin.users.delete-role') }}" method="delete">
                                             <x-slot name="body">
                                                 <p>
-                                                    Bla Bla
+                                                    Soll die Rolle "{{ $role }}" dem Benutzer "{{ $user->name }}" wirklich entfernt werden?
                                                 </p>
                                             </x-slot>
                                             <x-slot name="footer">
                                                 <input type="hidden" name="user" value="{{ $user->username }}" />
                                                 <input type="hidden" name="role" value="{{ $role }}" />
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
-                                                <button type="submit" class="btn btn-danger">Löschen</button>
+                                                <button type="submit" class="btn btn-danger">Ja, Löschen</button>
                                             </x-slot>
                                         </x-util.modal>
                                     @endpush
@@ -51,11 +51,11 @@
                         </tr>
 
                         @push('modal')
-                            <x-util.modal id="userAddRole{{ $user->username }}" title="" action="{{ route('group-admin.users.add-role') }}" method="put">
+                            <x-util.modal id="userAddRole{{ $user->username }}" title="Rollen Bearbeiten" action="{{ route('group-admin.users.add-role') }}" method="put">
                                 <x-slot name="body">
                                     <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Example select</label>
-                                        <select name="role" class="form-control" id="exampleFormControlSelect1">
+                                        <label for="userAddRole{{ $user->username }}">Neue Rolle:</label>
+                                        <select name="role" class="form-control" id="userAddRole{{ $user->username }}">
                                             @foreach ($roles as $role)
                                                 <option>{{ $role->name }}</option>
                                             @endforeach

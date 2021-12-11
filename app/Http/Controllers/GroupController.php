@@ -44,6 +44,7 @@ class GroupController extends Controller
             "user_id" => $user->id,
             "tipp_group_id" => $group->id
         ]);
+        $group->changeInviteCode();
         $user->current_group_id = $group->id;
         $user->save();
 

@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserGroup;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -110,17 +108,19 @@ class GroupAdminController extends Controller
 
     public function saveSettings(Request $request) {
         $validated = $request->validate([
+            'name' => ['required', 'string', 'min:4'],
             'invites_enabled' => ['required', 'boolean'],
-            'pot_enabled' => ['required', 'boolean'],
+            'payment_enabled' => ['required', 'boolean'],
             'wrong_tipp' => ['regex:/[\d.](,\d\d)?$/'],
             'not_tipped' => ['regex:/[\d.](,\d\d)?$/']
         ]);
 
         $group = Auth::user()->currentGroup;
+        $group->name = $validated['name'];
         $group->invites_enabled = $validated['invites_enabled'];
-        $group->pot_enabled = $validated['pot_enabled'];
+        $group->payment_enabled = $validated['payment_enabled'];
 
-        if($group->pot_enabled && isset($validated['wrong_tipp']) && isset($validated['not_tipped'])) {
+        if($group->payment_enabled && isset($validated['wrong_tipp']) && isset($validated['not_tipped'])) {
             $validated['wrong_tipp'] = floatval(str_replace(',', '.', $validated['wrong_tipp']));
             $validated['not_tipped'] = floatval(str_replace(',', '.', $validated['not_tipped']));
             $group->wrong_tipp = $validated['wrong_tipp'];
@@ -132,9 +132,7 @@ class GroupAdminController extends Controller
     }
 
     public function changeInviteCode() {
-        $group = Auth::user()->currentGroup;
-        $group->invite_code = substr(str_replace('.', '', Hash::make(Carbon::now()->timestamp)), -7);
-        $group->save();
+        Auth::user()->currentGroup->changeInviteCode();
         return redirect()->back()->with(['success' => 'Ein neuer Einladungscode wurde erstellt.']);
     }
 }

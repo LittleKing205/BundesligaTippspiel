@@ -10,14 +10,26 @@
 @section('content')
     <div class="row">
         <x-statistics.system-box />
-        <x-statistics.all-player-box />
+        @if (Auth::user()->currentGroup->payment_enabled)
+            <x-statistics.all-player-box />
+        @endif
         <x-statistics.player-box />
     </div>
 
-    <div class="row">
-        <x-statistics.payment-table league="1" />
-        <x-statistics.payment-table league="2" />
-    </div>
+    @if (Auth::user()->currentGroup->payment_enabled)
+        <div class="row">
+            <x-statistics.payment-table league="1" />
+            <x-statistics.payment-table league="2" />
+        </div>
+    @else
+        <div class="row">
+            <x-util.card title="Platzierungen">
+                <x-slot name="body">
+                    Dieser Bereich wird demächst Verfügbar sein.
+                </x-slot>
+            </x-util.card>
+        </div>
+    @endif
 @endsection
 
 @push('modal')

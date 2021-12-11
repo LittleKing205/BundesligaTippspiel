@@ -10,7 +10,9 @@
     <div class="row">
         <x-dashboard.current-day-table league="1" />
         <x-dashboard.current-day-table league="2" />
-        <x-dashboard.statistics-box />
+        @if (Auth::user()->currentGroup->payment_enabled)
+            <x-dashboard.statistics-box />
+        @endif
     </div>
 
     <div class="row">

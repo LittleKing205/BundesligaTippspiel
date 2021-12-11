@@ -19,7 +19,7 @@ class CreateTippGroupsTable extends Migration
             $table->unsignedBigInteger('owner_id');
             $table->boolean('invites_enabled')->default(true);
             $table->string('invite_code')->unique();
-            $table->boolean('pot_enabled')->default(true);
+            $table->boolean('payment_enabled')->default(true);
             $table->float('wrong_tipp')->default(0.50);
             $table->float('not_tipped')->default(1.00);
             $table->timestamps();

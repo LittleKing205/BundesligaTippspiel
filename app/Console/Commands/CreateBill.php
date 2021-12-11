@@ -53,12 +53,15 @@ class CreateBill extends Command
                 $wrong += 1;
         }
         $not_tipped = 9 - count($matches);
-        $toPay = ($wrong * 0.5) + $not_tipped;
         $groups = UserGroup::where('user_id', $this->argument("user"))->get();
         foreach($groups as $group) {
             $bill = Bill::where("user_id", $this->argument("user"))->where("day", $this->argument("day"))->where("league", $this->argument("league"))->where('tipp_group_id', $group->tipp_group_id)->first();
+            if ($group->tippGroup->payment_enabled)
+                $toPay = ($wrong * $group->tippGroup->wrong_tipp) + ($not_tipped * $group->tippGroup->not_tipped);
+            else
+                $toPay = 0;
             if (is_null($bill)) {
-                Bill::create([
+                $bill = Bill::create([
                     "user_id" => $this->argument("user"),
                     "league" => $this->argument("league"),
                     "day" => $this->argument("day"),
@@ -66,8 +69,12 @@ class CreateBill extends Command
                     "wrong" => $wrong,
                     "not_tipped" => $not_tipped,
                     "to_pay" => $toPay,
-                    "tipp_group_id" => $group->tipp_group_id
+                    "tipp_group_id" => $group->tipp_group_id,
                 ]);
+                if ($toPay == 0) {
+                    $bill->has_payed = true;
+                    $bill->save();
+                }
             } else {
                 $bill->to_pay = $toPay;
                 $bill->right = $right;

@@ -11,12 +11,14 @@
     <div class="sb-nav-link-icon"><i class="fas fa-scroll"></i></div>
     Regeln
 </a>
-@can('treasurer.show')
-    <a class="nav-link" href="{{ route('treasurer') }}">
-        <div class="sb-nav-link-icon"><i class="fas fa-coins"></i></div>
-        Kassenwart
-    </a>
-@endcan
+@if (Auth::user()->currentGroup->payment_enabled)
+    @can('treasurer.show')
+        <a class="nav-link" href="{{ route('treasurer') }}">
+            <div class="sb-nav-link-icon"><i class="fas fa-coins"></i></div>
+            Kassenwart
+        </a>
+    @endcan
+@endif
 
 @foreach([1, 2] as $league)
     <div class="sb-sidenav-menu-heading">{{ $league }}. Bundesliga</div>

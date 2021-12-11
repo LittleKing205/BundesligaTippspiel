@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class TippGroup extends Model
 {
@@ -34,5 +36,10 @@ class TippGroup extends Model
 
     public function bills() {
         return $this->hasMany(Bill::class);
+    }
+
+    public function changeInviteCode() {
+        $this->invite_code = substr(str_replace('.', '', Hash::make(Carbon::now()->timestamp)), -7);
+        $this->save();
     }
 }

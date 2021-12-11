@@ -15,4 +15,8 @@ class UserGroup extends Model
         'user_id',
         'tipp_group_id'
     ];
+
+    public function tippGroup() {
+        return $this->belongsTo(TippGroup::class, 'tipp_group_id');
+    }
 }

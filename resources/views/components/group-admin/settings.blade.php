@@ -13,6 +13,13 @@
                         @method('patch')
 
                         <div class="form-group mb-3 row">
+                            <label for="inputGroupName" class="col-sm-2 col-form-label">Tippgruppen Name</label>
+                            <div class="col-sm-10">
+                                <input name="name" type="text" step="0.01" class="form-control" id="inputGroupName" placeholder="Falscher Tipp" value="{{ $group->name }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3 row">
                             <label for="inputEnableInvites" class="col-sm-2 col-form-label">Einladungen</label>
                             <div class="col-12 col-sm-3 mb-2">
                                 <select name="invites_enabled" class="form-select" id="inputEnableInvites" aria-label="select">
@@ -43,9 +50,9 @@
                         <div class="form-group mb-3 row">
                             <label for="inputEnablePot" class="col-sm-2 col-form-label">Preisgelder</label>
                             <div class="col-sm-10 mb-2">
-                                <select name="pot_enabled" class="form-select" id="inputEnablePot" aria-label="select">
-                                    <option value="1" @if($group->pot_enabled) selected @endif>Eingeschaltet</option>
-                                    <option value="0" @if(!$group->pot_enabled) selected @endif>Ausgeschaltet</option>
+                                <select name="payment_enabled" class="form-select" id="inputEnablePot" aria-label="select">
+                                    <option value="1" @if($group->payment_enabled) selected @endif>Eingeschaltet</option>
+                                    <option value="0" @if(!$group->payment_enabled) selected @endif>Ausgeschaltet</option>
                                 </select>
                             </div>
                         </div>
@@ -53,14 +60,14 @@
                         <div class="form-group mb-3 row">
                             <label for="inputWrongPot" class="col-sm-2 col-form-label">Falscher Tipp Preisgeld</label>
                             <div class="col-sm-10">
-                                <input name="wrong_tipp" type="text" step="0.01" class="form-control" id="inputWrongPot" placeholder="Falscher Tipp" value="{{ number_format($group->wrong_tipp , 2, ",", ".") }}" @if(!$group->pot_enabled) disabled @endif>
+                                <input name="wrong_tipp" type="text" step="0.01" class="form-control" id="inputWrongPot" placeholder="Falscher Tipp" value="{{ number_format($group->wrong_tipp , 2, ",", ".") }}" @if(!$group->payment_enabled) disabled @endif>
                             </div>
                         </div>
 
                         <div class="form-group mb-3 row">
                             <label for="inputNotTipped" class="col-sm-2 col-form-label">Kein Tipp Preisgeld</label>
                             <div class="col-sm-10">
-                                <input name="not_tipped" type="text" step="0.01" class="form-control" id="inputNotTipped" placeholder="Nicht Getipped" value="{{ number_format($group->not_tipped , 2, ",", ".") }}" @if(!$group->pot_enabled) disabled @endif>
+                                <input name="not_tipped" type="text" step="0.01" class="form-control" id="inputNotTipped" placeholder="Nicht Getipped" value="{{ number_format($group->not_tipped , 2, ",", ".") }}" @if(!$group->payment_enabled) disabled @endif>
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Speichern</button>

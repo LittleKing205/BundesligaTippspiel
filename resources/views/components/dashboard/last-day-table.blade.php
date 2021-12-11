@@ -7,7 +7,9 @@
                     <th>Name</th>
                     <th>Richtig</th>
                     <th>Falsch</th>
-                    <th>Zu Behzahlen</th>
+                    @if (Auth::user()->currentGroup->payment_enabled)
+                        <th>Zu Behzahlen</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -17,7 +19,9 @@
                         <td>{{ $userResult["user"]->name }}</td>
                         <td>{{ $userResult["right"] }}</td>
                         <td>{{ $userResult["wrong"] }}</td>
-                        <td>{{ number_format($userResult["to_pay"], 2, ",", ".") }} €</td>
+                        @if (Auth::user()->currentGroup->payment_enabled)
+                            <td>{{ number_format($userResult["to_pay"], 2, ",", ".") }} €</td>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>

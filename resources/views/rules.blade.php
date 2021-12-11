@@ -15,9 +15,11 @@
                     <li>Getippt wird jedes Spiel der ersten und zweiten Bundesliga.</li>
                     <li>Die Spiele können bis zwei Stunden vor Anpfiff getippt werden.</li>
                     <li>Getippt wird auf Heimsieg, Auswärtssieg oder Unentschieden.</li>
-                    <li>Jedes <u>FALSCH</u> getippte Spiel kostet 0,50 €.</li>
-                    <li>Jedes <u>NICHT</u> getippte Spiel kostet 1,00 €.</li>
-                    <li>Die Abrechnung erfolgt nach beendigung des aktuellen Spieltages der jeweiligen Bundesliga.</li>
+                    @if (Auth::user()->currentGroup->payment_enabled)
+                        <li>Jedes <u>FALSCH</u> getippte Spiel kostet 0,50 €.</li>
+                        <li>Jedes <u>NICHT</u> getippte Spiel kostet 1,00 €.</li>
+                        <li>Die Abrechnung erfolgt nach beendigung des aktuellen Spieltages der jeweiligen Bundesliga.</li>
+                    @endif
                 </ol>
             </x-slot>
         </x-util.card>

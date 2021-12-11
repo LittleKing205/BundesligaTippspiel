@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -130,7 +132,9 @@ class GroupAdminController extends Controller
     }
 
     public function changeInviteCode() {
-
+        $group = Auth::user()->currentGroup;
+        $group->invite_code = substr(str_replace('.', '', Hash::make(Carbon::now()->timestamp)), -7);
+        $group->save();
         return redirect()->back()->with(['success' => 'Ein neuer Einladungscode wurde erstellt.']);
     }
 }

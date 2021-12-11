@@ -14,6 +14,11 @@ class TippGroup extends Model
         'owner_id'
     ];
 
+    protected $casts = [
+        'invites_enabled' => 'boolean',
+        'pot_enabled' => 'boolean',
+    ];
+
     public function owner() {
         return $this->hasOne(User::class, 'id', 'owner_id');
     }

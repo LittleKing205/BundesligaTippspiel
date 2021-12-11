@@ -17,11 +17,13 @@ class GroupSeeder extends Seeder
     {
         TippGroup::create([
             "name" => "Test 1",
-            "owner_id" => 1
+            "owner_id" => 1,
+            "invite_code" => "123"
         ]);
         TippGroup::create([
             "name" => "Test 2",
-            "owner_id" => 1
+            "owner_id" => 1,
+            "invite_code" => "456"
         ]);
 
         UserGroup::create([

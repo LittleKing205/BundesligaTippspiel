@@ -8,6 +8,7 @@
 @endsection
 
 @section('content')
+    <x-group-admin.settings />
     <x-group-admin.users />
     <x-group-admin.roles />
 @endsection

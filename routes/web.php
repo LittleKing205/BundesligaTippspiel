@@ -67,6 +67,8 @@ Route::middleware('auth')->group(function () {
 
     // Admin Routes
     Route::get('/admin', [GroupAdminController::class, 'show'])->name('group-admin');
+    Route::patch('/admin/save-settings', [GroupAdminController::class, 'saveSettings'])->name('group-admin.save-settings');
+    Route::oatch('/admin/invite-code-change')->name('group-admin.change-invite-code');
     Route::put('/admin/user/add-role', [GroupAdminController::class, 'addRoleToUser'])->name('group-admin.users.add-role');
     Route::delete('/admin/user/delete-role', [GroupAdminController::class, 'removeRoleFromUser'])->name('group-admin.users.delete-role');
     Route::put('/admin/roles/create', [GroupAdminController::class, 'createRole'])->name('group-admin.roles.create');

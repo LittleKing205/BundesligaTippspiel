@@ -105,4 +105,32 @@ class GroupAdminController extends Controller
         $role->syncPermissions($permissions);
         return redirect()->back()->with(['success' => 'Die Rolle '.$role->name.' wurde erfolgreich gespeichert']);
     }
+
+    public function saveSettings(Request $request) {
+        $validated = $request->validate([
+            'invites_enabled' => ['required', 'boolean'],
+            'pot_enabled' => ['required', 'boolean'],
+            'wrong_tipp' => ['regex:/[\d.](,\d\d)?$/'],
+            'not_tipped' => ['regex:/[\d.](,\d\d)?$/']
+        ]);
+
+        $group = Auth::user()->currentGroup;
+        $group->invites_enabled = $validated['invites_enabled'];
+        $group->pot_enabled = $validated['pot_enabled'];
+
+        if($group->pot_enabled && isset($validated['wrong_tipp']) && isset($validated['not_tipped'])) {
+            $validated['wrong_tipp'] = floatval(str_replace(',', '.', $validated['wrong_tipp']));
+            $validated['not_tipped'] = floatval(str_replace(',', '.', $validated['not_tipped']));
+            $group->wrong_tipp = $validated['wrong_tipp'];
+            $group->not_tipped = $validated['not_tipped'];
+        }
+        $group->save();
+
+        return redirect()->back()->with(['success' => 'Einstellungen gespeichert']);
+    }
+
+    public function changeInviteCode() {
+
+        return redirect()->back()->with(['success' => 'Ein neuer Einladungscode wurde erstellt.']);
+    }
 }

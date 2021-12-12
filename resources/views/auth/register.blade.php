@@ -7,10 +7,23 @@
         <img class="mb-4" src="{{ asset('images/logo.png') }}" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Bundeliga Tippspiel Registration</h1>
 
+        @if(!is_null(Request::input('invite')))
+            @php
+                $group = App\Models\TippGroup::where('invite_code', Request::input('invite'))->first();
+            @endphp
+            @if(!is_null($group))
+                <h3 class="h5 mb-3 font-weight-normal">Du wurdest zu "{{ $group->name }}" eingeladen</h3>
+            @endif
+        @endif
+
         @if($errors->any())
             @foreach($errors->all() as $error)
                 <h5 class="text-danger">{{ $error }}</h5>
             @endforeach
+        @endif
+
+        @if(!is_null(Request::input('invite')))
+            <input type="hidden" name="invite_code" value="{{ Request::input('invite') }}" />
         @endif
 
         <label for="inputUsername" class="sr-only">Benutzername</label>

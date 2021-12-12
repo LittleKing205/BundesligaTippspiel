@@ -39,7 +39,7 @@ class TippGroup extends Model
     }
 
     public function changeInviteCode() {
-        $this->invite_code = substr(str_replace('.', '', Hash::make(Carbon::now()->timestamp)), -7);
+        $this->invite_code = substr(str_replace('/', '', str_replace('.', '', Hash::make(Carbon::now()->timestamp))), -7);
         $this->save();
     }
 }

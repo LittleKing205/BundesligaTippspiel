@@ -13,6 +13,8 @@ class CheckCurrentGroup
         'group/switch',
         'group/new',
         'group/new/create',
+        'group/enter',
+        'group/new-or-enter'
     ];
 
     /**
@@ -29,7 +31,6 @@ class CheckCurrentGroup
 
         if (Auth::check()) {
             if (is_null($request->user()->current_group_id)) {
-                //throw new Exception("No Group was set (TODO: route to group select)");
                 return redirect(route('group.new.show'));
             } else {
                 app(\Spatie\Permission\PermissionRegistrar::class)->setPermissionsTeamId($request->user()->current_group_id);

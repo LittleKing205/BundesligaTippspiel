@@ -15,5 +15,7 @@
 
 <body class="text-center">
     @yield('content')
+    <script src="{{ mix('js/app.js') }}"></script>
+    @stack('script')
 </body>
 </html>

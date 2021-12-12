@@ -45,7 +45,8 @@ Route::middleware('auth')->group(function () {
 
     // Groups
     Route::post('/group/switch', [GroupController::class, 'switchGroup'])->name('group.switch');
-    Route::get('/group/new', [GroupController::class, 'addGroupShow'])->name('group.new.show');
+    Route::get('/group/new-or-enter', [GroupController::class, 'addGroupShow'])->name('group.new.show');
+    Route::post('/group/enter', [GroupController::class, 'enterGroup'])->name('group.enter');
     Route::post('/group/new/create', [GroupController::class, 'createGroup'])->name('group.new.create');
 
     // Tipps

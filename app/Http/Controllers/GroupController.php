@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\UserGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -65,6 +66,25 @@ class GroupController extends Controller
             Permission::findOrCreate('treasurer.validate_payment')
         ];
         $treasurerGroup->syncPermissions($treasurerPermissions);
+
+        return redirect(route('dashboard'));
+    }
+
+    public function enterGroup(Request $request) {
+        $validated = $request->validate([
+            'invite_code' => ['string', 'nullable', Rule::exists('tipp_groups')->where(function ($query) {
+                    return $query->where('invites_enabled', 1);
+                }),
+            ],
+        ]);
+        $user = Auth::user();
+        $group = TippGroup::where('invite_code', $validated['invite_code'])->first();
+        $user->current_group_id = $group->id;
+        UserGroup::create([
+            "user_id" => $user->id,
+            "tipp_group_id" => $group->id
+        ]);
+        $user->save();
 
         return redirect(route('dashboard'));
     }

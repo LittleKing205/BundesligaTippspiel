@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\UserGroup;
+use App\Notifications\InvitePlayerNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -134,5 +135,15 @@ class GroupAdminController extends Controller
     public function changeInviteCode() {
         Auth::user()->currentGroup->changeInviteCode();
         return redirect()->back()->with(['success' => 'Ein neuer Einladungscode wurde erstellt.']);
+    }
+
+    public function sendInvite(Request $request) {
+        $validated = $request->validate([
+            'channel' => ['required'],
+            "to" => ['required', 'min:8']
+        ]);
+
+        $user = Auth::user();
+        $user->notify(new InvitePlayerNotification($validated['channel'], $validated['to']));
     }
 }

@@ -48,13 +48,13 @@
     <x-util.modal id="invitePlayerModal" title="Spieler einladen">
         <x-slot name="body">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="inviteTabTextSms-tab" data-bs-toggle="pill" data-bs-target="#inviteTabTextSms" type="button" role="tab" aria-controls="inviteTabTextSms" aria-selected="true">SMS</button>
-                </li>
+                <x-layout.invite-box.elements.button>Link</x-layout.invite-box.elements.button>
+                <x-layout.invite-box.elements.button active>SMS</x-layout.invite-box.elements.button>
             </ul>
+            {{-- SMS --}}
             <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="inviteTabTextSms" role="tabpanel" aria-labelledby="inviteTabTextSms-tab">...</div>
-                {{-- <div class="tab-pane fade show active" id="inviteTabTextEmail" role="tabpanel" aria-labelledby="inviteTabTextSms-tab">...</div> --}}
+                <x-layout.invite-box.link-copy />
+                <x-layout.invite-box.sms />
             </div>
         </x-slot>
     </x-util.modal>

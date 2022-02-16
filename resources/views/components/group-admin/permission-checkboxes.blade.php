@@ -8,6 +8,13 @@
     </x-util.checkbox>
 </div>
 
+<div><b>Allgemeine Spieler Berechtigungen:</b></div>
+<div class="ms-3">
+    <x-util.checkbox id="{{ isset($role) ? $role->id : '' }}-adminSettingsShow-Ceckbox" name="permissions[]" value="player.can-invite" checked="{{ isset($role) ? $role->hasPermissionTo('player.can-invite') : false }}">
+        {{ __('permission_names.player.can-invite') }}
+    </x-util.checkbox>
+</div>
+
 <div><b>Kassenwart Berechtigungen</b></div>
 <div class="ms-3">
     <x-util.checkbox id="{{ isset($role) ? $role->id : '' }}-treasurerShow-Ceckbox" name="permissions[]" value="treasurer.show" checked="{{ isset($role) ? $role->hasPermissionTo('treasurer.show') : false }}">

@@ -7,6 +7,9 @@ return [
     'admin.edit-settings' => 'Gruppen einstellungen bearbeiten',
     'admin.change-invite-code' => 'Einladungscode generieren',
 
+    // Spieler
+    'player.can-invite' => 'Spieler Einladungen versenden',
+
     // Kassenwart
     'treasurer.show' => 'Kassenwart Seite einsehen',
     'treasurer.reject_payment' => "Zahlungen zurücksetzen",
